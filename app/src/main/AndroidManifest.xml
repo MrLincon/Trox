@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
+        android:name=".util.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,10 +16,28 @@
         android:theme="@style/Theme.Trox"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpActivity"
+            android:name=".authentication.ResetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".authentication.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AccountSetupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".authentication.OTPActivity"
+            android:exported="false" />
+        <activity
+            android:name=".authentication.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.OnboardingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".authentication.SignUpAsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".authentication.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".activity.SplashActivity"

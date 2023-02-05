@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/authentication_bg"
-    tools:context=".activity.LoginActivity">
+    android:background="@drawable/gradient_bg"
+    tools:context=".authentication.LoginActivity">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:src="@drawable/ic_back"
+        android:src="@drawable/ic_arrow_left"
         android:paddingLeft="16dp"></ImageView>
 
     <LinearLayout
@@ -128,6 +128,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/log_in"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     app:cardCornerRadius="60dp"
@@ -172,6 +173,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/forgot_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/forgot_password"
@@ -257,6 +259,7 @@
                         android:layout_gravity="center"></TextView>
 
                     <TextView
+                        android:id="@+id/sign_up"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/create_account"
