@@ -46,4 +46,25 @@
     <string name="sent_to_phone">Code will be sent to your phone</string>
     <string name="welcome">Welcome!</string>
     <string name="enter_your_tracking_number">Enter your tracking number...</string>
+    <string name="send_parcel">Send Parcel</string>
+    <string name="price_check">Price Check</string>
+    <string name="track_order">Track Order</string>
+    <string name="domestic">Domestic</string>
+    <string name="international">International</string>
+    <string name="delivery_type">Delivery Type</string>
+    <string name="pick_your_location">Pick Your Location</string>
+    <string name="home">Home</string>
+    <string name="set_address">Set Address</string>
+    <string name="work">Work</string>
+    <string name="offers">Offers</string>
+    <string name="orders">Orders</string>
+    <string name="profile">Profile</string>
+    <string name="notifications">Notifications</string>
+    <string name="saved_address">Saved Address</string>
+    <string name="language">Language</string>
+    <string name="permissions">Permissions</string>
+    <string name="emergency_support">Emergency Support</string>
+    <string name="privacy_policies_amp_faq"><![CDATA[Privacy Policies & FAQ]]></string>
+    <string name="rate_us">Rate Us</string>
+    <string name="logout">Logout</string>
 </resources>

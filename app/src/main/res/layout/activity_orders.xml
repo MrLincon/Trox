@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    tools:context=".activity.OrdersActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="top">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:paddingLeft="16dp"
+            app:tint="@color/colorBlackHighEmp"
+            android:src="@drawable/ic_arrow_left"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/ubuntu_medium"
+            android:text="@string/orders"
+            android:textColor="@color/colorBlackHighEmp"
+            android:textSize="16sp"></TextView>
+
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        app:tabRippleColor="@null"
+        app:tabGravity="fill"
+        app:tabPaddingStart="24dp"
+        app:tabPaddingEnd="24dp"
+        app:tabMode="scrollable"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:tabBackground="@drawable/tab_selector"
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@color/colorWhiteHighEmp"
+        app:tabTextAppearance="@style/tabTextAppearance"
+        app:tabTextColor="@color/colorBlackMidEmp">
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhiteHighEmp"></androidx.viewpager.widget.ViewPager>
+
+
+
+</LinearLayout>

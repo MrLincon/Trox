@@ -7,9 +7,9 @@
     <color name="colorPrimaryDark">#CA4922</color>
     <color name="colorPrimaryDarker">#652411</color>
     <color name="colorPrimaryDarkest">#321209</color>
-    <color name="colorPrimaryLight">#CA4922</color>
-    <color name="colorPrimaryLighter">#652411</color>
-    <color name="colorPrimaryLightest">#321209</color>
+    <color name="colorPrimaryLight">#fd7c55</color>
+    <color name="colorPrimaryLighter">#febdaa</color>
+    <color name="colorPrimaryLightest">#feded5</color>
 
     <color name="colorSecondaryDark">#2C9292</color>
     <color name="colorSecondaryDarker">#216D6D</color>

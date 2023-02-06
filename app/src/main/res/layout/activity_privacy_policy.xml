@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="@color/colorWhiteHighEmp"
+    tools:context=".activity.PrivacyPolicyActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:paddingLeft="16dp"
+            app:tint="@color/colorBlackHighEmp"
+            android:src="@drawable/ic_arrow_left"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/ubuntu_medium"
+            android:text="@string/privacy_policies_amp_faq"
+            android:textColor="@color/colorBlackHighEmp"
+            android:textSize="16sp"></TextView>
+
+    </LinearLayout>
+
+</LinearLayout>

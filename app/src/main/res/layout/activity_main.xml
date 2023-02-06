@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_gradient_bg"
+    android:clipToPadding="false"
     tools:context=".activity.MainActivity">
 
     <LinearLayout
@@ -72,130 +73,361 @@
             android:fontFamily="@font/ubuntu_medium"
             android:hint="@string/enter_your_tracking_number"
             android:paddingLeft="16dp"
+            android:maxLines="1"
             android:paddingRight="8dp"
             android:textColor="@color/colorBlackHighEmp"
             android:textColorHint="@color/colorBlackLowEmp"
             android:textSize="12sp"></EditText>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
 
-            <LinearLayout
-                android:layout_width="328dp"
-                android:layout_height="94dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_bg"
-                android:gravity="center"
-                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_send_parcel"></ImageView>
+       <ScrollView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:scrollbars="none">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/ubuntu_medium"
-                    android:text="Send Parcel"
-                    android:textColor="@color/colorBlackMidEmp"
-                    android:textSize="12sp"></TextView>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical">
 
-            </LinearLayout>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="16dp"
+                   android:layout_marginRight="16dp"
+                   android:layout_marginBottom="16dp"
+                   android:orientation="horizontal"
+                   android:weightSum="3">
 
-            <View
-                android:layout_width="8dp"
-                android:layout_height="match_parent"></View>
+                   <LinearLayout
+                       android:layout_width="328dp"
+                       android:layout_height="94dp"
+                       android:layout_weight="1"
+                       android:background="@drawable/card_bg"
+                       android:gravity="center"
+                       android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="328dp"
-                android:layout_height="94dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_bg"
-                android:gravity="center"
-                android:orientation="vertical">
+                       <ImageView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/ic_send_parcel"></ImageView>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_price_check"></ImageView>
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="8dp"
+                           android:fontFamily="@font/ubuntu_medium"
+                           android:text="@string/send_parcel"
+                           android:textColor="@color/colorBlackMidEmp"
+                           android:textSize="12sp"></TextView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/ubuntu_medium"
-                    android:text="Send Parcel"
-                    android:textColor="@color/colorBlackMidEmp"
-                    android:textSize="12sp"></TextView>
+                   </LinearLayout>
 
-            </LinearLayout>
+                   <View
+                       android:layout_width="8dp"
+                       android:layout_height="match_parent"></View>
 
-            <View
-                android:layout_width="8dp"
-                android:layout_height="match_parent"></View>
+                   <LinearLayout
+                       android:layout_width="328dp"
+                       android:layout_height="94dp"
+                       android:layout_weight="1"
+                       android:background="@drawable/card_bg"
+                       android:gravity="center"
+                       android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="328dp"
-                android:layout_height="94dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_bg"
-                android:gravity="center"
-                android:orientation="vertical">
+                       <ImageView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/ic_price_check"></ImageView>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_track_order"></ImageView>
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="8dp"
+                           android:fontFamily="@font/ubuntu_medium"
+                           android:text="@string/price_check"
+                           android:textColor="@color/colorBlackMidEmp"
+                           android:textSize="12sp"></TextView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/ubuntu_medium"
-                    android:text="Send Parcel"
-                    android:textColor="@color/colorBlackMidEmp"
-                    android:textSize="12sp"></TextView>
+                   </LinearLayout>
 
-            </LinearLayout>
+                   <View
+                       android:layout_width="8dp"
+                       android:layout_height="match_parent"></View>
 
-        </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="328dp"
+                       android:layout_height="94dp"
+                       android:layout_weight="1"
+                       android:background="@drawable/card_bg"
+                       android:gravity="center"
+                       android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="12dp">
+                       <ImageView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/ic_track_order"></ImageView>
 
-            <com.smarteist.autoimageslider.SliderView
-                android:id="@+id/imageSlider"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:sliderAnimationDuration="600"
-                app:sliderAutoCycleDirection="back_and_forth"
-                app:sliderAutoCycleEnabled="true"
-                app:sliderIndicatorAnimationDuration="600"
-                app:sliderIndicatorGravity="center_horizontal|bottom"
-                app:sliderIndicatorMargin="15dp"
-                app:sliderIndicatorOrientation="horizontal"
-                app:sliderIndicatorPadding="2dp"
-                app:sliderIndicatorRadius="1.5dp"
-                app:sliderIndicatorSelectedColor="@color/colorPrimary"
-                app:sliderIndicatorUnselectedColor="@color/colorWhiteLowEmp"
-                app:sliderScrollTimeInSec="1"
-                app:sliderStartAutoCycle="true" />
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="8dp"
+                           android:fontFamily="@font/ubuntu_medium"
+                           android:text="@string/track_order"
+                           android:textColor="@color/colorBlackMidEmp"
+                           android:textSize="12sp"></TextView>
 
-        </androidx.cardview.widget.CardView>
+                   </LinearLayout>
 
+               </LinearLayout>
+
+               <com.smarteist.autoimageslider.SliderView
+                   android:id="@+id/imageSlider"
+                   android:layout_width="match_parent"
+                   android:layout_height="160dp"
+                   app:sliderAnimationDuration="600"
+                   app:sliderAutoCycleDirection="back_and_forth"
+                   app:sliderAutoCycleEnabled="true"
+                   app:sliderIndicatorAnimationDuration="600"
+                   app:sliderIndicatorGravity="center_horizontal|bottom"
+                   app:sliderIndicatorMargin="16dp"
+                   app:sliderIndicatorOrientation="horizontal"
+                   app:sliderIndicatorPadding="2dp"
+                   app:sliderIndicatorRadius="1.5dp"
+                   app:sliderIndicatorSelectedColor="@color/colorPrimary"
+                   app:sliderIndicatorUnselectedColor="@color/colorWhiteLowEmp"
+                   app:sliderScrollTimeInSec="1"
+                   app:sliderStartAutoCycle="true" />
+
+
+               <androidx.cardview.widget.CardView
+                   android:layout_width="match_parent"
+                   android:layout_height="100dp"
+                   android:layout_margin="16dp"
+                   app:cardCornerRadius="12dp"
+                   app:cardBackgroundColor="@color/colorWhiteHighEmp">
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:orientation="vertical">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/delivery_type"
+                           android:textColor="@color/colorBlackHighEmp"
+                           android:fontFamily="@font/ubuntu_medium"
+                           android:textSize="16sp"
+                           android:layout_marginTop="16dp"
+                           android:layout_marginLeft="16dp"
+                           android:layout_marginRight="16dp"
+                           android:layout_marginBottom="12dp"></TextView>
+
+
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:weightSum="2"
+                           android:orientation="horizontal">
+
+                           <LinearLayout
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:orientation="horizontal"
+                               android:layout_weight="1">
+
+                               <ImageView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:paddingLeft="16dp"
+                                   android:src="@drawable/ic_domestic"></ImageView>
+
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:text="@string/domestic"
+                                   android:paddingLeft="12dp"
+                                   android:layout_gravity="center"
+                                   android:textColor="@color/colorBlackMidEmp"
+                                   android:fontFamily="@font/ubuntu_medium"
+                                   android:textSize="12sp"></TextView>
+
+                           </LinearLayout>
+
+                           <LinearLayout
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:orientation="horizontal"
+                               android:layout_weight="1">
+
+                               <ImageView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:paddingLeft="16dp"
+                                   android:src="@drawable/ic_international"></ImageView>
+
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:text="@string/international"
+                                   android:paddingLeft="12dp"
+                                   android:layout_gravity="center"
+                                   android:textColor="@color/colorBlackMidEmp"
+                                   android:fontFamily="@font/ubuntu_medium"
+                                   android:textSize="12sp"></TextView>
+
+                           </LinearLayout>
+
+                       </LinearLayout>
+
+                   </LinearLayout>
+
+               </androidx.cardview.widget.CardView>
+
+               <androidx.cardview.widget.CardView
+                   android:layout_width="match_parent"
+                   android:layout_height="100dp"
+                   android:layout_marginLeft="16dp"
+                   android:layout_marginRight="16dp"
+                   app:cardCornerRadius="12dp"
+                   app:cardBackgroundColor="@color/colorWhiteHighEmp">
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:orientation="vertical">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/pick_your_location"
+                           android:textColor="@color/colorBlackHighEmp"
+                           android:fontFamily="@font/ubuntu_medium"
+                           android:textSize="16sp"
+                           android:layout_marginTop="16dp"
+                           android:layout_marginLeft="16dp"
+                           android:layout_marginRight="16dp"
+                           android:layout_marginBottom="12dp"></TextView>
+
+
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:weightSum="2"
+                           android:orientation="horizontal">
+
+                           <LinearLayout
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:orientation="horizontal"
+                               android:layout_weight="1">
+
+                               <ImageView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:paddingLeft="16dp"
+                                   android:src="@drawable/ic_home2"></ImageView>
+
+                               <LinearLayout
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_gravity="center"
+                                   android:orientation="vertical">
+
+                                   <TextView
+                                       android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content"
+                                       android:text="@string/home"
+                                       android:paddingLeft="12dp"
+                                       android:textColor="@color/colorBlackMidEmp"
+                                       android:fontFamily="@font/ubuntu_medium"
+                                       android:textSize="12sp"></TextView>
+
+                                   <TextView
+                                       android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content"
+                                       android:text="@string/set_address"
+                                       android:paddingLeft="12dp"
+                                       android:paddingTop="4dp"
+                                       android:textColor="@color/colorBlackMidEmp"
+                                       android:fontFamily="@font/ubuntu"
+                                       android:textSize="10sp"></TextView>
+
+                               </LinearLayout>
+
+                           </LinearLayout>
+
+                           <LinearLayout
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:orientation="horizontal"
+                               android:layout_weight="1">
+
+                               <ImageView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:paddingLeft="16dp"
+                                   android:src="@drawable/ic_work"></ImageView>
+
+                               <LinearLayout
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_gravity="center"
+                                   android:orientation="vertical">
+
+                                   <TextView
+                                       android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content"
+                                       android:fontFamily="@font/ubuntu_medium"
+                                       android:paddingLeft="12dp"
+                                       android:text="@string/work"
+                                       android:textColor="@color/colorBlackMidEmp"
+                                       android:textSize="12sp"></TextView>
+
+                                   <TextView
+                                       android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content"
+                                       android:text="@string/set_address"
+                                       android:paddingLeft="12dp"
+                                       android:paddingTop="4dp"
+                                       android:textColor="@color/colorBlackMidEmp"
+                                       android:fontFamily="@font/ubuntu"
+                                       android:textSize="10sp"></TextView>
+
+                               </LinearLayout>
+
+                           </LinearLayout>
+
+                       </LinearLayout>
+
+                   </LinearLayout>
+
+               </androidx.cardview.widget.CardView>
+
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="40dp"></View>
+
+           </LinearLayout>
+
+       </ScrollView>
 
     </LinearLayout>
 
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:cnb_menuResource="@menu/bottom_nav"
+        android:background="@drawable/bottom_nav_bg"
+        app:cnb_orientationMode="horizontal"
+        app:cnb_iconSize="22dp"
+        android:elevation="10dp"
+        app:cnb_unselectedColor="@color/colorBlackMidEmp"
+        android:layout_gravity="bottom"
+        app:cnb_textAppearance="@style/bottomNavTextAppearance">
+    </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
