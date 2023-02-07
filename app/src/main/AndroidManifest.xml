@@ -16,6 +16,12 @@
         android:theme="@style/Theme.Trox"
         tools:targetApi="31">
         <activity
+            android:name=".activity.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SendParcelActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.PrivacyPolicyActivity"
             android:exported="false" />
         <activity

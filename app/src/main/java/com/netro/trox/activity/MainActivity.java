@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.netro.trox.R;
@@ -20,6 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
+    LinearLayout sendParcel;
     ChipNavigationBar bottomNav;
     CircleImageView userImage;
 
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         userImage = findViewById(R.id.user_image);
         bottomNav = findViewById(R.id.bottomNav);
+        sendParcel = findViewById(R.id.send_parcel);
 
         bottomNav.setItemSelected(R.id.nav_home,true);
 
@@ -51,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
         sliderView.setScrollTimeInSec(3);
         sliderView.setAutoCycle(true);
         sliderView.startAutoCycle();
+
+        sendParcel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SendParcelActivity.class));
+            }
+        });
 
 
         userImage.setOnClickListener(new View.OnClickListener() {

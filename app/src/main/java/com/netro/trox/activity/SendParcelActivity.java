@@ -1,4 +1,4 @@
-package com.netro.trox.authentication;
+package com.netro.trox.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -12,24 +12,25 @@ import android.widget.RelativeLayout;
 
 import com.netro.trox.R;
 
-public class ForgotPasswordActivity extends AppCompatActivity {
+public class SendParcelActivity extends AppCompatActivity {
 
     ImageView back;
 
-    RelativeLayout email, phone;
+    RelativeLayout domestic, international;
+
+    CardView btnContinue;
 
     String selected = "";
-    CardView btnContinue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password);
+        setContentView(R.layout.activity_send_parcel);
 
         back = findViewById(R.id.back);
         btnContinue = findViewById(R.id.btn_continue);
-        email = findViewById(R.id.email);
-        phone = findViewById(R.id.phone);
+        domestic = findViewById(R.id.domestic);
+        international = findViewById(R.id.international);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,29 +39,31 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
         });
 
-        email.setOnClickListener(new View.OnClickListener() {
+        domestic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selected = "Email";
-                email.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.selected_outline_bg));
-                phone.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_bg));
+                selected = "Domestic";
+                domestic.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.selected_outline_bg));
+                international.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_bg));
             }
         });
 
-        phone.setOnClickListener(new View.OnClickListener() {
+        international.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selected = "International";
-                email.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_bg));
-                phone.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.selected_outline_bg));
+                domestic.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_bg));
+                international.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.selected_outline_bg));
             }
         });
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ForgotPasswordActivity.this, ResetPasswordActivity.class));
+                startActivity(new Intent(SendParcelActivity.this, OrderDetailsActivity.class));
             }
         });
+
+
     }
 }

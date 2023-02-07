@@ -2,8 +2,6 @@ package com.netro.trox.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,24 +10,23 @@ import android.widget.LinearLayout;
 import com.netro.trox.R;
 import com.netro.trox.util.Tools;
 
-public class EmergencySupportActivity extends AppCompatActivity {
+public class OrderDetailsActivity extends AppCompatActivity {
 
+     ImageView back;
     LinearLayout main;
-    ImageView back;
-
     Tools tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emergency_support);
+        setContentView(R.layout.activity_order_details);
 
-        main = findViewById(R.id.main);
         back = findViewById(R.id.back);
+        main = findViewById(R.id.main);
 
         tools = new Tools();
 
-        tools.setLightStatusBar(main,this);
+        tools.setLightStatusBar(main, this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +34,5 @@ public class EmergencySupportActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
-
 }

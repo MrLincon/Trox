@@ -10,11 +10,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.netro.trox.R;
+import com.netro.trox.util.Tools;
 
 public class PrivacyPolicyActivity extends AppCompatActivity {
 
     LinearLayout main;
     ImageView back;
+
+    Tools tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,9 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
         main = findViewById(R.id.main);
         back = findViewById(R.id.back);
 
-        setLightStatusBar(main, this);
+        tools = new Tools();
+
+        tools.setLightStatusBar(main,this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,15 +37,6 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    public static void  setLightStatusBar(View view, Activity activity){
-        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.M){
-            int flags = view.getSystemUiVisibility();
-            flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-            view.setSystemUiVisibility(flags);
-            activity.getWindow().setStatusBarColor(view.getResources().getColor(R.color.colorWhiteHighEmp));
-        }
     }
 
 }

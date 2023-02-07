@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.netro.trox.R;
 import com.netro.trox.adapter.ViewpagerAdapterOffers;
 import com.netro.trox.adapter.ViewpagerAdapterOrders;
+import com.netro.trox.util.Tools;
 
 public class OrdersActivity extends AppCompatActivity {
 
@@ -22,6 +23,8 @@ public class OrdersActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
+
+    Tools tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,10 @@ public class OrdersActivity extends AppCompatActivity {
         back = findViewById(R.id.back);
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.viewPager);
+
+        tools = new Tools();
+
+        tools.setLightStatusBar(main,this);
 
         tabLayout.setupWithViewPager(viewPager);
 

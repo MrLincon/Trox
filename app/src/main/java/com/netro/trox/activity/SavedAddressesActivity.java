@@ -1,6 +1,7 @@
 package com.netro.trox.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.app.Activity;
 import android.os.Build;
@@ -10,11 +11,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.netro.trox.R;
+import com.netro.trox.util.Tools;
 
 public class SavedAddressesActivity extends AppCompatActivity {
 
-    LinearLayout main;
+    CoordinatorLayout main;
     ImageView back;
+
+    Tools tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +28,9 @@ public class SavedAddressesActivity extends AppCompatActivity {
         main = findViewById(R.id.main);
         back = findViewById(R.id.back);
 
-        setLightStatusBar(main, this);
+        tools = new Tools();
+
+        tools.setLightStatusBar(main,this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,15 +39,6 @@ public class SavedAddressesActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public static void  setLightStatusBar(View view, Activity activity){
-        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.M){
-            int flags = view.getSystemUiVisibility();
-            flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-            view.setSystemUiVisibility(flags);
-            activity.getWindow().setStatusBarColor(view.getResources().getColor(R.color.colorWhiteHighEmp));
-        }
     }
 
 }

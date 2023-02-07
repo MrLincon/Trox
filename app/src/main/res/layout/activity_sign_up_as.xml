@@ -8,6 +8,7 @@
     tools:context=".authentication.SignUpAsActivity">
 
     <ImageView
+        android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:paddingLeft="16dp"
@@ -67,12 +68,11 @@
                     android:textSize="20sp"></TextView>
 
                 <RelativeLayout
+                    android:id="@+id/customer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:clickable="true"
                     android:background="@drawable/outline_bg"
                     android:padding="16dp">
 
@@ -113,6 +113,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/merchant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
@@ -120,8 +121,6 @@
                     android:layout_marginRight="24dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/outline_bg"
-                    android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:padding="16dp">
 
                     <ImageView

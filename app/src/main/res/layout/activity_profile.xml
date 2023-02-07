@@ -124,6 +124,7 @@
                android:layout_marginRight="16dp"
                android:layout_marginBottom="8dp"
                android:clickable="false"
+               app:cardElevation="2dp"
                android:foreground="?android:attr/selectableItemBackground"
                app:cardBackgroundColor="@color/colorWhiteHighEmp"
                app:cardCornerRadius="12dp">
@@ -174,6 +175,7 @@
                android:layout_marginRight="16dp"
                android:layout_marginBottom="8dp"
                android:clickable="true"
+               app:cardElevation="2dp"
                android:foreground="?android:attr/selectableItemBackground"
                app:cardBackgroundColor="@color/colorWhiteHighEmp"
                app:cardCornerRadius="12dp">
@@ -209,11 +211,13 @@
            </androidx.cardview.widget.CardView>
 
            <androidx.cardview.widget.CardView
+               android:id="@+id/language"
                android:layout_width="match_parent"
                android:layout_height="56dp"
                android:layout_marginLeft="16dp"
                android:layout_marginRight="16dp"
                android:clickable="true"
+               app:cardElevation="2dp"
                android:foreground="?android:attr/selectableItemBackground"
                android:layout_marginBottom="8dp"
                app:cardBackgroundColor="@color/colorWhiteHighEmp"
@@ -256,6 +260,7 @@
                android:layout_marginLeft="16dp"
                android:layout_marginRight="16dp"
                android:clickable="true"
+               app:cardElevation="2dp"
                android:foreground="?android:attr/selectableItemBackground"
                android:layout_marginBottom="8dp"
                app:cardBackgroundColor="@color/colorWhiteHighEmp"
@@ -298,6 +303,7 @@
                android:layout_marginLeft="16dp"
                android:layout_marginRight="16dp"
                android:clickable="true"
+               app:cardElevation="2dp"
                android:foreground="?android:attr/selectableItemBackground"
                android:layout_marginBottom="8dp"
                app:cardBackgroundColor="@color/colorWhiteHighEmp"
@@ -340,6 +346,7 @@
                android:layout_marginLeft="16dp"
                android:layout_marginRight="16dp"
                android:clickable="true"
+               app:cardElevation="2dp"
                android:foreground="?android:attr/selectableItemBackground"
                android:layout_marginBottom="8dp"
                app:cardBackgroundColor="@color/colorWhiteHighEmp"
@@ -381,6 +388,7 @@
                android:layout_marginLeft="16dp"
                android:layout_marginRight="16dp"
                android:clickable="true"
+               app:cardElevation="2dp"
                android:foreground="?android:attr/selectableItemBackground"
                android:layout_marginBottom="8dp"
                app:cardBackgroundColor="@color/colorWhiteHighEmp"
@@ -423,6 +431,7 @@
                android:layout_marginRight="16dp"
                android:layout_marginBottom="8dp"
                android:clickable="true"
+               app:cardElevation="2dp"
                android:foreground="?android:attr/selectableItemBackground"
                app:cardBackgroundColor="@color/colorWhiteHighEmp"
                app:cardCornerRadius="12dp">

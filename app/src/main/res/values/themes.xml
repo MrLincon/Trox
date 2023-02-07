@@ -8,6 +8,7 @@
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:textColor">@color/colorWhiteHighEmp</item>
         <item name="android:windowDisablePreview">true</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="bottomNavTextAppearance" parent="@android:style/TextAppearance">
@@ -23,5 +24,12 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_bg</item>
+    </style>
 
 </resources>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_bg"
-    tools:context=".authentication.ForgotPasswordActivity">
+    tools:context=".activity.SendParcelActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:fontFamily="@font/ubuntu_medium"
-            android:text="@string/forgot_password"
+            android:text="@string/send_parcel"
             android:textColor="@color/colorWhiteHighEmp"
             android:textSize="16sp"></TextView>
 
@@ -81,7 +81,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/ubuntu_bold"
-                    android:text="@string/forgot_password"
+                    android:text="@string/reliable_delivery"
                     android:textColor="@color/colorBlackHighEmp"
                     android:textSize="20sp"></TextView>
 
@@ -95,12 +95,12 @@
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="16dp"
                     android:gravity="center"
-                    android:text="@string/select_a_contact_details"
+                    android:text="@string/send_things_to_your_destination_fast_and_securely"
                     android:textColor="@color/colorBlackHighEmp"
-                    android:textSize="16sp"></TextView>
+                    android:textSize="16sp" />
 
                 <RelativeLayout
-                    android:id="@+id/email"
+                    android:id="@+id/domestic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
@@ -112,7 +112,7 @@
                         android:id="@+id/customer_image"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_type_email"></ImageView>
+                        android:src="@drawable/ic_domestic"></ImageView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -127,7 +127,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ubuntu_medium"
-                            android:text="@string/e_mail"
+                            android:text="@string/domestic"
                             android:textColor="@color/colorBlackHighEmp"
                             android:textSize="14sp"></TextView>
 
@@ -136,7 +136,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/ubuntu_medium"
-                            android:text="@string/send_to_email"
+                            android:text="@string/planning_and_setting_up_shipping_for_your_small_business"
                             android:textColor="@color/colorBlackLowEmp"
                             android:textSize="10sp"></TextView>
 
@@ -145,7 +145,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/phone"
+                    android:id="@+id/international"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
@@ -159,7 +159,7 @@
                         android:id="@+id/merchant_image"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_merchant"></ImageView>
+                        android:src="@drawable/ic_international"></ImageView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -174,7 +174,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ubuntu_medium"
-                            android:text="@string/phone"
+                            android:text="@string/international"
                             android:textColor="@color/colorBlackHighEmp"
                             android:textSize="14sp"></TextView>
 
@@ -183,7 +183,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/ubuntu_medium"
-                            android:text="@string/sent_to_phone"
+                            android:text="More delivery time options are available for your international shipments"
                             android:textColor="@color/colorBlackLowEmp"
                             android:textSize="10sp"></TextView>
 

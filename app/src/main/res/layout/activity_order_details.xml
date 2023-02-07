@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    tools:context=".activity.OrderDetailsActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="top">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:paddingLeft="16dp"
+            app:tint="@color/colorBlackHighEmp"
+            android:src="@drawable/ic_arrow_left"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/ubuntu_medium"
+            android:text="@string/order_details"
+            android:textColor="@color/colorBlackHighEmp"
+            android:textSize="16sp"></TextView>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_quotation"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Get Quotation"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@id/image_view"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:textColor="@color/colorBlackHighEmp"></TextView>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    app:tint="@color/colorBlackHighEmp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_right"></ImageView>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/colorWhiteMidEmp"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Quotation"
+                android:textSize="16sp"
+                android:layout_toRightOf="@id/image_view"
+                android:fontFamily="@font/ubuntu_medium"
+                android:textColor="@color/colorBlackHighEmp"></TextView>
+            
+            
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/receiver_s_phone_number"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/ubuntu"
+                android:textColor="@color/colorBlackHighEmp"
+                android:textColorHint="@color/colorBlackLowEmp"
+                android:background="@drawable/edit_text_bg2"></EditText>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/receiver_s_name"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/ubuntu"
+                android:textColor="@color/colorBlackHighEmp"
+                android:textColorHint="@color/colorBlackLowEmp"
+                android:background="@drawable/edit_text_bg2"></EditText>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deliver_address"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/image_view"
+                android:fontFamily="@font/ubuntu_medium"
+                android:textColor="@color/colorBlackHighEmp"></TextView>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/city"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:drawablePadding="8dp"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableTint="@color/colorBlackLowEmp"
+                android:textSize="14sp"
+                android:fontFamily="@font/ubuntu"
+                android:textColor="@color/colorBlackHighEmp"
+                android:textColorHint="@color/colorBlackLowEmp"
+                android:background="@drawable/edit_text_bg2"></EditText>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/zone"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:drawablePadding="8dp"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableTint="@color/colorBlackLowEmp"
+                android:fontFamily="@font/ubuntu"
+                android:textColor="@color/colorBlackHighEmp"
+                android:textColorHint="@color/colorBlackLowEmp"
+                android:background="@drawable/edit_text_bg2"></EditText>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/area_amp_full_address"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/ubuntu"
+                android:textColor="@color/colorBlackHighEmp"
+                android:textColorHint="@color/colorBlackLowEmp"
+                android:background="@drawable/edit_text_bg2"></EditText>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
