@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/main"
-    tools:context=".activity.OrdersActivity">
+    tools:context=".activity.DeliveryAddressActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -29,37 +28,25 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/ubuntu_medium"
-            android:text="@string/orders"
+            android:text="@string/delivery_address"
             android:textColor="@color/colorBlackHighEmp"
             android:textSize="16sp"></TextView>
 
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        app:tabRippleColor="@null"
-        app:tabGravity="fill"
-        app:tabPaddingStart="24dp"
-        app:tabPaddingEnd="24dp"
-        app:tabMode="scrollable"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        app:tabBackground="@drawable/tab_selector"
-        app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="@color/colorWhiteHighEmp"
-        app:tabTextAppearance="@style/tabTextAppearance"
-        app:tabTextColor="@color/colorBlackMidEmp">
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <EditText
+        android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhiteHighEmp"></androidx.viewpager.widget.ViewPager>
-
-
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/edit_text_bg"
+        android:drawableEnd="@drawable/ic_search"
+        android:fontFamily="@font/ubuntu_medium"
+        android:paddingLeft="16dp"
+        android:maxLines="1"
+        android:paddingRight="8dp"
+        android:textColor="@color/colorBlackHighEmp"
+        android:textColorHint="@color/colorBlackLowEmp"
+        android:textSize="12sp"></EditText>
 
 </LinearLayout>

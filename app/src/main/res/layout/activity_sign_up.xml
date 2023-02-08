@@ -10,14 +10,15 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:src="@drawable/ic_arrow_left"
-        android:paddingLeft="16dp"></ImageView>
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:src="@drawable/ic_arrow_left"></ImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="vertical">
 
 
@@ -32,21 +33,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:text="@string/_1_parcel_delivery_platform"
             android:fontFamily="@font/ubuntu_medium"
+            android:text="@string/_1_parcel_delivery_platform"
             android:textColor="@color/colorWhiteHighEmp"
             android:textSize="16sp"></TextView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="24dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="16dp"
             android:layout_marginBottom="24dp"
-            app:cardBackgroundColor="@color/colorWhiteHighEmp">
+            app:cardBackgroundColor="@color/colorWhiteHighEmp"
+            app:cardCornerRadius="24dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,9 +61,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
-                    android:text="@string/sign_up"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/ubuntu_bold"
+                    android:text="@string/sign_up"
                     android:textColor="@color/colorBlackHighEmp"
                     android:textSize="20sp"></TextView>
 
@@ -70,77 +71,77 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:textColor="@color/colorBlackHighEmp"
-                    android:textColorHint="@color/colorBlackLowEmp"
-                    app:startIconDrawable="@drawable/ic_email"
-                    app:boxStrokeWidth="0dp"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
-                    app:boxStrokeWidthFocused="0dp">
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:startIconDrawable="@drawable/ic_email">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
+                        android:background="@drawable/edit_text_bg"
                         android:hint="@string/your_e_mail_address"
                         android:inputType="textEmailAddress|textNoSuggestions"
                         android:textColor="@color/colorBlackHighEmp"
                         android:textColorHint="@color/colorBlackLowEmp"
-                        android:background="@drawable/edit_text_bg"
-                        android:textCursorDrawable="@null" />
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
+                    android:layout_marginLeft="24dp"
                     android:layout_marginTop="12dp"
+                    android:layout_marginRight="24dp"
                     android:textColor="@color/colorBlackHighEmp"
                     android:textColorHint="@color/colorBlackLowEmp"
-                    app:startIconDrawable="@drawable/ic_lock"
                     app:boxStrokeWidth="0dp"
-                    app:passwordToggleEnabled="true"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:passwordToggleContentDescription="@string/password_toggle_content_description">
+                    app:passwordToggleContentDescription="@string/password_toggle_content_description"
+                    app:passwordToggleEnabled="true"
+                    app:startIconDrawable="@drawable/ic_lock">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
+                        android:background="@drawable/edit_text_bg"
                         android:hint="@string/password"
                         android:inputType="textPassword"
                         android:textColor="@color/colorBlackHighEmp"
                         android:textColorHint="@color/colorBlackLowEmp"
-                        android:background="@drawable/edit_text_bg"
-                        android:textCursorDrawable="@null" />
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
+                    android:layout_marginLeft="24dp"
                     android:layout_marginTop="12dp"
+                    android:layout_marginRight="24dp"
                     android:textColor="@color/colorBlackHighEmp"
                     android:textColorHint="@color/colorBlackLowEmp"
-                    app:startIconDrawable="@drawable/ic_phone"
                     app:boxStrokeWidth="0dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="24dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:passwordToggleContentDescription="@string/password_toggle_content_description">
+                    app:passwordToggleContentDescription="@string/password_toggle_content_description"
+                    app:startIconDrawable="@drawable/ic_phone">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
+                        android:background="@drawable/edit_text_bg"
                         android:hint="@string/phone"
                         android:inputType="number"
                         android:textColor="@color/colorBlackHighEmp"
                         android:textColorHint="@color/colorBlackLowEmp"
-                        android:background="@drawable/edit_text_bg"
-                        android:textCursorDrawable="@null" />
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -203,22 +204,22 @@
                     android:id="@+id/cv_continue"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    app:cardCornerRadius="60dp"
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginRight="24dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:layout_marginRight="24dp"
-                    app:cardBackgroundColor="@color/colorPrimary">
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardCornerRadius="60dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/continue_"
+                        android:layout_gravity="center"
                         android:fontFamily="@font/ubuntu_medium"
-                        android:textSize="16sp"
+                        android:text="@string/continue_"
                         android:textColor="@color/colorWhiteHighEmp"
-                        android:layout_gravity="center"></TextView>
+                        android:textSize="16sp"></TextView>
 
 
                 </androidx.cardview.widget.CardView>

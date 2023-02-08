@@ -10,23 +10,24 @@ import android.widget.LinearLayout;
 import com.netro.trox.R;
 import com.netro.trox.util.Tools;
 
-public class OrderDetailsActivity extends AppCompatActivity {
+public class QuotationAddressActivity extends AppCompatActivity {
 
-     ImageView back;
+    ImageView back;
     LinearLayout main;
+
     Tools tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_details);
+        setContentView(R.layout.activity_quotation_address);
 
-        back = findViewById(R.id.back);
         main = findViewById(R.id.main);
+        back = findViewById(R.id.back);
 
         tools = new Tools();
 
-        tools.setLightStatusBar(main, this);
+        tools.setLightStatusBar(main,this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

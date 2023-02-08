@@ -99,4 +99,23 @@
     <string name="city">City</string>
     <string name="zone">Zone</string>
     <string name="area_amp_full_address"><![CDATA[Area & Full Address]]></string>
+    <string name="country">Country</string>
+    <string name="parcel_weight_kg">Parcel Weight (KG)</string>
+    <string name="parcel">Parcel</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="enter_city">Enter City</string>
+    <string name="enter_state">Enter State</string>
+    <string name="enter_country">Enter Country</string>
+    <string name="state">State</string>
+    <string name="select_courier_type">Select courier Type</string>
+    <string name="non_perishable_goods_no_fragile_no_food_items">Non-perishable goods, no fragile, no food items</string>
+    <string name="document">Document</string>
+    <string name="no_passport_or_bank_cheques">No passport or bank cheques</string>
+    <string name="get_quotation">Get Quotation</string>
+    <string name="destination_city">Destination City</string>
+    <string name="merchant_drop">Merchant Drop</string>
+    <string name="pickup_city">Pickup City</string>
+    <string name="home_pickup">Home Pickup</string>
+    <string name="select_city">Select City</string>
+    <string name="click_to_upload_doc_pdf_jpg_etc">Click to upload DOC, PDF, JPG ETC</string>
 </resources>

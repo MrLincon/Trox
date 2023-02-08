@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    tools:context=".activity.DomesticOrderDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="top">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                app:tint="@color/colorBlackHighEmp"
+                android:src="@drawable/ic_arrow_left"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/ubuntu_medium"
+                android:text="@string/order_details"
+                android:textColor="@color/colorBlackHighEmp"
+                android:textSize="16sp"></TextView>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp">
+
+                <RelativeLayout
+                    android:id="@+id/get_quotation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp">
+
+                    <ImageView
+                        android:id="@+id/image_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_quotation"></ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/get_quotation"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toRightOf="@id/image_view"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:textColor="@color/colorBlackHighEmp"></TextView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        app:tint="@color/colorBlackHighEmp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_arrow_right"></ImageView>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/colorWhiteMidEmp"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Get Quotation"
+                    android:textSize="16sp"
+                    android:layout_toRightOf="@id/image_view"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:textColor="@color/colorBlackHighEmp"></TextView>
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/receiver_s_phone_number"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/ubuntu"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:background="@drawable/edit_text_bg2"></EditText>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/receiver_s_name"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/ubuntu"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:background="@drawable/edit_text_bg2"></EditText>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/deliver_address"
+                    android:textSize="16sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_toRightOf="@id/image_view"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:textColor="@color/colorBlackHighEmp"></TextView>
+
+                <EditText
+                    android:id="@+id/country"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/country"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:drawablePadding="8dp"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:drawableTint="@color/colorBlackLowEmp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/ubuntu"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:background="@drawable/edit_text_bg2"></EditText>
+
+                <EditText
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/city"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:drawablePadding="8dp"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:drawableTint="@color/colorBlackLowEmp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/ubuntu"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:background="@drawable/edit_text_bg2"></EditText>
+
+                <EditText
+                    android:id="@+id/state"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/state"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14sp"
+                    android:drawablePadding="8dp"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:drawableTint="@color/colorBlackLowEmp"
+                    android:fontFamily="@font/ubuntu"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:background="@drawable/edit_text_bg2" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/area_amp_full_address"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textSize="14sp"
+                    android:maxLines="2"
+                    android:lines="6"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/ubuntu"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:background="@drawable/edit_text_bg2"></EditText>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/parcel_weight_kg"
+                    android:textSize="16sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_toRightOf="@id/image_view"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:textColor="@color/colorBlackHighEmp"></TextView>
+
+                <com.google.android.material.slider.RangeSlider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:valueFrom="0"
+                    android:valueTo="10"
+                    android:stepSize="1"></com.google.android.material.slider.RangeSlider>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/colorWhiteMidEmp"></View>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/item_type_image"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_send_parcel"></ImageView>
+
+                        <TextView
+                            android:id="@+id/item_type_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/parcel"
+                            android:paddingLeft="12dp"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorBlackHighEmp"
+                            android:fontFamily="@font/ubuntu_medium"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/item_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:layout_weight="1">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Change Item Type"
+                            android:paddingLeft="12dp"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorPrimary"
+                            android:fontFamily="@font/ubuntu"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            app:tint="@color/colorPrimary"
+                            android:src="@drawable/ic_arrow_down"></ImageView>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorWhiteMidEmp"></View>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btn_continue"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    app:cardCornerRadius="60dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginBottom="36dp"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:layout_marginRight="24dp"
+                    app:cardBackgroundColor="@color/colorPrimary">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/continue_"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorWhiteHighEmp"
+                        android:layout_gravity="center"></TextView>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

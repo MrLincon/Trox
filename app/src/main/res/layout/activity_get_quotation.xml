@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.GetQuotationActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="@color/colorBlackHighEmp"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/ubuntu_medium"
+            android:text="@string/get_quotation"
+            android:textColor="@color/colorBlackHighEmp"
+            android:textSize="16sp"></TextView>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardBackgroundColor="@color/colorWhiteHighEmp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/pickup_city"
+                        android:textColor="@color/colorBlackHighEmp"
+                        android:textSize="16sp"></TextView>
+
+                    <EditText
+                        android:id="@+id/pickup_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/edit_text_bg"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/ic_arrow_right"
+                        android:drawableTint="@color/colorBlackHighEmp"
+                        android:focusable="false"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:hint="@string/city"
+                        android:maxLines="1"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:textColor="@color/colorBlackHighEmp"
+                        android:textColorHint="@color/colorBlackLowEmp"
+                        android:textSize="12sp"></EditText>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/destination_city"
+                        android:textColor="@color/colorBlackHighEmp"
+                        android:textSize="16sp"></TextView>
+
+                    <EditText
+                        android:id="@+id/destination_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/edit_text_bg"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/ic_arrow_right"
+                        android:drawableTint="@color/colorBlackHighEmp"
+                        android:focusable="false"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:hint="@string/city"
+                        android:maxLines="1"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:textColor="@color/colorBlackHighEmp"
+                        android:textColorHint="@color/colorBlackLowEmp"
+                        android:textSize="12sp"></EditText>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_toRightOf="@id/image_view"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/parcel_weight_kg"
+                        android:textColor="@color/colorBlackHighEmp"
+                        android:textSize="16sp"></TextView>
+
+                    <com.google.android.material.slider.RangeSlider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stepSize="1"
+                        android:valueFrom="0"
+                        android:valueTo="10"></com.google.android.material.slider.RangeSlider>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/colorWhiteHighEmp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="24dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="1dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_home2"></ImageView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ubuntu_medium"
+                                android:paddingLeft="12dp"
+                                android:text="@string/home_pickup"
+                                android:textColor="@color/colorBlackMidEmp"
+                                android:textSize="12sp"></TextView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ubuntu"
+                                android:paddingLeft="12dp"
+                                android:paddingTop="4dp"
+                                android:text="$50.00"
+                                android:textColor="@color/colorBlackMidEmp"
+                                android:textSize="10sp"></TextView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="1dp"
+                            android:src="@drawable/ic_merchant"></ImageView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ubuntu_medium"
+                                android:paddingLeft="12dp"
+                                android:text="@string/merchant_drop"
+                                android:textColor="@color/colorBlackMidEmp"
+                                android:textSize="12sp"></TextView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/ubuntu"
+                                android:paddingLeft="12dp"
+                                android:paddingTop="4dp"
+                                android:text="$0.00"
+                                android:textColor="@color/colorBlackMidEmp"
+                                android:textSize="10sp"></TextView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -16,7 +16,19 @@
         android:theme="@style/Theme.Trox"
         tools:targetApi="31">
         <activity
-            android:name=".activity.OrderDetailsActivity"
+            android:name=".activity.InternationalOrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.QuotationAddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.GetQuotationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DeliveryAddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DomesticOrderDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".activity.SendParcelActivity"

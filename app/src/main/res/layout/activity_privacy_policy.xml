@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:src="@drawable/ic_arrow_left"
             app:tint="@color/colorBlackHighEmp"></ImageView>
 
@@ -28,7 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="16dp"
             android:fontFamily="@font/ubuntu_medium"
             android:text="@string/privacy_policies_amp_faq"
             android:textColor="@color/colorBlackHighEmp"
