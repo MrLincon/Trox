@@ -118,4 +118,11 @@
     <string name="home_pickup">Home Pickup</string>
     <string name="select_city">Select City</string>
     <string name="click_to_upload_doc_pdf_jpg_etc">Click to upload DOC, PDF, JPG ETC</string>
+    <string name="rating">Rating</string>
+    <string name="are_you_sure_want_to_logout">Are you sure want to Logout?</string>
+    <string name="submit">Submit</string>
+    <string name="active_orders">Active Orders</string>
+    <string name="track_orders">Track Orders</string>
+    <string name="delivery_details">Delivery Details</string>
+    <string name="pickup_requested">Pickup Requested</string>
 </resources>

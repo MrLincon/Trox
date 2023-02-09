@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
@@ -21,7 +22,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    LinearLayout sendParcel;
+    ImageView notification;
+    LinearLayout sendParcel, priceCheck;
     ChipNavigationBar bottomNav;
     CircleImageView userImage;
 
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         userImage = findViewById(R.id.user_image);
         bottomNav = findViewById(R.id.bottomNav);
         sendParcel = findViewById(R.id.send_parcel);
+        priceCheck = findViewById(R.id.price_check);
+        notification = findViewById(R.id.notification);
 
         bottomNav.setItemSelected(R.id.nav_home,true);
 
@@ -55,6 +59,23 @@ public class MainActivity extends AppCompatActivity {
         sliderView.setAutoCycle(true);
         sliderView.startAutoCycle();
 
+
+        userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                finish();
+            }
+        });
+
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, NotificationActivity.class));
+                finish();
+            }
+        });
+
         sendParcel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,12 +84,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        userImage.setOnClickListener(new View.OnClickListener() {
+        priceCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                startActivity(new Intent(MainActivity.this, GetQuotationActivity.class));
             }
         });
+
 
         bottomNav.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override

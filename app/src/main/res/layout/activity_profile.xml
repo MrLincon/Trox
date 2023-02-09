@@ -425,6 +425,7 @@
            </androidx.cardview.widget.CardView>
 
            <androidx.cardview.widget.CardView
+               android:id="@+id/log_out"
                android:layout_width="match_parent"
                android:layout_height="56dp"
                android:layout_marginLeft="16dp"
