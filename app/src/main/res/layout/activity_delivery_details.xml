@@ -1,38 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorWhiteHighEmp"
     tools:context=".activity.DeliveryDetailsActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:src="@drawable/ic_arrow_left"
-            app:tint="@color/colorBlackHighEmp"></ImageView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:src="@drawable/ic_arrow_left"
+                app:tint="@color/colorBlackHighEmp"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/ubuntu_medium"
+                android:text="@string/delivery_details"
+                android:textColor="@color/colorBlackHighEmp"
+                android:textSize="16sp"></TextView>
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="@color/colorWhiteHighEmp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_id"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textSize="16sp"></TextView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CB192545UKS323"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:textColor="@color/colorBlackLowEmp"
+                        android:textSize="16sp"></TextView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_copy"
+                        android:layout_alignParentRight="true"></ImageView>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shipping_info"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:textColor="@color/colorBlackMidEmp"
+                    android:textSize="14sp"></TextView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sender"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="@color/colorBlackMidEmp"
+                        android:textSize="14sp"></TextView>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="John D. Bufford"
+                        android:gravity="right"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="@color/colorBlackMidEmp"
+                        android:textSize="14sp"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phone_no"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="@color/colorBlackMidEmp"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="01753904376"
+                        android:gravity="right"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="@color/colorBlackMidEmp"
+                        android:textSize="14sp"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contact_address"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="@color/colorBlackMidEmp"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="322 W/South St, Union, South Carolina, 29379, United States"
+                        android:gravity="right"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="@color/colorBlackMidEmp"
+                        android:textSize="14sp"></TextView>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorWhiteLowEmp"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/amount"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="@color/colorBlackMidEmp"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="$50"
+                        android:gravity="right"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="@color/colorBlackMidEmp"
+                        android:textSize="14sp"></TextView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/colorWhiteHighEmp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/order_id"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:textColor="@color/colorBlackHighEmp"
+                        android:textSize="16sp"></TextView>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Rate Now"
+                        android:gravity="right"
+                        android:visibility="invisible"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/user_image"></ImageView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Harriet J. Frye"
+                            android:fontFamily="@font/ubuntu_medium"
+                            android:textColor="@color/colorBlackMidEmp"
+                            android:textSize="14sp"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4.8"
+                            android:drawableLeft="@drawable/ic_rating"
+                            android:drawablePadding="8dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/ubuntu_medium"
+                            android:textColor="@color/colorBlackHighEmp"
+                            android:textSize="14sp"></TextView>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/btn_order_details"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="40dp"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/primary_bg_unselected"
+        android:layout_gravity="bottom|center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:fontFamily="@font/ubuntu_medium"
-            android:text="@string/delivery_details"
-            android:textColor="@color/colorBlackHighEmp"
-            android:textSize="16sp"></TextView>
+            android:text="@string/call_support"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
 
     </LinearLayout>
 
-</LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -125,4 +125,15 @@
     <string name="track_orders">Track Orders</string>
     <string name="delivery_details">Delivery Details</string>
     <string name="pickup_requested">Pickup Requested</string>
+    <string name="order_placed">Order placed</string>
+    <string name="processing">Processing</string>
+    <string name="picked_up_by_delivery_man">Picked up by delivery man</string>
+    <string name="delivering">Delivering</string>
+    <string name="delivered">Delivered</string>
+    <string name="order_id">Order ID</string>
+    <string name="shipping_info">Shipping Info</string>
+    <string name="sender">Sender</string>
+    <string name="phone_no">Phone No</string>
+    <string name="amount">Amount</string>
+    <string name="call_support">Call Support</string>
 </resources>

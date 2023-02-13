@@ -23,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity {
 
     ImageView notification;
-    LinearLayout sendParcel, priceCheck;
+    LinearLayout sendParcel, priceCheck, trackOrder;
     ChipNavigationBar bottomNav;
     CircleImageView userImage;
 
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottomNav);
         sendParcel = findViewById(R.id.send_parcel);
         priceCheck = findViewById(R.id.price_check);
+        trackOrder = findViewById(R.id.track_order);
         notification = findViewById(R.id.notification);
 
         bottomNav.setItemSelected(R.id.nav_home,true);
@@ -91,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        trackOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ActiveOrdersActivity.class));
+            }
+        });
 
         bottomNav.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override

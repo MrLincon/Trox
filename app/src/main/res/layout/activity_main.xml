@@ -160,6 +160,7 @@
                        android:layout_height="match_parent"></View>
 
                    <LinearLayout
+                       android:id="@+id/track_order"
                        android:layout_width="328dp"
                        android:layout_height="94dp"
                        android:layout_weight="1"
