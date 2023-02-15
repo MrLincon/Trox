@@ -23,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity {
 
     ImageView notification;
-    LinearLayout sendParcel, priceCheck, trackOrder;
+    LinearLayout sendParcel, priceCheck, trackOrder, domestic, international, homeAddress, workAddress;
     ChipNavigationBar bottomNav;
     CircleImageView userImage;
 
@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
         priceCheck = findViewById(R.id.price_check);
         trackOrder = findViewById(R.id.track_order);
         notification = findViewById(R.id.notification);
+        domestic = findViewById(R.id.domestic);
+        international = findViewById(R.id.international);
+        homeAddress = findViewById(R.id.home);
+        workAddress = findViewById(R.id.work);
 
         bottomNav.setItemSelected(R.id.nav_home,true);
 
@@ -84,6 +88,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        domestic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Intent intent = new Intent(MainActivity.this, DomesticOrderDetailsActivity.class);
+              intent.putExtra("type","Domestic");
+              startActivity(intent);
+            }
+        });
+
+        international.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, InternationalOrderDetailsActivity.class);
+                intent.putExtra("type","International");
+                startActivity(intent);
+            }
+        });
+
+        homeAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SavedAddressesActivity.class));
+            }
+        });
+
+        workAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SavedAddressesActivity.class));
+            }
+        });
+
 
         priceCheck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ActiveOrdersActivity.class));
+                finish();
             }
         });
 
@@ -107,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
                        startActivity(new Intent(MainActivity.this, OffersActivity.class));
                         break;
                     case R.id.nav_home:
-
                         break;
                     case R.id.nav_order:
                         startActivity(new Intent(MainActivity.this, OrdersActivity.class));

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    tools:context=".activity.FAQActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="@color/colorBlackHighEmp"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/ubuntu_medium"
+            android:text="@string/faq"
+            android:textColor="@color/colorBlackHighEmp"
+            android:textSize="16sp"></TextView>
+
+    </LinearLayout>
+
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:scrollbars="none">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="16dp"
+               android:id="@+id/card1"
+               app:cardBackgroundColor="@color/colorWhiteHighEmp"
+               app:cardCornerRadius="8dp"
+               app:cardElevation="4dp">
+
+               <LinearLayout
+                   android:id="@+id/layout1"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="16dp"
+                   android:animateLayoutChanges="true"
+                   android:orientation="vertical">
+
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginRight="36dp"
+                           android:fontFamily="@font/ubuntu_medium"
+                           android:text="I’d like to return a gift that was sent to me. How to I do that?"
+                           android:textColor="@color/colorBlackHighEmp"
+                           android:textSize="14sp"></TextView>
+
+                       <ImageView
+                           android:id="@+id/image1"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_alignParentRight="true"
+                           android:src="@drawable/ic_arrow_down"
+                           app:tint="@color/colorBlackHighEmp"></ImageView>
+
+                   </RelativeLayout>
+
+                   <TextView
+                       android:id="@+id/details1"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="8dp"
+                       android:fontFamily="@font/ubuntu"
+                       android:text="@string/lorem_ipsum"
+                       android:textColor="@color/colorBlackMidEmp"
+                       android:textSize="12sp"
+                       android:visibility="gone"></TextView>
+
+               </LinearLayout>
+
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="16dp"
+               android:id="@+id/card2"
+               android:layout_marginRight="16dp"
+               android:layout_marginBottom="16dp"
+               app:cardBackgroundColor="@color/colorWhiteHighEmp"
+               app:cardCornerRadius="8dp"
+               app:cardElevation="4dp">
+
+               <LinearLayout
+                   android:id="@+id/layout2"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="16dp"
+                   android:animateLayoutChanges="true"
+                   android:orientation="vertical">
+
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginRight="36dp"
+                           android:fontFamily="@font/ubuntu_medium"
+                           android:text="I want to return my purchases! What do I do?"
+                           android:textColor="@color/colorBlackHighEmp"
+                           android:textSize="14sp"></TextView>
+
+                       <ImageView
+                           android:id="@+id/image2"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_alignParentRight="true"
+                           android:src="@drawable/ic_arrow_down"
+                           app:tint="@color/colorBlackHighEmp"></ImageView>
+
+                   </RelativeLayout>
+
+                   <TextView
+                       android:id="@+id/details2"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="8dp"
+                       android:fontFamily="@font/ubuntu"
+                       android:text="@string/lorem_ipsum"
+                       android:textColor="@color/colorBlackMidEmp"
+                       android:textSize="12sp"
+                       android:visibility="gone"></TextView>
+
+               </LinearLayout>
+
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="16dp"
+               android:layout_marginRight="16dp"
+               android:id="@+id/card3"
+               android:layout_marginBottom="16dp"
+               app:cardBackgroundColor="@color/colorWhiteHighEmp"
+               app:cardCornerRadius="8dp"
+               app:cardElevation="4dp">
+
+               <LinearLayout
+                   android:id="@+id/layout3"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="16dp"
+                   android:animateLayoutChanges="true"
+                   android:orientation="vertical">
+
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginRight="36dp"
+                           android:fontFamily="@font/ubuntu_medium"
+                           android:text="Do you have a catalogue?"
+                           android:textColor="@color/colorBlackHighEmp"
+                           android:textSize="14sp"></TextView>
+
+                       <ImageView
+                           android:id="@+id/image3"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_alignParentRight="true"
+                           android:src="@drawable/ic_arrow_down"
+                           app:tint="@color/colorBlackHighEmp"></ImageView>
+
+                   </RelativeLayout>
+
+                   <TextView
+                       android:id="@+id/details3"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="8dp"
+                       android:fontFamily="@font/ubuntu"
+                       android:text="@string/lorem_ipsum"
+                       android:textColor="@color/colorBlackMidEmp"
+                       android:textSize="12sp"
+                       android:visibility="gone"></TextView>
+
+               </LinearLayout>
+
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="16dp"
+               android:layout_marginRight="16dp"
+               android:id="@+id/card4"
+               android:layout_marginBottom="16dp"
+               app:cardBackgroundColor="@color/colorWhiteHighEmp"
+               app:cardCornerRadius="8dp"
+               app:cardElevation="4dp">
+
+               <LinearLayout
+                   android:id="@+id/layout4"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="16dp"
+                   android:animateLayoutChanges="true"
+                   android:orientation="vertical">
+
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginRight="36dp"
+                           android:fontFamily="@font/ubuntu_medium"
+                           android:text="Can I exchange my order instead of returning it?"
+                           android:textColor="@color/colorBlackHighEmp"
+                           android:textSize="14sp"></TextView>
+
+                       <ImageView
+                           android:id="@+id/image4"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_alignParentRight="true"
+                           android:src="@drawable/ic_arrow_down"
+                           app:tint="@color/colorBlackHighEmp"></ImageView>
+
+                   </RelativeLayout>
+
+                   <TextView
+                       android:id="@+id/details4"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="8dp"
+                       android:fontFamily="@font/ubuntu"
+                       android:text="@string/lorem_ipsum"
+                       android:textColor="@color/colorBlackMidEmp"
+                       android:textSize="12sp"
+                       android:visibility="gone"></TextView>
+
+               </LinearLayout>
+
+           </androidx.cardview.widget.CardView>
+
+       </LinearLayout>
+
+   </ScrollView>
+
+</LinearLayout>

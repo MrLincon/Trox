@@ -150,30 +150,4 @@
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/add_new"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        app:cardCornerRadius="60dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="56dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:layout_marginRight="40dp"
-        app:cardBackgroundColor="@color/colorPrimary">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_new"
-            android:fontFamily="@font/ubuntu_medium"
-            android:textSize="16sp"
-            android:textColor="@color/colorWhiteHighEmp"
-            android:layout_gravity="center"></TextView>
-
-
-    </androidx.cardview.widget.CardView>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -61,10 +61,14 @@ public class SendParcelActivity extends AppCompatActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selected.equals("Domestic")){
-                    startActivity(new Intent(SendParcelActivity.this, DomesticOrderDetailsActivity.class));
-                }else if (selected.equals("International")){
-                    startActivity(new Intent(SendParcelActivity.this, InternationalOrderDetailsActivity.class));
+                if (selected.equals("Domestic")) {
+                    Intent intent = new Intent(getBaseContext(), DomesticOrderDetailsActivity.class);
+                    intent.putExtra("type", "Domestic");
+                    startActivity(intent);
+                } else if (selected.equals("International")) {
+                     Intent intent = new Intent(getBaseContext(), InternationalOrderDetailsActivity.class);
+                     intent.putExtra("type", "International");
+                     startActivity(intent);
                 }
             }
         });

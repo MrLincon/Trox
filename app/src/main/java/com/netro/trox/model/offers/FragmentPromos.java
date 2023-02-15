@@ -1,4 +1,4 @@
-package com.netro.trox.fragment.offers;
+package com.netro.trox.model.offers;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -17,6 +17,8 @@ public class InternationalOrderDetailsActivity extends AppCompatActivity {
     LinearLayout main;
 
 
+    String type;
+
     Tools tools;
 
     @Override
@@ -25,6 +27,8 @@ public class InternationalOrderDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_international_order_details);
 
         main = findViewById(R.id.main);
+
+        type = getIntent().getStringExtra("type");
 
         tools = new Tools();
 

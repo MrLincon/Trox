@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     android:background="@color/colorWhiteHighEmp"
     tools:context=".activity.DeliveryDetailsActivity">
 
@@ -43,9 +44,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
             android:layout_margin="16dp"
-            app:cardBackgroundColor="@color/colorWhiteHighEmp">
+            app:cardBackgroundColor="@color/colorWhiteHighEmp"
+            app:cardCornerRadius="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,8 +57,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/order_id"
                     android:fontFamily="@font/ubuntu_medium"
+                    android:text="@string/order_id"
                     android:textColor="@color/colorBlackHighEmp"
                     android:textSize="16sp"></TextView>
 
@@ -69,25 +70,25 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="CB192545UKS323"
                         android:fontFamily="@font/ubuntu_bold"
+                        android:text="CB192545UKS323"
                         android:textColor="@color/colorBlackLowEmp"
                         android:textSize="16sp"></TextView>
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_copy"
-                        android:layout_alignParentRight="true"></ImageView>
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_copy"></ImageView>
 
                 </RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/shipping_info"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/ubuntu_medium"
+                    android:text="@string/shipping_info"
                     android:textColor="@color/colorBlackMidEmp"
                     android:textSize="14sp"></TextView>
 
@@ -99,21 +100,21 @@
                     android:weightSum="2">
 
                     <TextView
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ubuntu"
                         android:text="@string/sender"
-                        android:fontFamily="@font/ubuntu"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="14sp"></TextView>
 
                     <TextView
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ubuntu"
+                        android:gravity="right"
                         android:text="John D. Bufford"
-                        android:gravity="right"
-                        android:fontFamily="@font/ubuntu"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="14sp"></TextView>
 
@@ -126,21 +127,21 @@
                     android:weightSum="2">
 
                     <TextView
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ubuntu"
                         android:text="@string/phone_no"
-                        android:fontFamily="@font/ubuntu"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="01753904376"
-                        android:gravity="right"
+                        android:layout_weight="1"
                         android:fontFamily="@font/ubuntu"
+                        android:gravity="right"
+                        android:text="01753904376"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="14sp"></TextView>
 
@@ -153,21 +154,21 @@
                     android:weightSum="2">
 
                     <TextView
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/contact_address"
+                        android:layout_weight="1"
                         android:fontFamily="@font/ubuntu"
+                        android:text="@string/contact_address"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="322 W/South St, Union, South Carolina, 29379, United States"
-                        android:gravity="right"
+                        android:layout_weight="1"
                         android:fontFamily="@font/ubuntu"
+                        android:gravity="right"
+                        android:text="322 W/South St, Union, South Carolina, 29379, United States"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="14sp"></TextView>
 
@@ -186,21 +187,21 @@
                     android:weightSum="2">
 
                     <TextView
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/amount"
+                        android:layout_weight="1"
                         android:fontFamily="@font/ubuntu"
+                        android:text="@string/amount"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="$50"
-                        android:gravity="right"
+                        android:layout_weight="1"
                         android:fontFamily="@font/ubuntu"
+                        android:gravity="right"
+                        android:text="$50"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="14sp"></TextView>
 
@@ -213,11 +214,11 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/colorWhiteHighEmp">
+            app:cardBackgroundColor="@color/colorWhiteHighEmp"
+            app:cardCornerRadius="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -228,28 +229,28 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:weightSum="2">
 
                     <TextView
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/order_id"
+                        android:layout_weight="1"
                         android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/order_id"
                         android:textColor="@color/colorBlackHighEmp"
                         android:textSize="16sp"></TextView>
 
                     <TextView
-                        android:layout_weight="1"
+                        android:id="@+id/rate_now"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Rate Now"
-                        android:gravity="right"
-                        android:visibility="invisible"
+                        android:layout_weight="1"
                         android:fontFamily="@font/ubuntu_medium"
+                        android:gravity="right"
+                        android:text="Rate Now"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"></TextView>
+                        android:textSize="16sp"
+                        android:visibility="invisible"></TextView>
 
                 </LinearLayout>
 
@@ -266,27 +267,27 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Harriet J. Frye"
                             android:fontFamily="@font/ubuntu_medium"
+                            android:text="Harriet J. Frye"
                             android:textColor="@color/colorBlackMidEmp"
                             android:textSize="14sp"></TextView>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4.8"
+                            android:layout_marginTop="4dp"
                             android:drawableLeft="@drawable/ic_rating"
                             android:drawablePadding="8dp"
-                            android:layout_marginTop="4dp"
                             android:fontFamily="@font/ubuntu_medium"
+                            android:text="4.8"
                             android:textColor="@color/colorBlackHighEmp"
                             android:textSize="14sp"></TextView>
 
@@ -302,9 +303,8 @@
 
     </LinearLayout>
 
-
     <LinearLayout
-        android:id="@+id/btn_order_details"
+        android:id="@+id/btn_delivery_details"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginLeft="40dp"
@@ -316,6 +316,7 @@
         android:layout_gravity="bottom|center">
 
         <TextView
+            android:id="@+id/action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu_medium"

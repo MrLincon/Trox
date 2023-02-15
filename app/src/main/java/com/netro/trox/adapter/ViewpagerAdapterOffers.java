@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.netro.trox.fragment.offers.FragmentOngoingOffers;
-import com.netro.trox.fragment.offers.FragmentPromos;
+import com.netro.trox.model.offers.FragmentOngoingOffers;
+import com.netro.trox.model.offers.FragmentPromos;
 
 public class ViewpagerAdapterOffers extends FragmentStatePagerAdapter {
 

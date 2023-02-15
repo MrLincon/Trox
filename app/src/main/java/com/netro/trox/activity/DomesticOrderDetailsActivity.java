@@ -28,6 +28,7 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
     RelativeLayout itemType, getQuotation;
 
     String parcelType = "Parcel";
+    String type;
     Tools tools;
 
     @Override
@@ -44,6 +45,8 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
         parcelTypeText = findViewById(R.id.item_type_text);
         parcelTypeImage = findViewById(R.id.item_type_image);
         getQuotation = findViewById(R.id.get_quotation);
+
+        type = getIntent().getStringExtra("type");
 
         tools = new Tools();
 

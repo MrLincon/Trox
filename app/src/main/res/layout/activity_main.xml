@@ -238,6 +238,7 @@
                            android:orientation="horizontal">
 
                            <LinearLayout
+                               android:id="@+id/domestic"
                                android:layout_width="match_parent"
                                android:layout_height="wrap_content"
                                android:orientation="horizontal"
@@ -262,6 +263,7 @@
                            </LinearLayout>
 
                            <LinearLayout
+                               android:id="@+id/international"
                                android:layout_width="match_parent"
                                android:layout_height="wrap_content"
                                android:orientation="horizontal"
@@ -325,6 +327,7 @@
                            android:orientation="horizontal">
 
                            <LinearLayout
+                               android:id="@+id/home"
                                android:layout_width="match_parent"
                                android:layout_height="wrap_content"
                                android:orientation="horizontal"
@@ -366,6 +369,7 @@
                            </LinearLayout>
 
                            <LinearLayout
+                               android:id="@+id/work"
                                android:layout_width="match_parent"
                                android:layout_height="wrap_content"
                                android:orientation="horizontal"

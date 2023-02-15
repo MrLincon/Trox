@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.netro.trox.fragment.offers.FragmentOngoingOffers;
-import com.netro.trox.fragment.offers.FragmentPromos;
 import com.netro.trox.fragment.orders.FragmentDelivered;
 import com.netro.trox.fragment.orders.FragmentPickUpRequest;
 import com.netro.trox.fragment.orders.FragmentPickedUp;

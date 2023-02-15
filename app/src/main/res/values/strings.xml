@@ -136,4 +136,14 @@
     <string name="phone_no">Phone No</string>
     <string name="amount">Amount</string>
     <string name="call_support">Call Support</string>
+    <string name="your_rating_successfully_done_thanks_for_giving_your_feedback">Your Rating Successfully Done. Thanks for giving your feedback.</string>
+    <string name="packaging_instructions">Packaging Instructions</string>
+    <string name="receiver">Receiver</string>
+    <string name="discount">Discount</string>
+    <string name="fee">Fee</string>
+    <string name="delivery_man">Delivery Man</string>
+    <string name="picked_up_by_rider">Picked up By Rider</string>
+    <string name="order_picked_up">Order Picked up</string>
+    <string name="returned">Returned</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet consectetur. Egestas tortor sit suscipit aliquam suspendisse a pellentesque lectus. Nisi elit tellus cursus pulvinar. Vitae non at mauris lorem tortor tristique eu mi. Cursus ante arcu dui montes commodo. Erat erat.</string>
 </resources>
