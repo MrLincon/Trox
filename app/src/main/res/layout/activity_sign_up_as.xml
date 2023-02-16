@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_bg"
+    android:id="@+id/main"
     tools:context=".authentication.SignUpAsActivity">
 
     <ImageView
@@ -160,59 +161,7 @@
 
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/ubuntu_medium"
-                        android:text="By signing up, you are agreeing to our"
-                        android:textColor="@color/colorBlackMidEmp"
-                        android:textSize="14sp"></TextView>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="4dp"
-                            android:fontFamily="@font/ubuntu_medium"
-                            android:text="Terms and Conditions"
-                            android:textColor="@color/colorStatusInfo"
-                            android:textSize="14sp"></TextView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="4dp"
-                            android:fontFamily="@font/ubuntu_medium"
-                            android:text="and"
-                            android:textColor="@color/colorBlackMidEmp"
-                            android:textSize="14sp"></TextView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="4dp"
-                            android:fontFamily="@font/ubuntu_medium"
-                            android:text="Privacy Policy"
-                            android:textColor="@color/colorStatusInfo"
-                            android:textSize="14sp"></TextView>
-
-                    </LinearLayout>
-
-                </LinearLayout>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/btn_continue"

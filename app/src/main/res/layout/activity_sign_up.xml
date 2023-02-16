@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_bg"
+    android:id="@+id/main"
     tools:context=".authentication.SignUpActivity">
 
     <ImageView
+        android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:paddingLeft="16dp"
@@ -69,6 +71,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_email"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:layout_marginLeft="24dp"
@@ -80,6 +83,7 @@
                     app:startIconDrawable="@drawable/ic_email">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_text_bg"
@@ -93,6 +97,36 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="24dp"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:passwordToggleContentDescription="@string/password_toggle_content_description"
+                    app:startIconDrawable="@drawable/ic_phone">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_text_bg"
+                        android:hint="@string/phone"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:textColor="@color/colorBlackHighEmp"
+                        android:textColorHint="@color/colorBlackLowEmp"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_password"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:layout_marginLeft="24dp"
@@ -107,37 +141,12 @@
                     app:startIconDrawable="@drawable/ic_lock">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_text_bg"
                         android:hint="@string/password"
                         android:inputType="textPassword"
-                        android:textColor="@color/colorBlackHighEmp"
-                        android:textColorHint="@color/colorBlackLowEmp"
-                        android:textCursorDrawable="@null"
-                        android:textSize="14sp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginRight="24dp"
-                    android:textColor="@color/colorBlackHighEmp"
-                    android:textColorHint="@color/colorBlackLowEmp"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:passwordToggleContentDescription="@string/password_toggle_content_description"
-                    app:startIconDrawable="@drawable/ic_phone">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/edit_text_bg"
-                        android:hint="@string/phone"
-                        android:inputType="number"
                         android:textColor="@color/colorBlackHighEmp"
                         android:textColorHint="@color/colorBlackLowEmp"
                         android:textCursorDrawable="@null"

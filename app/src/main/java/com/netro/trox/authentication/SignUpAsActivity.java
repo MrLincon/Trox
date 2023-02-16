@@ -2,6 +2,7 @@ package com.netro.trox.authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
@@ -10,19 +11,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.netro.trox.R;
+import com.netro.trox.util.Tools;
 
 public class SignUpAsActivity extends AppCompatActivity {
 
     ImageView back;
 
     RelativeLayout customer, merchant;
+    CoordinatorLayout main;
 
     String selected = "";
     TextView logIn;
     CardView btnContinue;
 
+    Tools tools;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,9 @@ public class SignUpAsActivity extends AppCompatActivity {
         back = findViewById(R.id.back);
         customer = findViewById(R.id.customer);
         merchant = findViewById(R.id.merchant);
+        main = findViewById(R.id.main);
+
+        tools = new Tools();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,8 +71,14 @@ public class SignUpAsActivity extends AppCompatActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignUpAsActivity.this, SignUpActivity.class));
-                finish();
+                if (!selected.equals("")){
+                    Intent intent = new Intent(SignUpAsActivity.this, SignUpActivity.class);
+                    intent.putExtra("selected",selected);
+                    startActivity(intent);         
+                    finish();
+                }else{
+                    tools.makeSnack(main,getString(R.string.message_user_type));
+                }
             }
         });
 

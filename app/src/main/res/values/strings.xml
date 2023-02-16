@@ -146,4 +146,5 @@
     <string name="order_picked_up">Order Picked up</string>
     <string name="returned">Returned</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet consectetur. Egestas tortor sit suscipit aliquam suspendisse a pellentesque lectus. Nisi elit tellus cursus pulvinar. Vitae non at mauris lorem tortor tristique eu mi. Cursus ante arcu dui montes commodo. Erat erat.</string>
+    <string name="message_user_type">You must select your user type</string>
 </resources>

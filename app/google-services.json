@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "869560255996",
+    "project_id": "trox-880ca",
+    "storage_bucket": "trox-880ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869560255996:android:5164c9ad0c89729984de79",
+        "android_client_info": {
+          "package_name": "com.netro.trox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869560255996-7d1f8fldtp7opj2co9boehvn0681vmb6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoydzvWHwqxQuk2LWZt-PcIreiP9MCDmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869560255996-7d1f8fldtp7opj2co9boehvn0681vmb6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
