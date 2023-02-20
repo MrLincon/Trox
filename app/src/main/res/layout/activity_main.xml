@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_gradient_bg"
     android:clipToPadding="false"
+    android:id="@+id/main"
     tools:context=".activity.MainActivity">
 
     <LinearLayout

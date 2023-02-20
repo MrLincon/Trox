@@ -1,6 +1,7 @@
 package com.netro.trox.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.netro.trox.R;
 import com.netro.trox.adapter.SliderAdapterHome;
@@ -25,7 +29,13 @@ public class MainActivity extends AppCompatActivity {
     ImageView notification;
     LinearLayout sendParcel, priceCheck, trackOrder, domestic, international, homeAddress, workAddress;
     ChipNavigationBar bottomNav;
+    CoordinatorLayout main;
     CircleImageView userImage;
+
+    private FirebaseFirestore db;
+    private DocumentReference document_ref;
+    private String userID;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
         international = findViewById(R.id.international);
         homeAddress = findViewById(R.id.home);
         workAddress = findViewById(R.id.work);
+
+
+        //firebase init
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        userID = mAuth.getUid();
+
 
         bottomNav.setItemSelected(R.id.nav_home,true);
 
@@ -152,6 +169,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     protected void onResume() {

@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "869560255996",
-    "project_id": "trox-880ca",
-    "storage_bucket": "trox-880ca.appspot.com"
+    "project_number": "144764896073",
+    "project_id": "trox-8ced3",
+    "storage_bucket": "trox-8ced3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:869560255996:android:5164c9ad0c89729984de79",
+        "mobilesdk_app_id": "1:144764896073:android:f0320e7636507347575098",
         "android_client_info": {
           "package_name": "com.netro.trox"
         }
       },
       "oauth_client": [
         {
-          "client_id": "869560255996-7d1f8fldtp7opj2co9boehvn0681vmb6.apps.googleusercontent.com",
+          "client_id": "144764896073-v2n7689o1l5op52h52e5r7acv0i4e1j9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.netro.trox",
+            "certificate_hash": "0a0580db31ffe9daaaea2c9a952aa1ebaf602fdf"
+          }
+        },
+        {
+          "client_id": "144764896073-ogtr9gif783ujt61pfgadkn77mfmt15u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDoydzvWHwqxQuk2LWZt-PcIreiP9MCDmE"
+          "current_key": "AIzaSyAN1plWFtktj4yht4u7EGLxFO5YQU7OB2w"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "869560255996-7d1f8fldtp7opj2co9boehvn0681vmb6.apps.googleusercontent.com",
+              "client_id": "144764896073-ogtr9gif783ujt61pfgadkn77mfmt15u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

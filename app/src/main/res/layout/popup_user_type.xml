@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:minWidth="320dp"
+    android:layout_height="wrap_content"
+    android:elevation="5dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_margin="24dp"
+    app:cardBackgroundColor="@color/colorWhiteHighEmp"
+    app:cardCornerRadius="16dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minWidth="320dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="@string/select_user_type"
+                android:textColor="@color/colorBlackHighEmp"
+                android:textSize="20sp"></TextView>
+
+            <RelativeLayout
+                android:id="@+id/customer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:background="@drawable/outline_bg"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/customer_image"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_customer"></ImageView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@id/customer_image"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/customer"
+                        android:textColor="@color/colorBlackHighEmp"
+                        android:textSize="14sp"></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/by_signing_up_you_are_agreeing_to_our_terms_amp_conditions"
+                        android:textColor="@color/colorBlackLowEmp"
+                        android:textSize="10sp"></TextView>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/merchant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/outline_bg"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/merchant_image"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_merchant"></ImageView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@id/merchant_image"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/merchant"
+                        android:textColor="@color/colorBlackHighEmp"
+                        android:textSize="14sp"></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/by_signing_up_you_are_agreeing_to_our_terms_amp_conditions"
+                        android:textColor="@color/colorBlackLowEmp"
+                        android:textSize="10sp"></TextView>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

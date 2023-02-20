@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
 import com.netro.trox.R;
 import com.netro.trox.authentication.LoginActivity;
 import com.netro.trox.bottomsheet.BottomSheetLanguage;
@@ -90,6 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         mBottomSheetDialog.cancel();
+                        FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
                         finish();
                     }

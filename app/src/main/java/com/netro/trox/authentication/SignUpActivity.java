@@ -43,10 +43,9 @@ public class SignUpActivity extends AppCompatActivity {
     CoordinatorLayout main;
     CardView cv_continue;
 
-    TextInputLayout layout_email, layout_phone, layout_password;
-    TextInputEditText et_email, et_phone, et_password;
+    TextInputLayout layout_email, layout_password;
+    TextInputEditText et_email, et_password;
 
-    String selected;
     Dialog popup;
     Tools tools;
 
@@ -68,10 +67,8 @@ public class SignUpActivity extends AppCompatActivity {
         main = findViewById(R.id.main);
 
         layout_email = findViewById(R.id.layout_email);
-        layout_phone = findViewById(R.id.layout_phone);
         layout_password = findViewById(R.id.layout_password);
         et_email = findViewById(R.id.et_email);
-        et_phone = findViewById(R.id.et_phone);
         et_password = findViewById(R.id.et_password);
 
         popup = new Dialog(this);
@@ -80,8 +77,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-
-        selected = getIntent().getStringExtra("selected");
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,35 +104,29 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void getData() {
         final String email = et_email.getText().toString().trim();
-        final String phone = et_phone.getText().toString().trim();
         final String password = et_password.getText().toString().trim();
 
         if (email.isEmpty()) {
             layout_email.setError("");
-            tools.makeSnack(main,"E-mail is required");
+            tools.makeSnack(main, "E-mail is required");
             return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             layout_email.setError("");
-            tools.makeSnack(main,"Please enter a valid email");
+            tools.makeSnack(main, "Please enter a valid email");
             return;
         }
 
         if (password.isEmpty()) {
             layout_password.setError("");
-            tools.makeSnack(main,"Password is required");
-            return;
-        }
-        if (phone.length() != 11 ) {
-            layout_phone.setError("");
-            tools.makeSnack(main,"Minimum length of phone number should be 11");
+            tools.makeSnack(main, "Password is required");
             return;
         }
 
         if (password.length() < 6) {
             layout_password.setError("");
-            tools.makeSnack(main,"Minimum length of password should be 6");
+            tools.makeSnack(main, "Minimum length of password should be 6");
             return;
         } else {
             tools.loading(popup, true);
@@ -154,31 +143,31 @@ public class SignUpActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
 
-                                            tools.logMessage("signup","completed");
+                                            tools.logMessage("signup", "completed");
                                             tools.loading(popup, false);
 
                                             FirebaseAuth.getInstance().getCurrentUser()
                                                     .sendEmailVerification()
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
 
-                                                        Dialog popup2 = new Dialog(SignUpActivity.this);
-                                                        popup2.setContentView(R.layout.popup_successful);
-                                                        popup2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                                        TextView message = popup2.findViewById(R.id.message);
-                                                        TextView actionText = popup2.findViewById(R.id.action_text);
-                                                        CardView btnContinue = popup2.findViewById(R.id.btn_continue);
-                                                        popup2.show();
-                                                        popup2.setCancelable(false);
+                                                            Dialog popup2 = new Dialog(SignUpActivity.this);
+                                                            popup2.setContentView(R.layout.popup_successful);
+                                                            popup2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                                            TextView message = popup2.findViewById(R.id.message);
+                                                            TextView actionText = popup2.findViewById(R.id.action_text);
+                                                            CardView btnContinue = popup2.findViewById(R.id.btn_continue);
+                                                            popup2.show();
+                                                            popup2.setCancelable(false);
 
-                                                        message.setText("A verification e-mail has been sent to your mail address. Verify the e-mail address and log in");
-                                                        actionText.setText(getResources().getString(R.string.continue_));
+                                                            message.setText("A verification e-mail has been sent to your mail address. Verify the e-mail address and log in");
+                                                            actionText.setText(getResources().getString(R.string.continue_));
 
 
-                                                        btnContinue.setOnClickListener(new View.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(View v) {
+                                                            btnContinue.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View v) {
 
                                                                     userID = mAuth.getUid();
 
@@ -186,10 +175,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                                                                     Map<String, String> userMap = new HashMap<>();
 
-                                                                    userMap.put("email", email);
-                                                                    userMap.put("phone", phone);
-                                                                    userMap.put("userType", selected);
-                                                                    userMap.put("usedID", userID);
+                                                                    userMap.put("user_email", email);
+                                                                    userMap.put("used_id", userID);
+                                                                    userMap.put("user_type", "");
 
                                                                     document_ref.set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                         @Override
@@ -205,10 +193,10 @@ public class SignUpActivity extends AppCompatActivity {
                                                                             tools.makeSnack(main, "Please try again");
                                                                         }
                                                                     });
-                                                            }
-                                                        });
-                                                }
-                                            });
+                                                                }
+                                                            });
+                                                        }
+                                                    });
                                         }
                                     }
                                 });

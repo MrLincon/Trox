@@ -147,4 +147,13 @@
     <string name="returned">Returned</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet consectetur. Egestas tortor sit suscipit aliquam suspendisse a pellentesque lectus. Nisi elit tellus cursus pulvinar. Vitae non at mauris lorem tortor tristique eu mi. Cursus ante arcu dui montes commodo. Erat erat.</string>
     <string name="message_user_type">You must select your user type</string>
+    <string name="user_type">User type</string>
+    <string name="profile_updated">Profile updated</string>
+    <string name="fill_all_the_fields">You need to fill all the fields</string>
+    <string name="select_user_type">Select user type</string>
+    <string name="select_your_gender">Select your gender</string>
+    <string name="other">Other</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="select_your_country">Select your country</string>
 </resources>
