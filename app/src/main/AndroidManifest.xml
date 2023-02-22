@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".util.App"
@@ -16,6 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Trox"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.OrderPickUpLocationActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.TranslucentStatus"/>
+        <activity
+            android:name=".activity.EditProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.FAQActivity"
             android:exported="false" />
@@ -85,7 +94,7 @@
         <activity
             android:name=".activity.AccountSetupActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".authentication.OTPActivity"
             android:exported="false" />
@@ -114,6 +123,9 @@
             android:name=".activity.MainActivity"
             android:exported="false" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

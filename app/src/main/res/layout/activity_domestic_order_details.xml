@@ -103,6 +103,7 @@
 
 
                 <EditText
+                    android:id="@+id/receiver_contact"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
@@ -116,6 +117,7 @@
                     android:textSize="14sp"></EditText>
 
                 <EditText
+                    android:id="@+id/receiver_name"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
@@ -135,12 +137,12 @@
                     android:layout_marginTop="16dp"
                     android:layout_toRightOf="@id/image_view"
                     android:fontFamily="@font/ubuntu_medium"
-                    android:text="@string/deliver_address"
+                    android:text="@string/delivery_address"
                     android:textColor="@color/colorBlackHighEmp"
                     android:textSize="16sp"></TextView>
 
                 <EditText
-                    android:id="@+id/country"
+                    android:id="@+id/delivery_country"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
@@ -159,7 +161,7 @@
                     android:textSize="14sp"></EditText>
 
                 <EditText
-                    android:id="@+id/city"
+                    android:id="@+id/delivery_city"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
@@ -178,7 +180,7 @@
                     android:textSize="14sp"></EditText>
 
                 <EditText
-                    android:id="@+id/state"
+                    android:id="@+id/delivery_state"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
@@ -197,6 +199,7 @@
                     android:textSize="14sp" />
 
                 <EditText
+                    android:id="@+id/delivery_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -225,6 +228,7 @@
                     android:textSize="16sp"></TextView>
 
                 <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/weight_slider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:stepSize="1"

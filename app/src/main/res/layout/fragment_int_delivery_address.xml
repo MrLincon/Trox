@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/ubuntu_medium"
-            android:text="@string/deliver_address"
+            android:text="@string/send_parcel"
             android:textColor="@color/colorBlackHighEmp"
             android:textSize="16sp"></TextView>
 
@@ -127,7 +127,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_toRightOf="@id/image_view"
                 android:fontFamily="@font/ubuntu_medium"
-                android:text="@string/deliver_address"
+                android:text="@string/delivery_address"
                 android:textColor="@color/colorBlackHighEmp"
                 android:textSize="16sp"></TextView>
 

@@ -66,9 +66,9 @@
 
 
                        <de.hdodenhof.circleimageview.CircleImageView
+                           android:id="@+id/user_image"
                            android:layout_width="110dp"
-                           android:layout_height="110dp"
-                           android:src="@drawable/user_image"></de.hdodenhof.circleimageview.CircleImageView>
+                           android:layout_height="110dp"></de.hdodenhof.circleimageview.CircleImageView>
 
                        <androidx.cardview.widget.CardView
                            android:layout_width="32dp"
@@ -79,6 +79,7 @@
                            app:cardCornerRadius="36dp">
 
                            <ImageView
+                               android:id="@+id/select_image"
                                android:layout_width="32dp"
                                android:layout_height="32dp"
                                android:padding="8dp"
@@ -89,7 +90,7 @@
                    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
                    <TextView
-                       android:id="@+id/textView2"
+                       android:id="@+id/user_name"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_marginTop="16dp"
@@ -102,6 +103,7 @@
                        app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout"></TextView>
 
                    <TextView
+                       android:id="@+id/user_email"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_marginTop="8dp"
@@ -111,7 +113,7 @@
                        android:textSize="14sp"
                        app:layout_constraintEnd_toEndOf="parent"
                        app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toBottomOf="@+id/textView2"></TextView>
+                       app:layout_constraintTop_toBottomOf="@+id/user_name"></TextView>
 
                </androidx.constraintlayout.widget.ConstraintLayout>
 

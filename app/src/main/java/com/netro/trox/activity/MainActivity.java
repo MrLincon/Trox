@@ -8,9 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.netro.trox.R;
@@ -19,6 +23,8 @@ import com.netro.trox.model.SliderData;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ChipNavigationBar bottomNav;
     CoordinatorLayout main;
     CircleImageView userImage;
+    TextView userName;
 
     private FirebaseFirestore db;
     private DocumentReference document_ref;
@@ -43,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         userImage = findViewById(R.id.user_image);
+        userName = findViewById(R.id.user_name);
         bottomNav = findViewById(R.id.bottomNav);
         sendParcel = findViewById(R.id.send_parcel);
         priceCheck = findViewById(R.id.price_check);
@@ -58,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         userID = mAuth.getUid();
-
 
         bottomNav.setItemSelected(R.id.nav_home,true);
 
@@ -80,6 +87,20 @@ public class MainActivity extends AppCompatActivity {
         sliderView.setScrollTimeInSec(3);
         sliderView.setAutoCycle(true);
         sliderView.startAutoCycle();
+
+        //load user data
+        db.collection("userDetails").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()){
+                    String user_image = documentSnapshot.getString("user_image");
+                    String user_name = documentSnapshot.getString("user_name");
+
+                    Glide.with(MainActivity.this).load(user_image).into(userImage);
+                    userName.setText(user_name);
+                }
+            }
+        });
 
 
         userImage.setOnClickListener(new View.OnClickListener() {

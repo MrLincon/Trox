@@ -1,10 +1,13 @@
 package com.netro.trox.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.WindowCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.slider.RangeSlider;
 import com.netro.trox.R;
 import com.netro.trox.util.Tools;
 
@@ -20,12 +24,15 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
     ImageView back;
     CoordinatorLayout main;
 
-    EditText country, city, state;
+    EditText receiverContact, receiverName, deliveryCountry, deliveryCity, deliveryState, deliveryAddress;
+    RangeSlider weightSlider;
 
     TextView parcelTypeText;
     ImageView parcelTypeImage;
 
     RelativeLayout itemType, getQuotation;
+
+    CardView btnContinue;
 
     String parcelType = "Parcel";
     String type;
@@ -36,15 +43,23 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_domestic_order_details);
 
+
         back = findViewById(R.id.back);
         main = findViewById(R.id.main);
-        country = findViewById(R.id.country);
-        city = findViewById(R.id.city);
-        state = findViewById(R.id.state);
+        receiverName = findViewById(R.id.receiver_name);
+        receiverContact = findViewById(R.id.receiver_contact);
+        deliveryCountry = findViewById(R.id.delivery_country);
+        deliveryCity = findViewById(R.id.delivery_city);
+        deliveryState = findViewById(R.id.delivery_state);
+        deliveryAddress = findViewById(R.id.delivery_address);
         itemType = findViewById(R.id.item_type);
         parcelTypeText = findViewById(R.id.item_type_text);
         parcelTypeImage = findViewById(R.id.item_type_image);
         getQuotation = findViewById(R.id.get_quotation);
+        btnContinue = findViewById(R.id.btn_continue);
+
+
+        Log.d("sdadadadada", "onCreate: "+"im in on DomesticOrderDetailsActivity");
 
         type = getIntent().getStringExtra("type");
 
@@ -60,7 +75,7 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
             }
         });
 
-        country.setOnClickListener(new View.OnClickListener() {
+        deliveryCountry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DomesticOrderDetailsActivity.this, DeliveryAddressActivity.class);
@@ -69,7 +84,7 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
             }
         });
 
-        city.setOnClickListener(new View.OnClickListener() {
+        deliveryCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DomesticOrderDetailsActivity.this, DeliveryAddressActivity.class);
@@ -78,7 +93,7 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
             }
         });
 
-        state.setOnClickListener(new View.OnClickListener() {
+        deliveryState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DomesticOrderDetailsActivity.this, DeliveryAddressActivity.class);
@@ -117,6 +132,13 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
                         mBottomSheetDialog.cancel();
                     }
                 });
+            }
+        });
+
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DomesticOrderDetailsActivity.this,OrderPickUpLocationActivity.class));
             }
         });
 

@@ -7,18 +7,35 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.netro.trox.R;
 import com.netro.trox.authentication.LoginActivity;
 import com.netro.trox.bottomsheet.BottomSheetLanguage;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView back;
 
+    CircleImageView userImage;
+    TextView userName, userEmail;
+
     CardView language, savedAddresses, permissions, emergencySupport, privacyPolicies, logOut;
+ImageView selectImage;
+
+    private FirebaseFirestore db;
+    private DocumentReference document_ref;
+    private String userID;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +49,41 @@ public class ProfileActivity extends AppCompatActivity {
         emergencySupport = findViewById(R.id.emergency_support);
         privacyPolicies = findViewById(R.id.privacy_policy);
         logOut = findViewById(R.id.log_out);
+        userImage = findViewById(R.id.user_image);
+        userName = findViewById(R.id.user_name);
+        userEmail = findViewById(R.id.user_email);
+        selectImage = findViewById(R.id.select_image);
+
+
+        //firebase init
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        userID = mAuth.getUid();
+
+
+        //load user data
+        db.collection("userDetails").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()){
+                    String user_image = documentSnapshot.getString("user_image");
+                    String user_name = documentSnapshot.getString("user_name");
+                    String user_email = documentSnapshot.getString("user_email");
+
+                    Glide.with(ProfileActivity.this).load(user_image).into(userImage);
+                    userName.setText(user_name);
+                    userEmail.setText(user_email);
+                }
+            }
+        });
+
+        selectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
+                finish();
+            }
+        });
 
         language.setOnClickListener(new View.OnClickListener() {
             @Override

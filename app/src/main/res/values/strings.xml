@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Trox</string>
+    <string name="map_api_key">AIzaSyD-xb0bmAfov55i-LH-PyTI8DZgvrgUvdE</string>
     <string name="parcel_delivery">PARCEL DELIVERY</string>
     <string name="_1_parcel_delivery_platform">#1 Parcel Delivery Platform</string>
     <string name="welcome_to_trox">Welcome to Trox!</string>
@@ -95,7 +96,6 @@
     <string name="order_details">Order Details</string>
     <string name="receiver_s_phone_number">Receiver\'s Phone Number</string>
     <string name="receiver_s_name">Receiver’s Name</string>
-    <string name="deliver_address">Deliver Address</string>
     <string name="city">City</string>
     <string name="zone">Zone</string>
     <string name="area_amp_full_address"><![CDATA[Area & Full Address]]></string>
@@ -156,4 +156,6 @@
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="select_your_country">Select your country</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="update">Update</string>
 </resources>

@@ -27,7 +27,6 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/user_image"
                 app:civ_border_color="@color/colorWhiteHighEmp"></de.hdodenhof.circleimageview.CircleImageView>
 
             <LinearLayout
@@ -46,10 +45,10 @@
                     android:textSize="14sp"></TextView>
 
                 <TextView
+                    android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/ubuntu_bold"
-                    android:text="Ahamed Lincon"
                     android:textSize="16sp"></TextView>
 
             </LinearLayout>
