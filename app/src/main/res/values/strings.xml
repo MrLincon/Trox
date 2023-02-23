@@ -158,4 +158,10 @@
     <string name="select_your_country">Select your country</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="update">Update</string>
+    <string name="select_a_pickup_location">Select a pickup location</string>
+    <string name="add_pickup_location">Add Pickup Location</string>
+    <string name="confirm">Confirm</string>
+    <string name="pickup">Pickup</string>
+    <string name="guide_pickup_agent">Guide Pickup Agent</string>
+    <string name="add_direction_road_landmark_house_etc">Add Direction (Road, Landmark, House etc.)</string>
 </resources>

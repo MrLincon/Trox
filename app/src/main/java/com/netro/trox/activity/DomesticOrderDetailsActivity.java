@@ -1,11 +1,15 @@
 package com.netro.trox.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.WindowCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +42,9 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
     String type;
     Tools tools;
 
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private boolean locationPermissionGranted;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +66,7 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
         btnContinue = findViewById(R.id.btn_continue);
 
 
-        Log.d("sdadadadada", "onCreate: "+"im in on DomesticOrderDetailsActivity");
+        Log.d("sdadadadada", "onCreate: " + "im in on DomesticOrderDetailsActivity");
 
         type = getIntent().getStringExtra("type");
 
@@ -138,9 +145,21 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DomesticOrderDetailsActivity.this,OrderPickUpLocationActivity.class));
+                if (ContextCompat.checkSelfPermission(DomesticOrderDetailsActivity.this,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    locationPermissionGranted = true;
+                    startActivity(new Intent(DomesticOrderDetailsActivity.this, OrderPickUpLocationActivity.class));
+                } else {
+                    ActivityCompat.requestPermissions(DomesticOrderDetailsActivity.this,
+                            new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                }
+
+
             }
         });
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,5 +167,22 @@ public class DomesticOrderDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        locationPermissionGranted = false;
+        if (requestCode
+                == PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {// If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                locationPermissionGranted = true;
+                startActivity(new Intent(DomesticOrderDetailsActivity.this, OrderPickUpLocationActivity.class));
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }

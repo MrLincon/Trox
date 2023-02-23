@@ -21,7 +21,7 @@
         <activity
             android:name=".activity.OrderPickUpLocationActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.TranslucentStatus"/>
+            android:theme="@style/Theme.Trox.FullScreen"/>
         <activity
             android:name=".activity.EditProfileActivity"
             android:exported="false" />
