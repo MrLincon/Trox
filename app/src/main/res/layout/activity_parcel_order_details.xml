@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.DomesticOrderDetailsActivity">
+    tools:context=".activity.ParcelOrderDetailsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,9 +97,96 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/image_view"
                     android:fontFamily="@font/ubuntu_medium"
-                    android:text="Get Quotation"
+                    android:text="@string/pickup_address"
                     android:textColor="@color/colorBlackHighEmp"
                     android:textSize="16sp"></TextView>
+
+                <EditText
+                    android:id="@+id/pickup_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_bg2"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/colorBlackLowEmp"
+                    android:focusable="false"
+                    android:fontFamily="@font/ubuntu"
+                    android:hint="@string/country"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:textSize="14sp"></EditText>
+
+                <EditText
+                    android:id="@+id/pickup_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_bg2"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/colorBlackLowEmp"
+                    android:focusable="false"
+                    android:fontFamily="@font/ubuntu"
+                    android:hint="@string/state"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/pickup_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_bg2"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/colorBlackLowEmp"
+                    android:focusable="false"
+                    android:fontFamily="@font/ubuntu"
+                    android:hint="@string/city"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:textSize="14sp"></EditText>
+
+
+
+                <EditText
+                    android:id="@+id/pickup_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_bg2"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/ubuntu"
+                    android:hint="@string/area_amp_full_address"
+                    android:lines="6"
+                    android:layout_marginBottom="16dp"
+                    android:maxLines="2"
+                    android:minHeight="56dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:textSize="14sp"></EditText>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/image_view"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:text="@string/receiver_details"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textSize="16sp" />
 
 
                 <EditText
@@ -112,6 +199,8 @@
                     android:hint="@string/receiver_s_phone_number"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
+                    android:maxLength="11"
+                    android:inputType="number"
                     android:textColor="@color/colorBlackHighEmp"
                     android:textColorHint="@color/colorBlackLowEmp"
                     android:textSize="14sp"></EditText>
@@ -161,6 +250,25 @@
                     android:textSize="14sp"></EditText>
 
                 <EditText
+                    android:id="@+id/delivery_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_bg2"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/colorBlackLowEmp"
+                    android:focusable="false"
+                    android:fontFamily="@font/ubuntu"
+                    android:hint="@string/state"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:textSize="14sp" />
+
+                <EditText
                     android:id="@+id/delivery_city"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
@@ -179,24 +287,7 @@
                     android:textColorHint="@color/colorBlackLowEmp"
                     android:textSize="14sp"></EditText>
 
-                <EditText
-                    android:id="@+id/delivery_state"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/edit_text_bg2"
-                    android:clickable="true"
-                    android:drawableEnd="@drawable/ic_arrow_right"
-                    android:drawablePadding="8dp"
-                    android:drawableTint="@color/colorBlackLowEmp"
-                    android:focusable="false"
-                    android:fontFamily="@font/ubuntu"
-                    android:hint="@string/state"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:textColor="@color/colorBlackHighEmp"
-                    android:textColorHint="@color/colorBlackLowEmp"
-                    android:textSize="14sp" />
+
 
                 <EditText
                     android:id="@+id/delivery_address"

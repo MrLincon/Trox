@@ -164,4 +164,13 @@
     <string name="pickup">Pickup</string>
     <string name="guide_pickup_agent">Guide Pickup Agent</string>
     <string name="add_direction_road_landmark_house_etc">Add Direction (Road, Landmark, House etc.)</string>
+    <string name="road">Road</string>
+    <string name="landmark">Landmark</string>
+    <string name="house">House</string>
+    <string name="order_confirmation">Order Confirmation</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="billing_information">Billing Information</string>
+    <string name="pay_with">Pay with</string>
+    <string name="pickup_address">Pickup Address</string>
+    <string name="receiver_details">Receiver Details</string>
 </resources>

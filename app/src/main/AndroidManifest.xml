@@ -15,13 +15,16 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trox"
         tools:targetApi="31">
         <activity
-            android:name=".activity.OrderPickUpLocationActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Trox.FullScreen"/>
+            android:name=".activity.NOCActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.OrderConfirmationActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.EditProfileActivity"
             android:exported="false" />
@@ -47,9 +50,6 @@
             android:name=".activity.NotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.InternationalOrderDetailsActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.QuotationAddressActivity"
             android:exported="false" />
         <activity
@@ -59,7 +59,7 @@
             android:name=".activity.DeliveryAddressActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.DomesticOrderDetailsActivity"
+            android:name=".activity.ParcelOrderDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".activity.SendParcelActivity"

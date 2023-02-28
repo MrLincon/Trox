@@ -20,11 +20,10 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.netro.trox.R;
 import com.netro.trox.adapter.SliderAdapterHome;
 import com.netro.trox.model.SliderData;
+import com.netro.trox.util.Tools;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -44,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private String userID;
     private FirebaseAuth mAuth;
 
+    Tools tools;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         homeAddress = findViewById(R.id.home);
         workAddress = findViewById(R.id.work);
 
+tools = new Tools();
 
         //firebase init
         mAuth = FirebaseAuth.getInstance();
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         domestic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(MainActivity.this, DomesticOrderDetailsActivity.class);
+              Intent intent = new Intent(MainActivity.this, ParcelOrderDetailsActivity.class);
               intent.putExtra("type","Domestic");
               startActivity(intent);
             }
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         international.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, InternationalOrderDetailsActivity.class);
+                Intent intent = new Intent(MainActivity.this, NOCActivity.class);
                 intent.putExtra("type","International");
                 startActivity(intent);
             }
@@ -191,7 +193,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        tools.makeSnack(main,"Use double back press to exit");
+    }
 
     @Override
     protected void onResume() {
