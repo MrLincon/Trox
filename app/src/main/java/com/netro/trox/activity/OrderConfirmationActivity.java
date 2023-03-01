@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -87,7 +88,10 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         String ParcelWeight = getIntent().getStringExtra("parcelWeight");
         String ParcelType = getIntent().getStringExtra("parcelType");
         String OrderType = getIntent().getStringExtra("orderType");
-
+        Double PickupLattitude = getIntent().getDoubleExtra("pickupLat",0);
+        Double PickupLongtitude = getIntent().getDoubleExtra("pickupLong",0);
+        Double DeliveryLattitude = getIntent().getDoubleExtra("deliveryLat",0);
+        Double DeliveryLongitude = getIntent().getDoubleExtra("deliveryLong",0);
 
         db.collection("userDetails").document(userID).get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -131,6 +135,10 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                 userMap.put("receiver_state", DeliveryState);
                 userMap.put("receiver_city", DeliveryCity);
                 userMap.put("receiver_address", DeliveryAddress);
+                userMap.put("pickupLat", PickupLattitude);
+                userMap.put("pickupLong", PickupLongtitude);
+                userMap.put("deliveryLat", DeliveryLattitude);
+                userMap.put("deliveryLong", DeliveryLongitude);
                 userMap.put("parcel_weight", ParcelWeight);
                 userMap.put("parcel_type", ParcelType);
                 userMap.put("order_id", currentTimeInMillies);
@@ -138,6 +146,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                 userMap.put("order_type", OrderType);
                 userMap.put("user_id", userID);
                 userMap.put("timestamp", FieldValue.serverTimestamp());
+
 
                 db.collection("orders").document(currentTimeInMillies)
                         .set(userMap)

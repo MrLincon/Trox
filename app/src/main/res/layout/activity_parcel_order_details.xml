@@ -159,7 +159,6 @@
                     android:textSize="14sp"></EditText>
 
 
-
                 <EditText
                     android:id="@+id/pickup_address"
                     android:layout_width="match_parent"
@@ -170,9 +169,29 @@
                     android:fontFamily="@font/ubuntu"
                     android:hint="@string/area_amp_full_address"
                     android:lines="6"
-                    android:layout_marginBottom="16dp"
                     android:maxLines="2"
                     android:minHeight="56dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:textSize="14sp"></EditText>
+
+
+                <EditText
+                    android:id="@+id/pickup_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edit_text_bg2"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_location"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/colorBlackLowEmp"
+                    android:focusable="false"
+                    android:fontFamily="@font/ubuntu"
+                    android:hint="Select Location on Map"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:textColor="@color/colorBlackHighEmp"
@@ -188,23 +207,6 @@
                     android:textColor="@color/colorBlackHighEmp"
                     android:textSize="16sp" />
 
-
-                <EditText
-                    android:id="@+id/receiver_contact"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/edit_text_bg2"
-                    android:fontFamily="@font/ubuntu"
-                    android:hint="@string/receiver_s_phone_number"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:maxLength="11"
-                    android:inputType="number"
-                    android:textColor="@color/colorBlackHighEmp"
-                    android:textColorHint="@color/colorBlackLowEmp"
-                    android:textSize="14sp"></EditText>
-
                 <EditText
                     android:id="@+id/receiver_name"
                     android:layout_width="match_parent"
@@ -218,6 +220,24 @@
                     android:textColor="@color/colorBlackHighEmp"
                     android:textColorHint="@color/colorBlackLowEmp"
                     android:textSize="14sp"></EditText>
+
+                <EditText
+                    android:id="@+id/receiver_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_bg2"
+                    android:fontFamily="@font/ubuntu"
+                    android:hint="@string/receiver_s_phone_number"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:textSize="14sp"></EditText>
+
+
 
 
                 <TextView
@@ -288,7 +308,6 @@
                     android:textSize="14sp"></EditText>
 
 
-
                 <EditText
                     android:id="@+id/delivery_address"
                     android:layout_width="match_parent"
@@ -301,6 +320,25 @@
                     android:lines="6"
                     android:maxLines="2"
                     android:minHeight="56dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/colorBlackHighEmp"
+                    android:textColorHint="@color/colorBlackLowEmp"
+                    android:textSize="14sp"></EditText>
+
+                <EditText
+                    android:id="@+id/delivery_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edit_text_bg2"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_location"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/colorBlackLowEmp"
+                    android:focusable="false"
+                    android:fontFamily="@font/ubuntu"
+                    android:hint="Select Location on Map"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:textColor="@color/colorBlackHighEmp"

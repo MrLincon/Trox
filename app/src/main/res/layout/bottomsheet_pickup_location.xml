@@ -85,65 +85,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:fontFamily="@font/ubuntu_medium"
-        android:text="@string/guide_pickup_agent"
-        android:textColor="@color/colorBlackHighEmp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/close"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/close" />
-
-    <LinearLayout
-        android:id="@+id/guide_agent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="horizontal"
-        android:background="@drawable/outline_bg">
-
-        <ImageView
-            android:layout_width="56dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_direction"></ImageView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:layout_marginRight="36dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/ubuntu_medium"
-                android:text="@string/add_direction_road_landmark_house_etc"
-                android:textColor="@color/colorBlackHighEmp"
-                android:textSize="14sp"></TextView>
-
-            <TextView
-                android:id="@+id/guidance_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/ubuntu"
-                android:text="@string/address"
-                android:layout_marginTop="4dp"
-                android:textColor="@color/colorBlackMidEmp"
-                android:textSize="14sp"></TextView>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/btn_confirm"

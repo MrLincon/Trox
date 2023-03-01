@@ -4,10 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,7 +32,8 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
     ImageView back;
     CoordinatorLayout main;
 
-    EditText receiverContact, receiverName, pickupCountry, pickupState, pickupCity, pickupAddress, deliveryCountry, deliveryCity, deliveryState, deliveryAddress;
+    EditText receiverContact, receiverName, pickupCountry, pickupState, pickupCity, pickupAddress, pickupLocation,
+            deliveryCountry, deliveryCity, deliveryState, deliveryAddress, deliveryLocation;
     RangeSlider weightSlider;
     int weight;
 
@@ -43,9 +48,13 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
 
     String parcelType = "Parcel";
     String type;
+    Double deliveryLattitude, deliveryLongitude, pickupLattitude, pickupLongtitude;
+
     Tools tools;
 
     private static final int REQUEST_CODE = 1011;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private boolean locationPermissionGranted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +70,12 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
         pickupState = findViewById(R.id.pickup_state);
         pickupCity = findViewById(R.id.pickup_city);
         pickupAddress = findViewById(R.id.pickup_address);
+        pickupLocation = findViewById(R.id.pickup_location);
         deliveryCountry = findViewById(R.id.delivery_country);
         deliveryCity = findViewById(R.id.delivery_city);
         deliveryState = findViewById(R.id.delivery_state);
         deliveryAddress = findViewById(R.id.delivery_address);
+        deliveryLocation = findViewById(R.id.delivery_location);
         itemType = findViewById(R.id.item_type);
         parcelTypeText = findViewById(R.id.item_type_text);
         parcelTypeImage = findViewById(R.id.item_type_image);
@@ -171,6 +182,59 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                     startActivityForResult(intent, REQUEST_CODE);
                 } else {
                     tools.makeSnack(main, "Select a state first");
+                }
+
+            }
+        });
+
+        pickupLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!pickupCity.getText().toString().equals("")){
+
+                    if (ContextCompat.checkSelfPermission(ParcelOrderDetailsActivity.this,
+                            android.Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        locationPermissionGranted = true;
+                        locationField = "PickupLocation";
+                        Intent intent = new Intent(ParcelOrderDetailsActivity.this, MapActivity.class);
+                        intent.putExtra("city", pickupCity.getText().toString());
+                        intent.putExtra("data", "pickup");
+                        startActivityForResult(intent, REQUEST_CODE);
+                    } else {
+                        ActivityCompat.requestPermissions(ParcelOrderDetailsActivity.this,
+                                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                    }
+                }else{
+                    tools.makeSnack(main,"Select a city first");
+                }
+
+            }
+        });
+
+        deliveryLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!deliveryCity.getText().toString().equals("")){
+                    if (ContextCompat.checkSelfPermission(ParcelOrderDetailsActivity.this,
+                            android.Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        locationPermissionGranted = true;
+                        locationField = "DeliveryLocation";
+                        Intent intent = new Intent(ParcelOrderDetailsActivity.this, MapActivity.class);
+                        intent.putExtra("city", deliveryCity.getText().toString());
+                        intent.putExtra("data", "delivery");
+                        startActivityForResult(intent, REQUEST_CODE);
+                    } else {
+                        ActivityCompat.requestPermissions(ParcelOrderDetailsActivity.this,
+                                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                    }
+                }else{
+                    tools.makeSnack(main,"Select a city first");
                 }
 
             }
@@ -294,13 +358,11 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                 String DeliveryAddress = deliveryAddress.getText().toString();
                 String ParcelWeight = weight + " KG";
                 String ParcelType = parcelTypeText.getText().toString();
+                String PickupLocation = pickupLocation.getText().toString();
+                String DeliveryLocation = deliveryLocation.getText().toString();
 
 
-                if (ReceiverContact.equals("")) {
-                    tools.makeSnack(main, "Receiver contact can not be empty");
-                } else if (ReceiverName.equals("")) {
-                    tools.makeSnack(main, "Receiver name can not be empty");
-                } else if (PickupCountry.equals("")) {
+                if (PickupCountry.equals("")) {
                     tools.makeSnack(main, "Country can not be empty");
                 } else if (PickupState.equals("")) {
                     tools.makeSnack(main, "State can not be empty");
@@ -308,6 +370,12 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                     tools.makeSnack(main, "City can not be empty");
                 } else if (PickupAddress.equals("")) {
                     tools.makeSnack(main, "Address can not be empty");
+                } else if (PickupLocation.equals("")) {
+                    tools.makeSnack(main, "Set a pickup location on the map");
+                } else if (ReceiverName.equals("")) {
+                    tools.makeSnack(main, "Receiver name can not be empty");
+                } else if (ReceiverContact.equals("")) {
+                    tools.makeSnack(main, "Receiver contact can not be empty");
                 } else if (DeliveryCountry.equals("")) {
                     tools.makeSnack(main, "Country can not be empty");
                 } else if (DeliveryState.equals("")) {
@@ -316,6 +384,8 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                     tools.makeSnack(main, "City can not be empty");
                 } else if (DeliveryAddress.equals("")) {
                     tools.makeSnack(main, "Address can not be empty");
+                } else if (DeliveryLocation.equals("")) {
+                    tools.makeSnack(main, "Set a delivery location on the map");
                 } else if (ParcelWeight.equals("0 KG")) {
                     tools.makeSnack(main, "Select your parcel's weight");
                 } else if (ParcelType.equals("")) {
@@ -336,6 +406,10 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                     intent.putExtra("parcelWeight", ParcelWeight);
                     intent.putExtra("parcelType", ParcelType);
                     intent.putExtra("orderType", type);
+                    intent.putExtra("pickupLat", pickupLattitude);
+                    intent.putExtra("pickupLong", pickupLongtitude);
+                    intent.putExtra("deliveryLat", deliveryLattitude);
+                    intent.putExtra("deliveryLong", deliveryLongitude);
                     startActivity(intent);
 
                 }
@@ -358,6 +432,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             String result = data.getStringExtra("key");
+
             if (locationField.equals("DA_Country")) {
                 deliveryCountry.setText(result);
             } else if (locationField.equals("DA_State")) {
@@ -371,6 +446,26 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
             } else if (locationField.equals("PU_City")) {
                 pickupCity.setText(result);
             }
+
+
+
+
+            if (locationField.equals("DeliveryLocation")) {
+
+                deliveryLattitude = data.getDoubleExtra("deliveryLat",0);
+                deliveryLongitude = data.getDoubleExtra("deliveryLong",0);
+                String deliveryAddress = data.getStringExtra("deliveryAddress");
+                deliveryLocation.setText(deliveryAddress);
+
+            } else if (locationField.equals("PickupLocation")) {
+
+                pickupLattitude = data.getDoubleExtra("pickupLat",0);
+                pickupLongtitude = data.getDoubleExtra("pickupLong",0);
+                String pickupAddress = data.getStringExtra("pickupAddress");
+                pickupLocation.setText(pickupAddress);
+
+            }
+
         }
     }
 }
