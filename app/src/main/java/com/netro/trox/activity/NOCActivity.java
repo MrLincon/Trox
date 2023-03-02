@@ -3,15 +3,25 @@ package com.netro.trox.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.netro.trox.R;
 import com.netro.trox.util.Tools;
+
+import java.util.ArrayList;
 
 public class NOCActivity extends AppCompatActivity {
 
@@ -20,6 +30,18 @@ public class NOCActivity extends AppCompatActivity {
 
     LinearLayout upload, file;
     CoordinatorLayout main;
+
+
+//    RecyclerView recyclerView;
+
+    private CollectionReference item;
+    private FirebaseAuth mAuth;
+    FirebaseFirestore db;
+    String userID;
+
+    Dialog popup;
+
+//    OngoingAdapter adapter;
 
     Tools tools;
 
@@ -41,6 +63,8 @@ public class NOCActivity extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 file.setVisibility(View.VISIBLE);
             }
         });

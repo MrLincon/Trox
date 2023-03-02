@@ -36,6 +36,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
             deliveryCountry, deliveryCity, deliveryState, deliveryAddress, deliveryLocation;
     RangeSlider weightSlider;
     int weight;
+    long price;
 
     TextView parcelTypeText;
     ImageView parcelTypeImage;
@@ -94,9 +95,12 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
         getQuotation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ParcelOrderDetailsActivity.this, GetQuotationActivity.class));
+                Intent intent = new Intent(ParcelOrderDetailsActivity.this, GetQuotationActivity.class);
+                intent.putExtra("data", parcelType);
+                startActivity(intent);
             }
         });
+
 
         if (type.equals("Domestic")) {
             FirebaseFirestore.getInstance().collection("userDetails").document(FirebaseAuth.getInstance().getUid())
@@ -114,6 +118,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                             deliveryCountry.setFocusable(false);
                         }
                     });
+
         } else if (type.equals("International")) {
             FirebaseFirestore.getInstance().collection("userDetails").document(FirebaseAuth.getInstance().getUid())
                     .get()
@@ -356,7 +361,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                 String DeliveryState = deliveryState.getText().toString();
                 String DeliveryCity = deliveryCity.getText().toString();
                 String DeliveryAddress = deliveryAddress.getText().toString();
-                String ParcelWeight = weight + " KG";
+                int ParcelWeight = weight;
                 String ParcelType = parcelTypeText.getText().toString();
                 String PickupLocation = pickupLocation.getText().toString();
                 String DeliveryLocation = deliveryLocation.getText().toString();
@@ -386,7 +391,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                     tools.makeSnack(main, "Address can not be empty");
                 } else if (DeliveryLocation.equals("")) {
                     tools.makeSnack(main, "Set a delivery location on the map");
-                } else if (ParcelWeight.equals("0 KG")) {
+                } else if (ParcelWeight==0) {
                     tools.makeSnack(main, "Select your parcel's weight");
                 } else if (ParcelType.equals("")) {
                     tools.makeSnack(main, "Parcel type can not be empty");
@@ -468,4 +473,6 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
 
         }
     }
+
+
 }

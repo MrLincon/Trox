@@ -298,7 +298,6 @@
                             android:textColor="@color/colorBlackMidEmp"
                             android:textSize="14sp"></TextView>
 
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -360,7 +359,6 @@
                             android:textColor="@color/colorBlackMidEmp"
                             android:textSize="14sp"></TextView>
 
-
                     </LinearLayout>
 
                     <View
@@ -396,7 +394,6 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/ubuntu_medium"
                             android:gravity="right"
-                            android:text="$30.00"
                             android:textColor="@color/colorBlackHighEmp"
                             android:textSize="24sp"></TextView>
 

@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -19,7 +16,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -34,14 +30,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.netro.trox.R;
 import com.netro.trox.util.Tools;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
-public class MapActivity extends AppCompatActivity  implements OnMapReadyCallback {
+public class AddressMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     Marker marker;
@@ -59,22 +59,20 @@ public class MapActivity extends AppCompatActivity  implements OnMapReadyCallbac
 
     private static final String TAG = "MapActivity";
 
-    String data, city;
+    String data;
 
     Tools tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        setContentView(R.layout.activity_address_map);
 
         tools = new Tools();
 
-
-        city = getIntent().getStringExtra("city");
         data = getIntent().getStringExtra("data");
 
-        MapActivity.this.getWindow().setFlags(
+        AddressMapActivity.this.getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         );
@@ -83,37 +81,62 @@ public class MapActivity extends AppCompatActivity  implements OnMapReadyCallbac
 
         SupportMapFragment mapFragment = (SupportMapFragment) this.getSupportFragmentManager().findFragmentById(R.id.map);
 
-        mapFragment.getMapAsync(MapActivity.this);
+        mapFragment.getMapAsync(AddressMapActivity.this);
     }
 
     private void openBottomSheet(String address){
-        BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(MapActivity.this);
-        View sheetView = getLayoutInflater().inflate(R.layout.bottomsheet_pickup_location, null);
+        BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(AddressMapActivity.this);
+        View sheetView = getLayoutInflater().inflate(R.layout.bottomsheet_set_address, null);
         mBottomSheetDialog.setContentView(sheetView);
         mBottomSheetDialog.show();
 
         TextView locationAddress = mBottomSheetDialog.findViewById(R.id.location_address);
+        TextView addressType = mBottomSheetDialog.findViewById(R.id.address_type);
         ImageView close = mBottomSheetDialog.findViewById(R.id.close);
         CardView btnConfirm = mBottomSheetDialog.findViewById(R.id.btn_confirm);
 
+        addressType.setText(data);
         locationAddress.setText(address.trim());
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                if (data.equals("pickup")){
-                    intent.putExtra("pickupAddress", address.trim());
-                    intent.putExtra("pickupLat", latitude);
-                    intent.putExtra("pickupLong", longitude);
-                } else if (data.equals("delivery")) {
-                    intent.putExtra("deliveryAddress", address.trim());
-                    intent.putExtra("deliveryLat", latitude);
-                    intent.putExtra("deliveryLong", longitude);
+                if (data.equals("Home")){
+
+                    Map<String, Object> userMap = new HashMap<>();
+
+                    userMap.put("home_address", address.trim());
+
+                    FirebaseFirestore.getInstance().collection("userDetails").document(FirebaseAuth.getInstance().getUid())
+                                    .update(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    intent.putExtra("home", address.trim());
+
+                                    marker.remove();
+                                    setResult(RESULT_OK, intent);
+                                    finish();
+                                }
+                            });
+
+                } else if (data.equals("Work")) {
+                    Map<String, Object> userMap = new HashMap<>();
+
+                    userMap.put("work_address", address.trim());
+
+                    FirebaseFirestore.getInstance().collection("userDetails").document(FirebaseAuth.getInstance().getUid())
+                            .update(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    intent.putExtra("work", address.trim());
+
+                                    marker.remove();
+                                    setResult(RESULT_OK, intent);
+                                    finish();
+                                }
+                            });
                 }
-                marker.remove();
-                setResult(RESULT_OK, intent);
-                finish();
             }
         });
 
@@ -218,10 +241,8 @@ public class MapActivity extends AppCompatActivity  implements OnMapReadyCallbac
         }
         try {
             if (locationPermissionGranted) {
-//                mMap.setMyLocationEnabled(true);
-//                mMap.getUiSettings().setMyLocationButtonEnabled(false);
-
-                openCityMap();
+                mMap.setMyLocationEnabled(true);
+                mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
             } else {
 
@@ -232,63 +253,38 @@ public class MapActivity extends AppCompatActivity  implements OnMapReadyCallbac
         }
     }
 
-    private void openCityMap(){
-        Geocoder geocoder = new Geocoder(this);
-        List<Address> addresses2 = null;
-        try {
-            addresses2 = geocoder.getFromLocationName(city, 1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (addresses2 != null && !addresses2.isEmpty()) {
-            Address address = addresses2.get(0);
-            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-        } else {
-            // Handle the case where the city name is invalid or not found
-        }
-    }
-
 
     private void getDeviceLocation() {
 
-        openCityMap();
+        try {
+            if (locationPermissionGranted) {
+                Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
+                locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        if (task.isSuccessful()) {
+                            // Set the map's camera position to the current location of the device.
+                            lastKnownLocation = task.getResult();
+                            if (lastKnownLocation != null) {
 
-//        try {
-//            if (locationPermissionGranted) {
-//                Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
-//                locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Location> task) {
-//                        if (task.isSuccessful()) {
-//                            // Set the map's camera position to the current location of the device.
-//                            lastKnownLocation = task.getResult();
-//                            if (lastKnownLocation != null) {
-//
-//                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-//                                        new LatLng(lastKnownLocation.getLatitude(),
-//                                                lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-//
-////                                LatLng newLocation = new LatLng(lastKnownLocation.getLatitude(),
-////                                        lastKnownLocation.getLongitude());
-////                                mMap.addMarker(new MarkerOptions().position(newLocation).title("Select position"));
-////                                mMap.moveCamera(CameraUpdateFactory.newLatLng(newLocation));
-//                            }
-//                        } else {
-//                            Log.d(TAG, "Current location is null. Using defaults.");
-//                            Log.e(TAG, "Exception: %s", task.getException());
-//                            mMap.moveCamera(CameraUpdateFactory
-//                                    .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
-//                            mMap.getUiSettings().setMyLocationButtonEnabled(false);
-//                        }
-//                    }
-//                });
-//            }
-//        } catch (SecurityException e)  {
-//            Log.e("Exception: %s", e.getMessage(), e);
-//        }
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                        new LatLng(lastKnownLocation.getLatitude(),
+                                                lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+
+                            }
+                        } else {
+                            Log.d(TAG, "Current location is null. Using defaults.");
+                            Log.e(TAG, "Exception: %s", task.getException());
+                            mMap.moveCamera(CameraUpdateFactory
+                                    .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+                            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                        }
+                    }
+                });
+            }
+        } catch (SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage(), e);
+        }
 
 
     }

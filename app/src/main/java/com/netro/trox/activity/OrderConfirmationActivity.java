@@ -41,7 +41,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     CardView btnConfirm;
 
     String name, contact, address;
-
+    long price;
 
     private FirebaseFirestore db;
     private String userID;
@@ -85,7 +85,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         String DeliveryState = getIntent().getStringExtra("deliveryState");
         String DeliveryCity = getIntent().getStringExtra("deliveryCity");
         String DeliveryAddress = getIntent().getStringExtra("deliveryAddress");
-        String ParcelWeight = getIntent().getStringExtra("parcelWeight");
+        int ParcelWeight = getIntent().getIntExtra("parcelWeight",0);
         String ParcelType = getIntent().getStringExtra("parcelType");
         String OrderType = getIntent().getStringExtra("orderType");
         Double PickupLattitude = getIntent().getDoubleExtra("pickupLat",0);
@@ -106,11 +106,59 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                             }
                         });
 
+
+        if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")){
+            String doc = null;
+            if (ParcelWeight==1){
+                doc = "1_kg";
+            } else if (ParcelWeight>1 && ParcelWeight<6) {
+                doc = "2_to_5_kg";
+            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+                doc = "5_to_10_kg";
+            }
+
+            setPrice("localPrice",doc);
+
+        }else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")){
+            String doc = null;
+            if (ParcelWeight==1){
+                doc = "1_kg";
+            } else if (ParcelWeight>1 && ParcelWeight<6) {
+                doc = "2_to_5_kg";
+            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+                doc = "5_to_10_kg";
+            }
+
+            setPrice("domesticPrice",doc);
+
+        }else if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")){
+            String doc = null;
+            if (ParcelWeight==1){
+                doc = "doc_1";
+            } else if (ParcelWeight>1 && ParcelWeight<6) {
+                doc = "doc_2_5";
+            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+                doc = "doc_5_10";
+            }
+            setPrice("localPrice",doc);
+        }else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")){
+            String doc = null;
+            if (ParcelWeight==1){
+                doc = "doc_1";
+            } else if (ParcelWeight>1 && ParcelWeight<6) {
+                doc = "doc_2_5";
+            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+                doc = "doc_5_10";
+            }
+            setPrice("domesticPrice",doc);
+        }
+
+
         senderAddress.setText(PickupAddress);
         receiverName.setText(ReceiverName);
         receiverContact.setText(ReceiverContact);
         receiverAddress.setText(DeliveryAddress);
-        parcelWeight.setText(ParcelWeight);
+        parcelWeight.setText(String.valueOf(ParcelWeight)+" KG");
 
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +166,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 btnConfirm.setFocusable(false);
+                btnConfirm.setClickable(false);
 
                 String currentTimeInMillies  = String.valueOf(System.currentTimeMillis());
 
@@ -141,12 +190,12 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                 userMap.put("deliveryLong", DeliveryLongitude);
                 userMap.put("parcel_weight", ParcelWeight);
                 userMap.put("parcel_type", ParcelType);
+                userMap.put("price", price);
                 userMap.put("order_id", currentTimeInMillies);
                 userMap.put("order_status", "Pending");
                 userMap.put("order_type", OrderType);
                 userMap.put("user_id", userID);
                 userMap.put("timestamp", FieldValue.serverTimestamp());
-
 
                 db.collection("orders").document(currentTimeInMillies)
                         .set(userMap)
@@ -184,6 +233,16 @@ public class OrderConfirmationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+    }
+
+    private void setPrice(String collection, String document) {
+        db.collection(collection).document(document).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                price = documentSnapshot.getLong("amount");
+                totalPrice.setText("$"+String.valueOf(price));
             }
         });
     }
