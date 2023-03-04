@@ -295,7 +295,7 @@
 
                <androidx.cardview.widget.CardView
                    android:layout_width="match_parent"
-                   android:layout_height="100dp"
+                   android:layout_height="wrap_content"
                    android:layout_marginLeft="16dp"
                    android:layout_marginRight="16dp"
                    app:cardCornerRadius="12dp"
@@ -324,6 +324,7 @@
                            android:layout_width="match_parent"
                            android:layout_height="match_parent"
                            android:weightSum="2"
+                           android:layout_marginBottom="16dp"
                            android:orientation="horizontal">
 
                            <LinearLayout
@@ -355,13 +356,14 @@
                                        android:textSize="12sp"></TextView>
 
                                    <TextView
+                                       android:id="@+id/home_address"
                                        android:layout_width="wrap_content"
                                        android:layout_height="wrap_content"
-                                       android:text="@string/set_address"
+                                       android:fontFamily="@font/ubuntu"
                                        android:paddingLeft="12dp"
                                        android:paddingTop="4dp"
+                                       android:text="@string/set_address"
                                        android:textColor="@color/colorBlackMidEmp"
-                                       android:fontFamily="@font/ubuntu"
                                        android:textSize="10sp"></TextView>
 
                                </LinearLayout>
@@ -397,11 +399,13 @@
                                        android:textSize="12sp"></TextView>
 
                                    <TextView
+                                       android:id="@+id/work_address"
                                        android:layout_width="wrap_content"
                                        android:layout_height="wrap_content"
                                        android:text="@string/set_address"
                                        android:paddingLeft="12dp"
                                        android:paddingTop="4dp"
+                                       android:layout_marginRight="8dp"
                                        android:textColor="@color/colorBlackMidEmp"
                                        android:fontFamily="@font/ubuntu"
                                        android:textSize="10sp"></TextView>

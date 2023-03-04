@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     CoordinatorLayout main;
     CircleImageView userImage;
     TextView userName;
+    TextView homeAddressText, workAddressText;
 
     private FirebaseFirestore db;
     private DocumentReference document_ref;
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         international = findViewById(R.id.international);
         homeAddress = findViewById(R.id.home);
         workAddress = findViewById(R.id.work);
+        homeAddressText = findViewById(R.id.home_address);
+        workAddressText = findViewById(R.id.work_address);
 
 tools = new Tools();
 
@@ -97,13 +100,20 @@ tools = new Tools();
                 if (documentSnapshot.exists()){
                     String user_image = documentSnapshot.getString("user_image");
                     String user_name = documentSnapshot.getString("user_name");
+                    String Home = documentSnapshot.getString("home_address");
+                    String Work = documentSnapshot.getString("work_address");
 
                     Glide.with(MainActivity.this).load(user_image).into(userImage);
                     userName.setText(user_name);
+                    if (!Home.equals("")) {
+                        homeAddressText.setText(Home);
+                    }
+                    if (!Work.equals("")) {
+                        workAddressText.setText(Work);
+                    }
                 }
             }
         });
-
 
         userImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,13 +189,15 @@ tools = new Tools();
             @Override
             public void onItemSelected(int i) {
                 switch (i){
-                    case R.id.nav_offer:
-                       startActivity(new Intent(MainActivity.this, OffersActivity.class));
-                        break;
                     case R.id.nav_home:
                         break;
+                   
                     case R.id.nav_order:
                         startActivity(new Intent(MainActivity.this, OrdersActivity.class));
+                        break;
+
+                    case R.id.nav_profile:
+                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                         break;
                 }
             }

@@ -140,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     updateUI(mAuth.getCurrentUser());
                                 } else {
+                                    tools.loading(popup, false);
                                     tools.makeSnack(main, "Authentication Failed!");
                                 }
                             }
@@ -155,6 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             updateUI(mAuth.getCurrentUser());
                                         } else {
+                                            tools.loading(popup, false);
                                             tools.makeSnack(main, "Authentication Failed!");
                                         }
                                     }

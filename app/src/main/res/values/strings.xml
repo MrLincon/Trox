@@ -173,4 +173,5 @@
     <string name="pay_with">Pay with</string>
     <string name="pickup_address">Pickup Address</string>
     <string name="receiver_details">Receiver Details</string>
+    <string name="click_to_upload">Click to upload</string>
 </resources>

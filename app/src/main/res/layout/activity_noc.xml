@@ -82,11 +82,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/ubuntu_medium"
-                    android:text="@string/click_to_upload_doc_pdf_jpg_etc"
+                    android:text="@string/click_to_upload"
                     android:textColor="@color/colorBlackMidEmp"
-                    android:textSize="12sp"></TextView>
+                    android:textSize="12sp" />
 
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"></androidx.recyclerview.widget.RecyclerView>
 
 
             <LinearLayout
