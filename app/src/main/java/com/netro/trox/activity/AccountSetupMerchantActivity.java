@@ -1,12 +1,5 @@
 package com.netro.trox.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -26,10 +19,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,6 +42,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -47,10 +52,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.netro.trox.R;
+import com.netro.trox.adapter.ImageAdapter;
 import com.netro.trox.util.Tools;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,27 +65,39 @@ import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AccountSetupActivity extends AppCompatActivity {
+public class AccountSetupMerchantActivity extends AppCompatActivity {
 
     CoordinatorLayout main;
     CardView btnContinue;
 
     CircleImageView userImage;
     ImageView selectImage;
+    RecyclerView recyclerView;
 
-    TextInputLayout nameLayout, emailLayout, dobLayout,
-            contactLayout, userTypeLayout, genderLayout, countryLayout, addressLayout;
+    TextInputLayout nameLayout, emailLayout,
+            contactLayout, countryLayout, addressLayout;
 
-    TextInputEditText name, email, dob, contact, userType, gender, country, address;
+    TextInputEditText name, email, contact, country, address;
+
+    LinearLayout upload;
 
     Dialog popup;
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
-    String userID, valueUserType;
+    String userID;
 
     FirebaseStorage storage;
     StorageReference storageReference;
+    private CollectionReference item;
+    private DatabaseReference databaseReference;
+
+    private static final int PICK_IMG = 1;
+    private ArrayList<Uri> imageList = new ArrayList<Uri>();
+    private int uploads = 0;
+    int index = 0;
+
+    ImageAdapter adapter;
 
     private Uri filePath;
     private String imageLink = "";
@@ -91,7 +110,7 @@ public class AccountSetupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_setup);
+        setContentView(R.layout.activity_account_setup_merchant);
 
         main = findViewById(R.id.main);
         btnContinue = findViewById(R.id.btn_continue);
@@ -99,20 +118,16 @@ public class AccountSetupActivity extends AppCompatActivity {
         selectImage = findViewById(R.id.select_image);
         nameLayout = findViewById(R.id.name_layout);
         emailLayout = findViewById(R.id.email_layout);
-        dobLayout = findViewById(R.id.user_dob_layout);
         contactLayout = findViewById(R.id.contact_layout);
-        userTypeLayout = findViewById(R.id.user_type_layout);
-        genderLayout = findViewById(R.id.gender_layout);
         countryLayout = findViewById(R.id.country_layout);
         addressLayout = findViewById(R.id.address_layout);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
-        dob = findViewById(R.id.user_dob);
         contact = findViewById(R.id.contact);
-        userType = findViewById(R.id.user_type);
-        gender = findViewById(R.id.gender);
         country = findViewById(R.id.country);
         address = findViewById(R.id.address);
+        recyclerView = findViewById(R.id.recycler_view);
+        upload = findViewById(R.id.upload);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -133,15 +148,22 @@ public class AccountSetupActivity extends AppCompatActivity {
             }
         });
 
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choose();
+            }
+        });
+
 
         selectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(AccountSetupActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                if (ContextCompat.checkSelfPermission(AccountSetupMerchantActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
 
                     // Request the permission
-                    ActivityCompat.requestPermissions(AccountSetupActivity.this,
+                    ActivityCompat.requestPermissions(AccountSetupMerchantActivity.this,
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                             REQUEST_CODE_READ_EXTERNAL_STORAGE);
                 }else {
@@ -150,106 +172,11 @@ public class AccountSetupActivity extends AppCompatActivity {
             }
         });
 
-        dob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        AccountSetupActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                dob.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-
-                            }
-                        },
-                        year, month, day);
-                datePickerDialog.show();
-            }
-        });
-
-        userType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog userTypePopup = new Dialog(AccountSetupActivity.this);
-                userTypePopup.setContentView(R.layout.popup_user_type);
-                userTypePopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                RelativeLayout customer = userTypePopup.findViewById(R.id.customer);
-                RelativeLayout merchant = userTypePopup.findViewById(R.id.merchant);
-                userTypePopup.show();
-                customer.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        customer.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_bg));
-                        valueUserType = "Customer";
-                        userTypePopup.dismiss();
-                        userType.setText(valueUserType);
-                    }
-                });
-
-                merchant.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        merchant.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_bg));
-                        valueUserType = "Merchant";
-                        userTypePopup.dismiss();
-                        userType.setText(valueUserType);
-                    }
-                });
-
-            }
-        });
-
-        gender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog genderPopup = new Dialog(AccountSetupActivity.this);
-                genderPopup.setContentView(R.layout.popup_gender);
-                genderPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                RelativeLayout male = genderPopup.findViewById(R.id.male);
-                RelativeLayout female = genderPopup.findViewById(R.id.female);
-                RelativeLayout other = genderPopup.findViewById(R.id.other);
-                genderPopup.show();
-
-                male.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        male.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_bg));
-                        gender.setText("Male");
-                        genderPopup.dismiss();
-                    }
-                });
-
-                female.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        female.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_bg));
-                        gender.setText("Female");
-                        genderPopup.dismiss();
-                    }
-                });
-
-                other.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        other.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_bg));
-                        gender.setText("Other");
-                        genderPopup.dismiss();
-                    }
-                });
-            }
-        });
 
         country.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog countryPopup = new Dialog(AccountSetupActivity.this);
+                Dialog countryPopup = new Dialog(AccountSetupMerchantActivity.this);
                 countryPopup.setContentView(R.layout.popup_country);
                 countryPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 ListView countryList = countryPopup.findViewById(R.id.country_list);
@@ -262,7 +189,7 @@ public class AccountSetupActivity extends AppCompatActivity {
                         "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru"};
 
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(AccountSetupActivity.this,
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(AccountSetupMerchantActivity.this,
                         R.layout.country_list_layout,R.id.text, countries);
                 countryList.setAdapter(adapter);
 
@@ -282,25 +209,19 @@ public class AccountSetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String Name = name.getText().toString();
-                String DOB = dob.getText().toString();
                 String Contact = contact.getText().toString();
-                String UserType = userType.getText().toString();
-                String Gender = gender.getText().toString();
                 String Country = country.getText().toString();
                 String Address = address.getText().toString();
 
-                if (!Name.isEmpty() && !Address.isEmpty() && !DOB.isEmpty() && !Contact.isEmpty()
-                        && !UserType.isEmpty() && !Gender.isEmpty() && !Country.isEmpty() && filePath != null) {
+                if (!Name.isEmpty() && !Address.isEmpty() && !Contact.isEmpty()
+                        && !Country.isEmpty() && filePath != null && imageList.size()!=0) {
 
                     tools.loading(popup, true);
 
                     Map<String, Object> userMap = new HashMap<>();
 
                     userMap.put("user_name", Name);
-                    userMap.put("user_dob", DOB);
                     userMap.put("user_contact", Contact);
-                    userMap.put("user_type", UserType);
-                    userMap.put("user_gender", Gender);
                     userMap.put("user_country", Country);
                     userMap.put("user_address", Address);
 
@@ -322,20 +243,6 @@ public class AccountSetupActivity extends AppCompatActivity {
     }
 
 
-    // Select Image method
-    private void selectImage() {
-
-        // Defining Implicit Intent to mobile gallery
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(
-                Intent.createChooser(
-                        intent,
-                        "Select Image from here..."),
-                PICK_IMAGE_REQUEST);
-    }
-
     // Override onActivityResult method
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -344,16 +251,11 @@ public class AccountSetupActivity extends AppCompatActivity {
                 resultCode,
                 data);
 
-        // checking request code and result code
-        // if request code is PICK_IMAGE_REQUEST and
-        // resultCode is RESULT_OK
-        // then set image in the image view
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
 
             // Get the Uri of data
             filePath = data.getData();
             try {
-
                 // Setting image on image view using Bitmap
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), filePath);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -365,10 +267,32 @@ public class AccountSetupActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+        if (requestCode == PICK_IMG && resultCode == RESULT_OK && null != data) {
+            if (data.getClipData() != null) {
+                int count = data.getClipData().getItemCount();
+
+                int CurrentImageSelect = 0;
+
+                for (int i = 0; i < count; i++) {
+                    Uri imageUri = data.getClipData().getItemAt(CurrentImageSelect).getUri();
+                    imageList.add(imageUri);
+                    CurrentImageSelect++;
+                }
+                loadSelectedImages();
+            } else {
+                Uri imageUri = data.getData();
+                if (imageUri != null) {
+                    imageList.add(imageUri);
+                }
+                loadSelectedImages();
+            }
+        }
+
     }
 
 
-    // UploadImage method
+    // Upload Image method
     private void uploadImage(String ID) {
 
         if (filePath != null) {
@@ -396,7 +320,7 @@ public class AccountSetupActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
 
-                                DocumentReference docRef = db.collection("userDetails").document(ID);
+                                DocumentReference docRef = db.collection("userDetails").document(userID);
 
                                 Map<String, Object> userMap = new HashMap<>();
                                 final String id = docRef.getId();
@@ -407,26 +331,8 @@ public class AccountSetupActivity extends AppCompatActivity {
                                 docRef.update(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        tools.makeSnack(main, getString(R.string.profile_updated));
-                                        popup.setContentView(R.layout.popup_successful);
-                                        popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                        TextView message = popup.findViewById(R.id.message);
-                                        TextView actionText = popup.findViewById(R.id.action_text);
-                                        CardView btnContinue = popup.findViewById(R.id.btn_continue);
-                                        popup.show();
-                                        popup.setCancelable(false);
 
-                                        message.setText(getResources().getString(R.string.account_ready));
-                                        actionText.setText(getResources().getString(R.string.go_to_home));
-
-                                        btnContinue.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                popup.dismiss();
-                                                startActivity(new Intent(AccountSetupActivity.this, MainActivity.class));
-                                                finish();
-                                            }
-                                        });
+                                        upload();
 
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -452,6 +358,125 @@ public class AccountSetupActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+
+    public void choose() {
+        //we will pick images
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(intent, PICK_IMG);
+
+    }
+
+    public void loadSelectedImages() {
+        recyclerView = findViewById(R.id.recycler_view);
+        adapter = new ImageAdapter(imageList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(AccountSetupMerchantActivity.this,RecyclerView.HORIZONTAL, false ));
+    }
+
+    // Select Image method
+    private void selectImage() {
+
+        // Defining Implicit Intent to mobile gallery
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(
+                        intent,
+                        "Select Image from here..."),
+                PICK_IMAGE_REQUEST);
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void upload() {
+        final StorageReference ImageFolder = FirebaseStorage.getInstance().getReference().child("ImageFolder");
+        for (uploads = 0; uploads < imageList.size(); uploads++) {
+
+            Bitmap bmp = null;
+            try {
+                bmp = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), imageList.get(uploads));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG, 25, baos);
+            byte[] data = baos.toByteArray();
+
+            final StorageReference imageName = ImageFolder.child("image/" + System.currentTimeMillis());
+
+            imageName.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    imageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+
+                            String url = String.valueOf(uri);
+                            SendLink(url, index);
+
+                        }
+                    });
+
+                }
+            });
+
+
+        }
+
+
+    }
+
+    private void SendLink(String url, int counter) {
+        index++;
+        Log.d("dara", "SendLink: " + index);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("imageLink", FieldValue.arrayUnion(url));
+
+
+        FirebaseFirestore.getInstance().collection("int").document(userID).update(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
+
+        if (index == imageList.size()) {
+            index=0;
+            popup.dismiss();
+            imageList.clear();
+            adapter.notifyDataSetChanged();
+
+            tools.makeSnack(main, getString(R.string.profile_updated));
+            popup.setContentView(R.layout.popup_successful);
+            popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            TextView message = popup.findViewById(R.id.message);
+            TextView actionText = popup.findViewById(R.id.action_text);
+            CardView btnContinue = popup.findViewById(R.id.btn_continue);
+            popup.show();
+            popup.setCancelable(false);
+
+            message.setText(getResources().getString(R.string.account_ready));
+            actionText.setText(getResources().getString(R.string.go_to_home));
+
+            btnContinue.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+
+        }
+
+
     }
 
 }

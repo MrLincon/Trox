@@ -35,21 +35,18 @@
 
     </LinearLayout>
 
-    <EditText
+    <SearchView
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_margin="16dp"
         android:background="@drawable/edit_text_bg"
-        android:drawableEnd="@drawable/ic_search"
-        android:fontFamily="@font/ubuntu_medium"
-        android:maxLines="1"
-        android:hint="@string/enter_city"
-        android:paddingLeft="16dp"
-        android:paddingRight="8dp"
-        android:textColor="@color/colorBlackHighEmp"
-        android:textColorHint="@color/colorBlackLowEmp"
-        android:textSize="12sp"></EditText>
+        android:layout_margin="16dp"
+        android:searchIcon="@drawable/ic_search"
+        android:iconifiedByDefault="false"
+        android:clickable="true"
+        android:layoutDirection="rtl"
+        android:queryBackground="@drawable/edit_text_bg"
+        android:queryHint="Search"></SearchView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -67,6 +64,5 @@
             android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 
     </androidx.cardview.widget.CardView>
-
 
 </LinearLayout>

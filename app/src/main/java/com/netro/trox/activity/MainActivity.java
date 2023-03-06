@@ -3,8 +3,11 @@ package com.netro.trox.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private String userID;
     private FirebaseAuth mAuth;
 
+    LocationManager locationManager;
+
     Tools tools;
 
     @Override
@@ -71,6 +76,8 @@ tools = new Tools();
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         userID = mAuth.getUid();
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         bottomNav.setItemSelected(R.id.nav_home,true);
 
@@ -105,12 +112,20 @@ tools = new Tools();
 
                     Glide.with(MainActivity.this).load(user_image).into(userImage);
                     userName.setText(user_name);
-                    if (!Home.equals("")) {
-                        homeAddressText.setText(Home);
+
+
+                    try {
+                        if (!Home.equals("")) {
+                            homeAddressText.setText(Home);
+                        }
+
+                        if (!Work.equals("")) {
+                            workAddressText.setText(Work);
+                        }
+                    }catch (Exception e){
+
                     }
-                    if (!Work.equals("")) {
-                        workAddressText.setText(Work);
-                    }
+
                 }
             }
         });
@@ -141,32 +156,58 @@ tools = new Tools();
         domestic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(MainActivity.this, ParcelOrderDetailsActivity.class);
-              intent.putExtra("type","Domestic");
-              startActivity(intent);
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+
+                }else {
+                    Intent intent = new Intent(MainActivity.this, ParcelOrderDetailsActivity.class);
+                    intent.putExtra("type","Domestic");
+                    intent.putExtra("ID", "fromHome");
+                    startActivity(intent);
+                }
+
             }
         });
 
         international.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, NOCActivity.class);
-                intent.putExtra("type","International");
-                startActivity(intent);
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+
+                }else {
+                    Intent intent = new Intent(MainActivity.this, NOCActivity.class);
+                    intent.putExtra("type", "International");
+                    startActivity(intent);
+                }
             }
         });
 
         homeAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SavedAddressesActivity.class));
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+
+                }else {
+                    startActivity(new Intent(MainActivity.this, SavedAddressesActivity.class));
+                }
             }
         });
 
         workAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SavedAddressesActivity.class));
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+
+                }else {
+                    startActivity(new Intent(MainActivity.this, SavedAddressesActivity.class));
+                }
             }
         });
 
@@ -191,7 +232,7 @@ tools = new Tools();
                 switch (i){
                     case R.id.nav_home:
                         break;
-                   
+
                     case R.id.nav_order:
                         startActivity(new Intent(MainActivity.this, OrdersActivity.class));
                         break;

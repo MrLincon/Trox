@@ -39,7 +39,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
-                android:background="@drawable/outline_bg"
                 android:padding="16dp">
 
                 <ImageView
@@ -70,7 +69,6 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/outline_bg"
                 android:padding="16dp">
 
                 <ImageView
@@ -102,7 +100,6 @@
                 android:layout_marginRight="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/outline_bg"
                 android:padding="16dp">
 
                 <ImageView

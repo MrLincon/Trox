@@ -3,8 +3,11 @@ package com.netro.trox.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +31,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     CircleImageView userImage;
     TextView userName, userEmail;
+
+
+    LocationManager locationManager;
 
     CardView language, savedAddresses, permissions, emergencySupport, privacyPolicies, logOut;
 ImageView selectImage;
@@ -54,6 +60,7 @@ ImageView selectImage;
         userEmail = findViewById(R.id.user_email);
         selectImage = findViewById(R.id.select_image);
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         //firebase init
         mAuth = FirebaseAuth.getInstance();
@@ -69,10 +76,13 @@ ImageView selectImage;
                     String user_image = documentSnapshot.getString("user_image");
                     String user_name = documentSnapshot.getString("user_name");
                     String user_email = documentSnapshot.getString("user_email");
+                    String user_type = documentSnapshot.getString("user_type");
 
                     Glide.with(ProfileActivity.this).load(user_image).into(userImage);
                     userName.setText(user_name);
                     userEmail.setText(user_email);
+
+
                 }
             }
         });
@@ -96,7 +106,12 @@ ImageView selectImage;
         savedAddresses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, SavedAddressesActivity.class));
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }else {
+                    startActivity(new Intent(ProfileActivity.this, SavedAddressesActivity.class));
+                }
             }
         });
 

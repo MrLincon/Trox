@@ -9,9 +9,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,13 +22,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.netro.trox.R;
-import com.netro.trox.activity.AccountSetupActivity;
-import com.netro.trox.activity.MainActivity;
 import com.netro.trox.util.Tools;
 
 import java.util.HashMap;
@@ -45,6 +40,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     TextInputLayout layout_email, layout_password;
     TextInputEditText et_email, et_password;
+
+    String selected;
 
     Dialog popup;
     Tools tools;
@@ -77,6 +74,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+
+        selected = getIntent().getStringExtra("selected");
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +176,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                                                                     userMap.put("user_email", email);
                                                                     userMap.put("used_id", userID);
-                                                                    userMap.put("user_type", "");
+                                                                    userMap.put("user_type", selected);
+                                                                    userMap.put("user_image", "");
 
                                                                     document_ref.set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                         @Override

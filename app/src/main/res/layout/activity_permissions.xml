@@ -90,6 +90,7 @@
                 </LinearLayout>
 
                 <Switch
+                    android:id="@+id/location_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"></Switch>
@@ -103,58 +104,6 @@
                 android:layout_marginBottom="12dp"
                 android:background="@color/colorWhiteMidEmp"></View>
 
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_camera2"></ImageView>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="56dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Camera Access"
-                        android:paddingLeft="12dp"
-                        android:textColor="@color/colorBlackHighEmp"
-                        android:fontFamily="@font/ubuntu_medium"
-                        android:textSize="16sp"></TextView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/directly_capture_image_for_your_profile_photo"
-                        android:paddingLeft="12dp"
-                        android:paddingTop="4dp"
-                        android:textColor="@color/colorBlackMidEmp"
-                        android:fontFamily="@font/ubuntu"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"></Switch>
-
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:background="@color/colorWhiteMidEmp"></View>
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
@@ -196,6 +145,7 @@
                 </LinearLayout>
 
                 <Switch
+                    android:id="@+id/gallery_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"></Switch>
@@ -209,111 +159,6 @@
                 android:layout_marginBottom="12dp"
                 android:background="@color/colorWhiteMidEmp"></View>
 
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_contact_details"></ImageView>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="56dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/contact_address"
-                        android:paddingLeft="12dp"
-                        android:textColor="@color/colorBlackHighEmp"
-                        android:fontFamily="@font/ubuntu_medium"
-                        android:textSize="16sp"></TextView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/get_contact_list_for_easy_top_up_experience"
-                        android:paddingLeft="12dp"
-                        android:paddingTop="4dp"
-                        android:textColor="@color/colorBlackMidEmp"
-                        android:fontFamily="@font/ubuntu"
-                        android:textSize="12sp"></TextView>
-
-                </LinearLayout>
-
-                <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"></Switch>
-
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:background="@color/colorWhiteMidEmp"></View>
-
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_microphone"></ImageView>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginRight="56dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/microphone_access"
-                        android:paddingLeft="12dp"
-                        android:textColor="@color/colorBlackHighEmp"
-                        android:fontFamily="@font/ubuntu_medium"
-                        android:textSize="16sp"></TextView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/for_in_app_voice_messaging"
-                        android:paddingLeft="12dp"
-                        android:paddingTop="4dp"
-                        android:textColor="@color/colorBlackMidEmp"
-                        android:fontFamily="@font/ubuntu"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"></Switch>
-
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:background="@color/colorWhiteMidEmp"></View>
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
@@ -355,6 +200,7 @@
                 </LinearLayout>
 
                 <Switch
+                    android:id="@+id/device_state_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"></Switch>

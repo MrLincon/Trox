@@ -36,9 +36,13 @@ public class SplashActivity extends AppCompatActivity {
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 if (documentSnapshot.exists()){
                                     String userType = documentSnapshot.getString("user_type");
+                                    String userImage = documentSnapshot.getString("user_image");
 
-                                    if (userType.equals("")){
-                                        startActivity(new Intent(SplashActivity.this, AccountSetupActivity.class));
+                                    if (userImage.equals("") && userType.equals("Customer")){
+                                        startActivity(new Intent(SplashActivity.this, AccountSetupCustomerActivity.class));
+                                        finish();
+                                    }if (userImage.equals("") && userType.equals("Merchant")){
+                                        startActivity(new Intent(SplashActivity.this, AccountSetupMerchantActivity.class));
                                         finish();
                                     }else {
                                         startActivity(new Intent(SplashActivity.this, MainActivity.class));

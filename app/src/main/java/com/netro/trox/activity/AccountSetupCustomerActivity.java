@@ -57,19 +57,18 @@ import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class AccountSetupCustomerActivity extends AppCompatActivity {
 
     CoordinatorLayout main;
-    CardView btnUpdate;
+    CardView btnContinue;
 
     CircleImageView userImage;
-    ImageView back, selectImage;
+    ImageView selectImage;
 
     TextInputLayout nameLayout, emailLayout, dobLayout,
             contactLayout, genderLayout, countryLayout, addressLayout;
 
     TextInputEditText name, email, dob, contact, gender, country, address;
-    String user_type;
 
     Dialog popup;
 
@@ -91,11 +90,10 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_account_setup_customer);
 
         main = findViewById(R.id.main);
-        back = findViewById(R.id.back);
-        btnUpdate = findViewById(R.id.btn_update);
+        btnContinue = findViewById(R.id.btn_continue);
         userImage = findViewById(R.id.user_image);
         selectImage = findViewById(R.id.select_image);
         nameLayout = findViewById(R.id.name_layout);
@@ -127,29 +125,8 @@ public class EditProfileActivity extends AppCompatActivity {
         db.collection("userDetails").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                String user_image = documentSnapshot.getString("user_image");
-                String user_name = documentSnapshot.getString("user_name");
-                String user_email = documentSnapshot.getString("user_email");
-                String user_dob = documentSnapshot.getString("user_dob");
-                String user_contact = documentSnapshot.getString("user_contact");
-                user_type = documentSnapshot.getString("user_type");
-                String user_gender = documentSnapshot.getString("user_gender");
-                String user_country = documentSnapshot.getString("user_country");
-                String user_address = documentSnapshot.getString("user_address");
-
-                Glide.with(EditProfileActivity.this).load(user_image).into(userImage);
-                name.setText(user_name);
-                email.setText(user_email);
-                dob.setText(user_dob);
-                contact.setText(user_contact);
-                gender.setText(user_gender);
-                country.setText(user_country);
-                address.setText(user_address);
-
-                if (user_type.equals("Merchant")){
-                    dobLayout.setVisibility(View.GONE);
-                    genderLayout.setVisibility(View.GONE);
-                }
+                String data = documentSnapshot.getString("user_email");
+                email.setText(data);
             }
         });
 
@@ -157,11 +134,11 @@ public class EditProfileActivity extends AppCompatActivity {
         selectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(EditProfileActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                if (ContextCompat.checkSelfPermission(AccountSetupCustomerActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
 
                     // Request the permission
-                    ActivityCompat.requestPermissions(EditProfileActivity.this,
+                    ActivityCompat.requestPermissions(AccountSetupCustomerActivity.this,
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                             REQUEST_CODE_READ_EXTERNAL_STORAGE);
                 }else {
@@ -170,25 +147,34 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-        email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                tools.makeSnack(main,"E-mail address can not be changed");
-            }
-        });
-
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-tools.makeSnack(main,"Death of birth can not be changed");
+                final Calendar c = Calendar.getInstance();
+
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        AccountSetupCustomerActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @SuppressLint("SetTextI18n")
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                dob.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+                            }
+                        },
+                        year, month, day);
+                datePickerDialog.show();
             }
         });
 
         gender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog genderPopup = new Dialog(EditProfileActivity.this);
+                Dialog genderPopup = new Dialog(AccountSetupCustomerActivity.this);
                 genderPopup.setContentView(R.layout.popup_gender);
                 genderPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 RelativeLayout male = genderPopup.findViewById(R.id.male);
@@ -228,7 +214,7 @@ tools.makeSnack(main,"Death of birth can not be changed");
         country.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog countryPopup = new Dialog(EditProfileActivity.this);
+                Dialog countryPopup = new Dialog(AccountSetupCustomerActivity.this);
                 countryPopup.setContentView(R.layout.popup_country);
                 countryPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 ListView countryList = countryPopup.findViewById(R.id.country_list);
@@ -241,7 +227,7 @@ tools.makeSnack(main,"Death of birth can not be changed");
                         "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru"};
 
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditProfileActivity.this,
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(AccountSetupCustomerActivity.this,
                         R.layout.country_list_layout,R.id.text, countries);
                 countryList.setAdapter(adapter);
 
@@ -249,15 +235,15 @@ tools.makeSnack(main,"Death of birth can not be changed");
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         String selectedCountry = parent.getItemAtPosition(position).toString();
-                        country.setText(selectedCountry);
-                        countryPopup.dismiss();
+                                country.setText(selectedCountry);
+                                countryPopup.dismiss();
                     }
                 });
 
             }
         });
 
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
+        btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String Name = name.getText().toString();
@@ -267,94 +253,27 @@ tools.makeSnack(main,"Death of birth can not be changed");
                 String Country = country.getText().toString();
                 String Address = address.getText().toString();
 
-               if (user_type.equals("Customer") && !Name.isEmpty() && !Address.isEmpty() && !DOB.isEmpty() && !Contact.isEmpty()
-                        && !Gender.isEmpty() && !Country.isEmpty()) {
+                if (!Name.isEmpty() && !Address.isEmpty() && !DOB.isEmpty() && !Contact.isEmpty()
+                        && !Gender.isEmpty() && !Country.isEmpty() && filePath != null) {
 
-                    if (filePath != null){
-                        tools.loading(popup, true);
+                    tools.loading(popup, true);
 
-                        Map<String, Object> userMap = new HashMap<>();
+                    Map<String, Object> userMap = new HashMap<>();
 
-                        userMap.put("user_name", Name);
-                        userMap.put("user_dob", DOB);
-                        userMap.put("user_contact", Contact);
-                        userMap.put("user_gender", Gender);
-                        userMap.put("user_country", Country);
-                        userMap.put("user_address", Address);
+                    userMap.put("user_name", Name);
+                    userMap.put("user_dob", DOB);
+                    userMap.put("user_contact", Contact);
+                    userMap.put("user_gender", Gender);
+                    userMap.put("user_country", Country);
+                    userMap.put("user_address", Address);
 
-                        db.collection("userDetails").document(userID).update(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                uploadImage(userID);
+                    db.collection("userDetails").document(userID).update(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            uploadImage(userID);
 
-                            }
-                        });
-                    }else {
-                        tools.loading(popup, true);
-
-                        Map<String, Object> userMap = new HashMap<>();
-
-                        userMap.put("user_name", Name);
-                        userMap.put("user_dob", DOB);
-                        userMap.put("user_contact", Contact);
-                        userMap.put("user_gender", Gender);
-                        userMap.put("user_country", Country);
-                        userMap.put("user_address", Address);
-
-                        db.collection("userDetails").document(userID).update(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                popup.dismiss();
-                                startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
-                                finish();
-                            }
-                        });
-                    }
-
-
-
-
-                }  if (user_type.equals("Merchant") && !Name.isEmpty() && !Address.isEmpty()&& !Contact.isEmpty()
-                        && !Country.isEmpty()) {
-
-                    if (filePath != null){
-                        tools.loading(popup, true);
-
-                        Map<String, Object> userMap = new HashMap<>();
-
-                        userMap.put("user_name", Name);
-                        userMap.put("user_contact", Contact);
-                        userMap.put("user_country", Country);
-                        userMap.put("user_address", Address);
-
-                        db.collection("userDetails").document(userID).update(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                uploadImage(userID);
-
-                            }
-                        });
-                    }else {
-                        tools.loading(popup, true);
-
-                        Map<String, Object> userMap = new HashMap<>();
-
-                        userMap.put("user_name", Name);
-                        userMap.put("user_contact", Contact);
-                        userMap.put("user_country", Country);
-                        userMap.put("user_address", Address);
-
-                        db.collection("userDetails").document(userID).update(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                popup.dismiss();
-                                startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
-                                finish();
-                            }
-                        });
-                    }
-
-
+                        }
+                    });
 
 
                 } else {
@@ -363,17 +282,6 @@ tools.makeSnack(main,"Death of birth can not be changed");
                 }
             }
         });
-
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
-                finish();
-            }
-        });
-
-
     }
 
 
@@ -399,10 +307,6 @@ tools.makeSnack(main,"Death of birth can not be changed");
                 resultCode,
                 data);
 
-        // checking request code and result code
-        // if request code is PICK_IMAGE_REQUEST and
-        // resultCode is RESULT_OK
-        // then set image in the image view
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
 
             // Get the Uri of data
@@ -439,7 +343,7 @@ tools.makeSnack(main,"Death of birth can not be changed");
                 uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        tools.makeSnack(main,"Upload successful");
+                      tools.makeSnack(main,"Upload successful");
 
                         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
@@ -462,9 +366,26 @@ tools.makeSnack(main,"Death of birth can not be changed");
                                 docRef.update(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        popup.dismiss();
-                                        startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
-                                        finish();
+                                        tools.makeSnack(main, getString(R.string.profile_updated));
+                                        popup.setContentView(R.layout.popup_successful);
+                                        popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                        TextView message = popup.findViewById(R.id.message);
+                                        TextView actionText = popup.findViewById(R.id.action_text);
+                                        CardView btnContinue = popup.findViewById(R.id.btn_continue);
+                                        popup.show();
+                                        popup.setCancelable(false);
+
+                                        message.setText(getResources().getString(R.string.account_ready));
+                                        actionText.setText(getResources().getString(R.string.go_to_home));
+
+                                        btnContinue.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                popup.dismiss();
+                                                startActivity(new Intent(AccountSetupCustomerActivity.this, MainActivity.class));
+                                                finish();
+                                            }
+                                        });
 
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -492,10 +413,4 @@ tools.makeSnack(main,"Death of birth can not be changed");
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
-        finish();
-    }
 }

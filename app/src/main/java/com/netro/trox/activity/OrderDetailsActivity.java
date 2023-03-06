@@ -12,7 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.netro.trox.R;
 import com.netro.trox.fragment.orders.FragmentPickUpRequest;
 import com.netro.trox.fragment.orders.FragmentPickedUp;
@@ -26,9 +29,9 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
     CardView status, rating, instructions;
 
-    TextView statusTitle, statusDescription, rateNow;
+    TextView statusTitle, statusDescription, rateNow, senderName, senderContact, senderAddress, receiverName, receiverContact, receiverAddress, parcelWeight, parcelPrice, orderID;
 
-    String data;
+    String data, order_id;
 
     Tools tools;
 
@@ -45,12 +48,52 @@ public class OrderDetailsActivity extends AppCompatActivity {
         statusTitle = findViewById(R.id.status_title);
         statusDescription = findViewById(R.id.status_description);
         rateNow = findViewById(R.id.rate_now);
+        senderName = findViewById(R.id.sender_name);
+        senderContact = findViewById(R.id.sender_contact);
+        senderAddress = findViewById(R.id.sender_address);
+        receiverName = findViewById(R.id.receiver_name);
+        receiverContact = findViewById(R.id.receiver_contact);
+        receiverAddress = findViewById(R.id.receiver_address);
+        parcelWeight = findViewById(R.id.parcel_weight);
+        parcelPrice = findViewById(R.id.parcel_price);
+        orderID = findViewById(R.id.order_id_text);
 
         tools = new Tools();
 
         tools.setLightStatusBar(main, this);
 
         data = getIntent().getStringExtra("data");
+        order_id = getIntent().getStringExtra("order_id");
+
+        FirebaseFirestore.getInstance().collection("orders").document(order_id)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                   if (documentSnapshot.exists()){
+                       String SenderName = documentSnapshot.getString("sender_name");
+                       String SenderContact = documentSnapshot.getString("sender_contact");
+                       String SenderAddress = documentSnapshot.getString("sender_address");
+                       String ReceiverName = documentSnapshot.getString("receiver_name");
+                       String ReceiverContact = documentSnapshot.getString("receiver_contact");
+                       String ReceiverAddress = documentSnapshot.getString("receiver_address");
+                       String ParcelWeight = documentSnapshot.getString("parcel_weight");
+                       Long Price = documentSnapshot.getLong("price");
+                       String OrdeID = documentSnapshot.getString("order_id");
+
+
+                       senderName.setText(SenderName);
+                       senderContact.setText(SenderContact);
+                       senderAddress.setText(SenderAddress);
+                       receiverName.setText(ReceiverName);
+                       receiverContact.setText(ReceiverContact);
+                       receiverAddress.setText(ReceiverAddress);
+                       parcelWeight.setText(ParcelWeight);
+                       parcelPrice.setText("$"+Price);
+                       orderID.setText(OrdeID);
+                   }
+                    }
+                });
 
         if (data.equals("FragmentPickUpRequest")){
             status.setVisibility(View.GONE);

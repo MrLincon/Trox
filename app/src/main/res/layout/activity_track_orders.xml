@@ -61,7 +61,7 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="32dp"
-                    android:src="@drawable/ic_selected"
+                    android:src="@drawable/ic_unselected"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></ImageView>
 
@@ -79,7 +79,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_selected"
+                    android:src="@drawable/ic_unselected"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/step_line_1"></ImageView>
 
@@ -97,7 +97,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_selected"
+                    android:src="@drawable/ic_unselected"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/step_line_2"></ImageView>
 
@@ -115,7 +115,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_selected"
+                    android:src="@drawable/ic_unselected"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/step_line_3"></ImageView>
 
@@ -161,11 +161,12 @@
                         android:textSize="14sp"></TextView>
 
                     <TextView
+                        android:id="@+id/order_placed_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="Your order has been placed on 22 september 2022"
+                        android:text="Your order has been placed"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="12sp"></TextView>
 
@@ -197,7 +198,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="Your order in being processed"
+                        android:text="Keep your package ready, Our delivery man is coming to pick up"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="12sp"></TextView>
 
@@ -228,7 +229,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="Your order has been picked up by a delivery man on 23 september 2022"
+                        android:text="Your order has been picked up by a delivery man"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="12sp"></TextView>
 
@@ -292,7 +293,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/ubuntu"
-                        android:text="Your order is in processing"
+                        android:text="Your order has been delivered"
                         android:textColor="@color/colorBlackMidEmp"
                         android:textSize="12sp"></TextView>
 

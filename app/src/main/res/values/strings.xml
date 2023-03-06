@@ -174,4 +174,7 @@
     <string name="pickup_address">Pickup Address</string>
     <string name="receiver_details">Receiver Details</string>
     <string name="click_to_upload">Click to upload</string>
+    <string name="business_name">Business Name</string>
+    <string name="upload_noc_form">Upload NOC Form</string>
+    <string name="business_identity">Business Identity</string>
 </resources>

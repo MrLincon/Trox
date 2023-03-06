@@ -90,7 +90,6 @@ public class NOCActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         userID = mAuth.getUid();
         db = FirebaseFirestore.getInstance();
-        ID = String.valueOf(System.currentTimeMillis());
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -151,6 +150,7 @@ public class NOCActivity extends AppCompatActivity {
 
     public void choose() {
         //we will pick images
+        ID = String.valueOf(System.currentTimeMillis());
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -244,12 +244,14 @@ public class NOCActivity extends AppCompatActivity {
         });
 
         if (index == imageList.size()) {
+            index=0;
             popup.dismiss();
             imageList.clear();
             adapter.notifyDataSetChanged();
             Toast.makeText(NOCActivity.this, "Image uploaded", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getBaseContext(), ParcelOrderDetailsActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ParcelOrderDetailsActivity.class);
             intent.putExtra("type", "International");
+            intent.putExtra("ID", ID);
             startActivity(intent);
         }
 

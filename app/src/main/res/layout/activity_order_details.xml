@@ -248,6 +248,7 @@ Write down the receiver’s details on the package to ensure delivery."
                      android:layout_height="wrap_content">
 
                      <TextView
+                         android:id="@+id/order_id_text"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:fontFamily="@font/ubuntu_medium"
@@ -303,11 +304,11 @@ Write down the receiver’s details on the package to ensure delivery."
                          android:textSize="14sp"></TextView>
 
                      <TextView
+                         android:id="@+id/sender_name"
                          android:layout_weight="1"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
                          android:fontFamily="@font/ubuntu_bold"
-                         android:text="John D. Bufford"
                          android:gravity="right"
                          android:textColor="@color/colorBlackMidEmp"
                          android:textSize="14sp"></TextView>
@@ -335,11 +336,11 @@ Write down the receiver’s details on the package to ensure delivery."
                          android:textSize="14sp"></TextView>
 
                      <TextView
+                         android:id="@+id/sender_contact"
                          android:layout_weight="1"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
                          android:fontFamily="@font/ubuntu_bold"
-                         android:text="202-555-0112"
                          android:gravity="right"
                          android:textColor="@color/colorBlackMidEmp"
                          android:textSize="14sp"></TextView>
@@ -367,11 +368,11 @@ Write down the receiver’s details on the package to ensure delivery."
                          android:textSize="14sp"></TextView>
 
                      <TextView
+                         android:id="@+id/sender_address"
                          android:layout_weight="1"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
                          android:fontFamily="@font/ubuntu_bold"
-                         android:text="322 W/South St, Alexander City, Alabama"
                          android:gravity="right"
                          android:textColor="@color/colorBlackMidEmp"
                          android:textSize="14sp"></TextView>
@@ -405,11 +406,11 @@ Write down the receiver’s details on the package to ensure delivery."
                          android:textSize="14sp" />
 
                      <TextView
+                         android:id="@+id/receiver_name"
                          android:layout_weight="1"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
                          android:fontFamily="@font/ubuntu_bold"
-                         android:text="Kimberly W. Ingram"
                          android:gravity="right"
                          android:textColor="@color/colorBlackMidEmp"
                          android:textSize="14sp"></TextView>
@@ -437,11 +438,11 @@ Write down the receiver’s details on the package to ensure delivery."
                          android:textSize="14sp"></TextView>
 
                      <TextView
+                         android:id="@+id/receiver_contact"
                          android:layout_weight="1"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
                          android:fontFamily="@font/ubuntu_bold"
-                         android:text="909-952-6105"
                          android:gravity="right"
                          android:textColor="@color/colorBlackMidEmp"
                          android:textSize="14sp"></TextView>
@@ -473,7 +474,7 @@ Write down the receiver’s details on the package to ensure delivery."
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
                          android:fontFamily="@font/ubuntu_bold"
-                         android:text="5/B, Demo Street,  Auburn, Alabama"
+                         android:id="@+id/receiver_address"
                          android:gravity="right"
                          android:textColor="@color/colorBlackMidEmp"
                          android:textSize="14sp"></TextView>
@@ -507,11 +508,11 @@ Write down the receiver’s details on the package to ensure delivery."
                          android:textSize="14sp" />
 
                      <TextView
+                         android:id="@+id/parcel_weight"
                          android:layout_weight="1"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
                          android:fontFamily="@font/ubuntu_bold"
-                         android:text="5kg"
                          android:gravity="right"
                          android:textColor="@color/colorBlackMidEmp"
                          android:textSize="14sp"></TextView>
@@ -609,11 +610,11 @@ Write down the receiver’s details on the package to ensure delivery."
                          android:textSize="16sp" />
 
                      <TextView
+                         android:id="@+id/parcel_price"
                          android:layout_weight="1"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
                          android:fontFamily="@font/ubuntu_medium"
-                         android:text="$30.00"
                          android:gravity="right"
                          android:textColor="@color/colorBlackHighEmp"
                          android:textSize="24sp"></TextView>

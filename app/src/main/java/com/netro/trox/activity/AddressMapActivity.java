@@ -6,12 +6,15 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -84,7 +87,7 @@ public class AddressMapActivity extends AppCompatActivity implements OnMapReadyC
         mapFragment.getMapAsync(AddressMapActivity.this);
     }
 
-    private void openBottomSheet(String address){
+    private void openBottomSheet(String address) {
         BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(AddressMapActivity.this);
         View sheetView = getLayoutInflater().inflate(R.layout.bottomsheet_set_address, null);
         mBottomSheetDialog.setContentView(sheetView);
@@ -102,14 +105,14 @@ public class AddressMapActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                if (data.equals("Home")){
+                if (data.equals("Home")) {
 
                     Map<String, Object> userMap = new HashMap<>();
 
                     userMap.put("home_address", address.trim());
 
                     FirebaseFirestore.getInstance().collection("userDetails").document(FirebaseAuth.getInstance().getUid())
-                                    .update(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            .update(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     intent.putExtra("home", address.trim());
@@ -150,7 +153,6 @@ public class AddressMapActivity extends AppCompatActivity implements OnMapReadyC
     }
 
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -161,7 +163,6 @@ public class AddressMapActivity extends AppCompatActivity implements OnMapReadyC
 
         getDeviceLocation();
 
-
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull LatLng latLng) {
@@ -169,7 +170,7 @@ public class AddressMapActivity extends AppCompatActivity implements OnMapReadyC
                 latitude = latLng.latitude;
                 longitude = latLng.longitude;
 
-                if (marker!=null){
+                if (marker != null) {
                     marker.remove();
                 }
 
@@ -248,7 +249,7 @@ public class AddressMapActivity extends AppCompatActivity implements OnMapReadyC
 
                 getLocationPermission();
             }
-        } catch (SecurityException e)  {
+        } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
         }
     }
@@ -282,7 +283,7 @@ public class AddressMapActivity extends AppCompatActivity implements OnMapReadyC
                     }
                 });
             }
-        } catch (SecurityException e)  {
+        } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage(), e);
         }
 

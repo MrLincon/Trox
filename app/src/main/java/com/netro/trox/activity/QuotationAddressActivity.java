@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,7 +36,7 @@ public class QuotationAddressActivity extends AppCompatActivity {
 
     LinearLayout main;
 
-    EditText search;
+    SearchView search;
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -74,7 +75,7 @@ public class QuotationAddressActivity extends AppCompatActivity {
         String city = getIntent().getStringExtra("city");
 
         if (data.equals("country")) {
-            search.setHint(getResources().getString(R.string.enter_country));
+            search.setQueryHint(getResources().getString(R.string.enter_country));
 
             db.collection("Countries").orderBy("name", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -108,7 +109,7 @@ public class QuotationAddressActivity extends AppCompatActivity {
 
 
         } else if (data.equals("state")) {
-            search.setHint(getResources().getString(R.string.enter_state));
+            search.setQueryHint(getResources().getString(R.string.enter_state));
 
 
             db.collection("Countries").document(country).collection("States").orderBy("name", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -140,7 +141,7 @@ public class QuotationAddressActivity extends AppCompatActivity {
                 }
             });
         } else if (data.equals("city")) {
-            search.setHint(getResources().getString(R.string.enter_city));
+            search.setQueryHint(getResources().getString(R.string.enter_city));
 
             db.collection("Countries").document(country).collection("States").document(state).collection("Cities").orderBy("name", Query.Direction.ASCENDING)
                     .get()
@@ -173,6 +174,43 @@ public class QuotationAddressActivity extends AppCompatActivity {
                         }
                     });
         }
+
+
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // handle search query submit
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                List<LocationList> filteredDataList = new ArrayList<>();
+                for (LocationList data : locationData) {
+                    if (data.getName().toLowerCase().contains(newText.toLowerCase())) {
+                        filteredDataList.add(data);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+
+                adapter = new LocationListAdpater(filteredDataList, QuotationAddressActivity.this);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(QuotationAddressActivity.this));
+
+                adapter.setOnItemClickListener(new LocationListAdpater.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(String value) {
+                        Intent intent = new Intent();
+                        intent.putExtra("key", value);
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }
+                });
+                return true;
+            }
+        });
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

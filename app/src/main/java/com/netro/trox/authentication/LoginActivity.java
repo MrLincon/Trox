@@ -1,7 +1,6 @@
 package com.netro.trox.authentication;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -34,11 +33,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.netro.trox.R;
-import com.netro.trox.activity.AccountSetupActivity;
+import com.netro.trox.activity.AccountSetupCustomerActivity;
 import com.netro.trox.activity.MainActivity;
 import com.netro.trox.util.Tools;
 
@@ -196,7 +193,7 @@ public class LoginActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpAsActivity.class));
             }
         });
 
@@ -302,7 +299,7 @@ public class LoginActivity extends AppCompatActivity {
                         String userType = documentSnapshot.getString("user_type");
 
                         if (userType.equals("")){
-                            startActivity(new Intent(LoginActivity.this, AccountSetupActivity.class));
+                            startActivity(new Intent(LoginActivity.this, AccountSetupCustomerActivity.class));
                             finish();
                         }else {
                             tools.loading(popup, false);

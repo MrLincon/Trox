@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.netro.trox.R;
-import com.netro.trox.activity.AccountSetupActivity;
+import com.netro.trox.activity.AccountSetupCustomerActivity;
 
 public class OTPActivity extends AppCompatActivity {
 
@@ -62,7 +62,7 @@ public class OTPActivity extends AppCompatActivity {
                 btnContinue.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(OTPActivity.this, AccountSetupActivity.class));
+                        startActivity(new Intent(OTPActivity.this, AccountSetupCustomerActivity.class));
                     }
                 });
             }

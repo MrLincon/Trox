@@ -6,30 +6,23 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_bg"
     android:id="@+id/main"
-    tools:context=".activity.EditProfileActivity">
+    tools:context=".activity.AccountSetupCustomerActivity">
 
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
+        android:gravity="center"
         android:layout_gravity="top">
-
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:src="@drawable/ic_arrow_left" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/ubuntu_medium"
-            android:text="@string/edit_profile"
+            android:text="@string/fill_your_profile"
             android:textColor="@color/colorWhiteHighEmp"
             android:textSize="16sp" />
 
@@ -78,7 +71,6 @@
                         android:layout_height="32dp"
                         android:layout_gravity="bottom|end"
                         android:layout_marginBottom="28dp"
-                        app:cardBackgroundColor="@color/colorPrimary"
                         app:cardCornerRadius="36dp">
 
                         <ImageView
@@ -86,7 +78,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:padding="8dp"
-                            android:src="@drawable/ic_edit"></ImageView>
+                            android:src="@drawable/ic_camera"></ImageView>
 
                     </androidx.cardview.widget.CardView>
 
@@ -140,6 +132,7 @@
                         android:background="@drawable/edit_text_bg2"
                         android:hint="@string/your_e_mail_address"
                         android:focusable="false"
+                        android:clickable="false"
                         android:inputType="textEmailAddress|textNoSuggestions"
                         android:textColor="@color/colorBlackHighEmp"
                         android:textColorHint="@color/colorBlackLowEmp"
@@ -300,7 +293,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/btn_update"
+        android:id="@+id/btn_continue"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginStart="32dp"
@@ -317,9 +310,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/ubuntu_medium"
-            android:text="@string/update"
+            android:text="@string/continue_"
             android:textColor="@color/colorWhiteHighEmp"
-            android:textSize="16sp" />
+            android:textSize="16sp"></TextView>
 
 
     </androidx.cardview.widget.CardView>

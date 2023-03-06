@@ -18,7 +18,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.slider.RangeSlider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,8 +50,9 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
     String locationField = "";
 
     String parcelType = "Parcel";
-    String type;
+    String type, ID;
     Double deliveryLattitude, deliveryLongitude, pickupLattitude, pickupLongtitude;
+
 
     Tools tools;
 
@@ -86,6 +89,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
 
 
         type = getIntent().getStringExtra("type");
+        ID = getIntent().getStringExtra("ID");
 
         tools = new Tools();
 
@@ -196,7 +200,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!pickupCity.getText().toString().equals("")){
+                if (!pickupCity.getText().toString().equals("")) {
 
                     if (ContextCompat.checkSelfPermission(ParcelOrderDetailsActivity.this,
                             android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -212,8 +216,8 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                                 new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                                 PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
                     }
-                }else{
-                    tools.makeSnack(main,"Select a city first");
+                } else {
+                    tools.makeSnack(main, "Select a city first");
                 }
 
             }
@@ -223,7 +227,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!deliveryCity.getText().toString().equals("")){
+                if (!deliveryCity.getText().toString().equals("")) {
                     if (ContextCompat.checkSelfPermission(ParcelOrderDetailsActivity.this,
                             android.Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
@@ -238,8 +242,8 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                                 new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                                 PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
                     }
-                }else{
-                    tools.makeSnack(main,"Select a city first");
+                } else {
+                    tools.makeSnack(main, "Select a city first");
                 }
 
             }
@@ -383,6 +387,8 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                     tools.makeSnack(main, "Receiver contact can not be empty");
                 } else if (DeliveryCountry.equals("")) {
                     tools.makeSnack(main, "Country can not be empty");
+                } else if (type.equals("International") && PickupCountry.equals(DeliveryCountry)) {
+                    tools.makeSnack(main, "Pickup country and Delivery country can not be the same in international delivery");
                 } else if (DeliveryState.equals("")) {
                     tools.makeSnack(main, "State can not be empty");
                 } else if (DeliveryCity.equals("")) {
@@ -391,7 +397,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                     tools.makeSnack(main, "Address can not be empty");
                 } else if (DeliveryLocation.equals("")) {
                     tools.makeSnack(main, "Set a delivery location on the map");
-                } else if (ParcelWeight==0) {
+                } else if (ParcelWeight == 0) {
                     tools.makeSnack(main, "Select your parcel's weight");
                 } else if (ParcelType.equals("")) {
                     tools.makeSnack(main, "Parcel type can not be empty");
@@ -415,6 +421,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                     intent.putExtra("pickupLong", pickupLongtitude);
                     intent.putExtra("deliveryLat", deliveryLattitude);
                     intent.putExtra("deliveryLong", deliveryLongitude);
+                    intent.putExtra("ID", ID);
                     startActivity(intent);
 
                 }
@@ -426,7 +433,19 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (ID.equals("fromHome")) {
+                    startActivity(new Intent(ParcelOrderDetailsActivity.this, MainActivity.class));
+                    finish();
+                } else if (ID.equals("fromParcel")) {
+                    finish();
+                } else {
+                    FirebaseFirestore.getInstance().collection("orders").document(ID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            finish();
+                        }
+                    });
+                }
             }
         });
     }
@@ -453,19 +472,17 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
             }
 
 
-
-
             if (locationField.equals("DeliveryLocation")) {
 
-                deliveryLattitude = data.getDoubleExtra("deliveryLat",0);
-                deliveryLongitude = data.getDoubleExtra("deliveryLong",0);
+                deliveryLattitude = data.getDoubleExtra("deliveryLat", 0);
+                deliveryLongitude = data.getDoubleExtra("deliveryLong", 0);
                 String deliveryAddress = data.getStringExtra("deliveryAddress");
                 deliveryLocation.setText(deliveryAddress);
 
             } else if (locationField.equals("PickupLocation")) {
 
-                pickupLattitude = data.getDoubleExtra("pickupLat",0);
-                pickupLongtitude = data.getDoubleExtra("pickupLong",0);
+                pickupLattitude = data.getDoubleExtra("pickupLat", 0);
+                pickupLongtitude = data.getDoubleExtra("pickupLong", 0);
                 String pickupAddress = data.getStringExtra("pickupAddress");
                 pickupLocation.setText(pickupAddress);
 
@@ -474,5 +491,20 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if (ID.equals("fromHome")) {
+            startActivity(new Intent(ParcelOrderDetailsActivity.this, MainActivity.class));
+            finish();
+        }else if (ID.equals("fromParcel")) {
+            finish();
+        }else{
+            FirebaseFirestore.getInstance().collection("orders").document(ID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    finish();
+                }
+            });
+        }
+    }
 }

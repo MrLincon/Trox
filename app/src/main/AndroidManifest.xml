@@ -19,6 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Trox"
         tools:targetApi="31">
+        <activity android:name=".activity.MainActivity"
+            android:exported="false">
+
+
+        </activity>
+        <activity
+            android:name=".activity.AccountSetupMerchantActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.AddressMapActivity"
             android:exported="false" />
@@ -98,7 +106,7 @@
             android:name=".authentication.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.AccountSetupActivity"
+            android:name=".activity.AccountSetupCustomerActivity"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
@@ -121,13 +129,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.MainActivity"
-            android:exported="false" />
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

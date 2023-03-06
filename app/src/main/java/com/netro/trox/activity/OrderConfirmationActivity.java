@@ -43,6 +43,8 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     String name, contact, address;
     long price;
 
+    String ID;
+
     private FirebaseFirestore db;
     private String userID;
     private FirebaseAuth mAuth;
@@ -69,6 +71,9 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         tools = new Tools();
 
         tools.setLightStatusBar(main,this);
+
+        ID = getIntent().getStringExtra("ID");
+
 
         //firebase init
         mAuth = FirebaseAuth.getInstance();
@@ -193,12 +198,13 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                 userMap.put("price", price);
                 userMap.put("order_id", currentTimeInMillies);
                 userMap.put("order_status", "Pending");
+                userMap.put("active_status", "Active");
                 userMap.put("order_type", OrderType);
                 userMap.put("user_id", userID);
                 userMap.put("timestamp", FieldValue.serverTimestamp());
 
-                db.collection("orders").document(currentTimeInMillies)
-                        .set(userMap)
+                db.collection("orders").document(ID)
+                        .update(userMap)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

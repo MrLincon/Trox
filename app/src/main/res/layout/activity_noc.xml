@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:fontFamily="@font/ubuntu_medium"
-                android:text="Upload NOC Form"
+                android:text="@string/upload_noc_form"
                 android:textColor="@color/colorBlackHighEmp"
                 android:textSize="16sp"></TextView>
 

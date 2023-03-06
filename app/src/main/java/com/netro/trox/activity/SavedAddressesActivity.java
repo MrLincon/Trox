@@ -1,17 +1,24 @@
 package com.netro.trox.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,6 +59,7 @@ public class SavedAddressesActivity extends AppCompatActivity {
         tools.setLightStatusBar(main, this);
 
 
+
         FirebaseFirestore.getInstance().collection("userDetails").document(FirebaseAuth.getInstance().getUid())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -61,12 +69,16 @@ public class SavedAddressesActivity extends AppCompatActivity {
                             String Home = documentSnapshot.getString("home_address");
                             String Work = documentSnapshot.getString("work_address");
 
-                            if (!Home.equals("")) {
-                                homeAddress.setText(Home);
-                            }
-                            if (!Work.equals("")) {
-                                workAddress.setText(Work);
-                            }
+                           try {
+                               if (!Home.equals("")) {
+                                   homeAddress.setText(Home);
+                               }
+                               if (!Work.equals("")) {
+                                   workAddress.setText(Work);
+                               }
+                           }catch (Exception e){
+
+                           }
                         }
                     }
                 });
@@ -74,20 +86,23 @@ public class SavedAddressesActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addressType = "home";
-                Intent intent = new Intent(SavedAddressesActivity.this, AddressMapActivity.class);
-                intent.putExtra("data", "Home");
-                startActivityForResult(intent, REQUEST_CODE);
+                    addressType = "home";
+                    Intent intent = new Intent(SavedAddressesActivity.this, AddressMapActivity.class);
+                    intent.putExtra("data", "Home");
+                    startActivityForResult(intent, REQUEST_CODE);
+
             }
         });
 
         work.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addressType = "work";
-                Intent intent = new Intent(SavedAddressesActivity.this, AddressMapActivity.class);
-                intent.putExtra("data", "Work");
-                startActivityForResult(intent, REQUEST_CODE);
+
+                    addressType = "work";
+                    Intent intent = new Intent(SavedAddressesActivity.this, AddressMapActivity.class);
+                    intent.putExtra("data", "Work");
+                    startActivityForResult(intent, REQUEST_CODE);
+
             }
         });
 
@@ -95,10 +110,12 @@ public class SavedAddressesActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(SavedAddressesActivity.this,MainActivity.class));
                 finish();
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -115,5 +132,9 @@ public class SavedAddressesActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(SavedAddressesActivity.this,MainActivity.class));
+        finish();
+    }
 }

@@ -24,8 +24,9 @@ public class TrackOrdersActivity extends AppCompatActivity {
     CoordinatorLayout main;
     ImageView back;
     ImageView step1, step2, step3, step4, step5;
+    View stepLine1, stepLine2, stepLine3, stepLine4;
 
-    TextView status;
+    String status, order_id, fragment;
     int value;
 
     Tools tools;
@@ -43,49 +44,74 @@ public class TrackOrdersActivity extends AppCompatActivity {
         step3 = findViewById(R.id.step_3);
         step4 = findViewById(R.id.step_4);
         step5 = findViewById(R.id.step_5);
-        status = findViewById(R.id.status);
+        stepLine1 = findViewById(R.id.step_line_1);
+        stepLine2 = findViewById(R.id.step_line_2);
+        stepLine3 = findViewById(R.id.step_line_3);
+        stepLine4 = findViewById(R.id.step_line_4);
 
         tools = new Tools();
 
         tools.setLightStatusBar(main, this);
+
+        status = getIntent().getStringExtra("status");
+        order_id = getIntent().getStringExtra("order_id");
+
+        orderStatusUpdate();
 
         value = 4;
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TrackOrdersActivity.this, ActiveOrdersActivity.class));
                 finish();
             }
         });
 
-        main.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (value==4){
-                    step5.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
-                    value++;
-                    status.setText("Delivery Details");
-                }
-            }
-        });
+
 
         btnOrderDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TrackOrdersActivity.this, DeliveryDetailsActivity.class);
+                Intent intent = new Intent(TrackOrdersActivity.this, OrderDetailsActivity.class);
                 intent.putExtra("value", value);
+                intent.putExtra("data", fragment);
+                intent.putExtra("order_id", order_id);
                 startActivity(intent);
-                finish();
             }
         });
 
     }
 
+    private void orderStatusUpdate() {
+        if (status.equals("Pending")){
+            fragment = "FragmentPickUpRequest";
+            step1.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+
+        } else if (status.equals("Processing")) {
+            fragment = "FragmentPickUpRequest";
+            step1.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+            step2.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+        }
+        else if (status.equals("Picked Up")) {
+            fragment = "FragmentPickedUp";
+            step1.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+            step2.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+            step3.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+            step4.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+        }
+        else if (status.equals("Delivered")) {
+            fragment = "FragmentDelivered";
+            step1.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+            step2.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+            step3.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+            step4.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+            step5.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+        }
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(TrackOrdersActivity.this, ActiveOrdersActivity.class));
         finish();
     }
 

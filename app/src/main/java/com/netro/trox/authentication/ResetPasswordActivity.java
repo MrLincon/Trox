@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.netro.trox.R;
-import com.netro.trox.activity.AccountSetupActivity;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
