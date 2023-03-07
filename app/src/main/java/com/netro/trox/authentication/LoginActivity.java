@@ -160,7 +160,6 @@ public class LoginActivity extends AppCompatActivity {
                                 });
                             } else {
                                 tools.makeSnack(main, "Email is not verified");
-
                             }
                         } catch (Exception e) {
 
@@ -193,7 +192,7 @@ public class LoginActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignUpAsActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
         });
 
@@ -248,7 +247,7 @@ public class LoginActivity extends AppCompatActivity {
                                         document_ref.update(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-
+                                                updateUI(mAuth.getCurrentUser());
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
@@ -261,7 +260,7 @@ public class LoginActivity extends AppCompatActivity {
                                         document_ref.set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-
+                                                updateUI(mAuth.getCurrentUser());
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
@@ -299,7 +298,7 @@ public class LoginActivity extends AppCompatActivity {
                         String userType = documentSnapshot.getString("user_type");
 
                         if (userType.equals("")){
-                            startActivity(new Intent(LoginActivity.this, AccountSetupCustomerActivity.class));
+                            startActivity(new Intent(LoginActivity.this, SignUpAsActivity.class));
                             finish();
                         }else {
                             tools.loading(popup, false);

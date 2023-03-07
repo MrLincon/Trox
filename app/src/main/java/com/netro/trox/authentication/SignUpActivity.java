@@ -75,12 +75,12 @@ public class SignUpActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        selected = getIntent().getStringExtra("selected");
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignUpActivity.this, SignUpAsActivity.class));
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                 finish();
             }
         });
@@ -176,8 +176,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                                                                     userMap.put("user_email", email);
                                                                     userMap.put("used_id", userID);
-                                                                    userMap.put("user_type", selected);
-                                                                    userMap.put("user_image", "");
+                                                                    userMap.put("user_type", "");
 
                                                                     document_ref.set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                         @Override
@@ -211,7 +210,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(SignUpActivity.this, SignUpAsActivity.class));
+        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
         finish();
 
     }

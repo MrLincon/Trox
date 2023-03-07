@@ -224,6 +224,7 @@ public class AccountSetupMerchantActivity extends AppCompatActivity {
                     userMap.put("user_contact", Contact);
                     userMap.put("user_country", Country);
                     userMap.put("user_address", Address);
+                    userMap.put("user_type", "Merchant");
 
                     db.collection("userDetails").document(userID).update(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -433,13 +434,12 @@ public class AccountSetupMerchantActivity extends AppCompatActivity {
 
     private void SendLink(String url, int counter) {
         index++;
-        Log.d("dara", "SendLink: " + index);
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("imageLink", FieldValue.arrayUnion(url));
 
 
-        FirebaseFirestore.getInstance().collection("int").document(userID).update(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+        FirebaseFirestore.getInstance().collection("userDetails").document(userID).update(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
 

@@ -81,7 +81,7 @@ public class SendParcelActivity extends AppCompatActivity {
                     if (selected.equals("Domestic")) {
                         Intent intent = new Intent(getBaseContext(), ParcelOrderDetailsActivity.class);
                         intent.putExtra("type", "Domestic");
-                        intent.putExtra("ID", "fromParcel");
+                        intent.putExtra("ID", "fromDomestic");
                         startActivity(intent);
                     } else if (selected.equals("International")) {
                         Intent intent = new Intent(getBaseContext(), NOCActivity.class);

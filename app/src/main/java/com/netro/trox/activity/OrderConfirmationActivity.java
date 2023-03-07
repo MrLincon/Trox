@@ -203,34 +203,67 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                 userMap.put("user_id", userID);
                 userMap.put("timestamp", FieldValue.serverTimestamp());
 
-                db.collection("orders").document(ID)
-                        .update(userMap)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
 
-                        Dialog popup = new Dialog(OrderConfirmationActivity.this);
-                        popup.setContentView(R.layout.popup_successful);
-                        popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        TextView message = popup.findViewById(R.id.message);
-                        TextView actionText = popup.findViewById(R.id.action_text);
-                        CardView btnContinue = popup.findViewById(R.id.btn_continue);
-                        popup.setCancelable(false);
-                        popup.show();
+                if (ID.equals("fromDomestic")){
+                    db.collection("orders").document(currentTimeInMillies)
+                            .set(userMap)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
 
-                        message.setText("Your order has been successfully placed. Your order will be picked up within 24 hours");
-                        actionText.setText("Go To Home");
+                                    Dialog popup = new Dialog(OrderConfirmationActivity.this);
+                                    popup.setContentView(R.layout.popup_successful);
+                                    popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    TextView message = popup.findViewById(R.id.message);
+                                    TextView actionText = popup.findViewById(R.id.action_text);
+                                    CardView btnContinue = popup.findViewById(R.id.btn_continue);
+                                    popup.setCancelable(false);
+                                    popup.show();
 
-                        btnContinue.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                popup.dismiss();
-                                startActivity(new Intent(OrderConfirmationActivity.this,MainActivity.class));
-                                finish();
-                            }
-                        });
-                    }
-                });
+                                    message.setText("Your order has been successfully placed. Your order will be picked up within 24 hours");
+                                    actionText.setText("Go To Home");
+
+                                    btnContinue.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            popup.dismiss();
+                                            startActivity(new Intent(OrderConfirmationActivity.this,MainActivity.class));
+                                            finish();
+                                        }
+                                    });
+                                }
+                            });
+                }else {
+                    db.collection("orders").document(ID)
+                            .update(userMap)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    Dialog popup = new Dialog(OrderConfirmationActivity.this);
+                                    popup.setContentView(R.layout.popup_successful);
+                                    popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                    TextView message = popup.findViewById(R.id.message);
+                                    TextView actionText = popup.findViewById(R.id.action_text);
+                                    CardView btnContinue = popup.findViewById(R.id.btn_continue);
+                                    popup.setCancelable(false);
+                                    popup.show();
+
+                                    message.setText("Your order has been successfully placed. Your order will be picked up within 24 hours");
+                                    actionText.setText("Go To Home");
+
+                                    btnContinue.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            popup.dismiss();
+                                            startActivity(new Intent(OrderConfirmationActivity.this,MainActivity.class));
+                                            finish();
+                                        }
+                                    });
+                                }
+                            });
+                }
+
             }
         });
 

@@ -32,7 +32,7 @@ public class OnboardingActivity extends AppCompatActivity {
         onboarding = findViewById(R.id.viewPagerOnboarding);
         dots = findViewById(R.id.dots);
 
-        sliderAdapter = new SliderAdapterOnboarding(this);
+        sliderAdapter = new SliderAdapterOnboarding(this, onboarding);
 
         onboarding.setAdapter(sliderAdapter);
 

@@ -1,7 +1,9 @@
 package com.netro.trox.authentication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -9,61 +11,170 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.netro.trox.R;
+import com.netro.trox.activity.MainActivity;
+import com.netro.trox.activity.OrderConfirmationActivity;
+import com.netro.trox.util.Tools;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
-    TextView time;
-    CardView verify;
+    ImageView back;
+    TextInputLayout emailLayout, currentPasswordLayout, newPasswordLayout;
+    TextInputEditText email, currentPassword, newPassword;
+    CoordinatorLayout main;
+
+    FirebaseUser user;
+    AuthCredential credential;
+    String Email, CurrentPassword, NewPassword;
+
+
+    CardView changePassword;
 
     Dialog popup;
+
+    Tools tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
-        time = findViewById(R.id.time);
-        verify = findViewById(R.id.verify);
+        main = findViewById(R.id.main);
+        back = findViewById(R.id.back);
+        emailLayout = findViewById(R.id.email_layout);
+        currentPasswordLayout = findViewById(R.id.password_layout);
+        newPasswordLayout = findViewById(R.id.password_layout_new);
+        email = findViewById(R.id.et_email);
+        currentPassword = findViewById(R.id.et_password);
+        newPassword = findViewById(R.id.et_password_new);
+        changePassword = findViewById(R.id.change_password);
 
-        popup = new Dialog(this);
 
-        new CountDownTimer(60000, 1000) {
+        tools = new Tools();
 
-            public void onTick(long millisUntilFinished) {
-                time.setText(String.valueOf(millisUntilFinished / 1000 + " s"));
-                // logic to set the EditText could go here
-            }
+        tools.setLightStatusBar(main, this);
 
-            public void onFinish() {
-                time.setText("0");
-            }
-
-        }.start();
-
-        verify.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popup.setContentView(R.layout.popup_successful);
-                popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                TextView message = popup.findViewById(R.id.message);
-                TextView actionText = popup.findViewById(R.id.action_text);
-                CardView btnContinue = popup.findViewById(R.id.btn_continue);
-                popup.show();
-                popup.setCancelable(false);
+                finish();
+            }
+        });
 
-                message.setText(getResources().getString(R.string.account_ready));
-                actionText.setText(getResources().getString(R.string.explore_now));
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                btnContinue.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(ResetPasswordActivity.this, LoginActivity.class));
-                    }
-                });
+                Email = email.getText().toString();
+                CurrentPassword = currentPassword.getText().toString();
+                NewPassword = newPassword.getText().toString();
+
+                if (Email.isEmpty()) {
+                    emailLayout.setError("E-mail is required");
+                    tools.makeSnack(main, "Email is required");
+                    return;
+                }
+
+                if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
+                    emailLayout.setError("Please enter a valid email");
+                    tools.makeSnack(main, "Please enter a valid email");
+                    return;
+                }
+
+                if (CurrentPassword.isEmpty()) {
+                    currentPasswordLayout.setError("Current password is required");
+                    tools.makeSnack(main, "Current password is required");
+                    return;
+                }
+
+                if (CurrentPassword.length() < 6) {
+                    currentPasswordLayout.setError("Minimum length of current password should be 6");
+                    tools.makeSnack(main, "Minimum length of current password was  6");
+                    return;
+                }
+                if (NewPassword.isEmpty()) {
+                    newPasswordLayout.setError("New password is required");
+                    tools.makeSnack(main, "New password is required");
+                    return;
+                }
+
+                if (NewPassword.length() < 6) {
+                    newPasswordLayout.setError("Minimum length of new password should be 6");
+                    tools.makeSnack(main, "Minimum length of new password should be 6");
+                    return;
+                } else {
+
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    credential = EmailAuthProvider.getCredential(Email, CurrentPassword);
+
+
+                    user.reauthenticate(credential)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        // Update the user's password with the new password
+                                        user.updatePassword(NewPassword)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            FirebaseAuth.getInstance().signOut();
+
+                                                            Dialog popup = new Dialog(ResetPasswordActivity.this);
+                                                            popup.setContentView(R.layout.popup_successful);
+                                                            popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                                            TextView message = popup.findViewById(R.id.message);
+                                                            TextView actionText = popup.findViewById(R.id.action_text);
+                                                            CardView btnContinue = popup.findViewById(R.id.btn_continue);
+                                                            popup.setCancelable(false);
+                                                            popup.show();
+
+                                                            message.setText("Your password has been updated. Log in with your new password.");
+                                                            actionText.setText("Log in");
+
+                                                            btnContinue.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View v) {
+
+                                                                    startActivity(new Intent(ResetPasswordActivity.this, LoginActivity.class));
+                                                                    finish();
+                                                                }
+                                                            });
+
+                                                        } else {
+                                                            currentPasswordLayout.setErrorEnabled(true);
+                                                            tools.makeSnack(main, "Your current password in not correct");
+                                                        }
+                                                    }
+                                                });
+                                    } else {
+                                        tools.makeSnack(main, "Your current password in not correct");
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    tools.makeSnack(main, "Your current password in not correct");
+                                }
+                            });
+                }
             }
         });
     }

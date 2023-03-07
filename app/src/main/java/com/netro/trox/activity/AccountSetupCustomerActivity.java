@@ -266,6 +266,7 @@ public class AccountSetupCustomerActivity extends AppCompatActivity {
                     userMap.put("user_gender", Gender);
                     userMap.put("user_country", Country);
                     userMap.put("user_address", Address);
+                    userMap.put("user_type", "Customer");
 
                     db.collection("userDetails").document(userID).update(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

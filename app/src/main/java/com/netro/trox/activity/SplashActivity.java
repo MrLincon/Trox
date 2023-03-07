@@ -13,8 +13,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.netro.trox.R;
 import com.netro.trox.authentication.LoginActivity;
+import com.netro.trox.authentication.SignUpAsActivity;
 
 public class SplashActivity extends AppCompatActivity {
+
+    boolean firstStart = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +28,16 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-                boolean firstStart = prefs.getBoolean("firstStart", true);
+                SharedPreferences prefs = getApplication().getSharedPreferences("prefs", MODE_PRIVATE);
+                firstStart = prefs.getBoolean("starting", true);
 
-                if (firstStart==false) {
+                if (firstStart==true) {
+
+                    Intent intent = new Intent(SplashActivity.this, OnboardingActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+
                     if (FirebaseAuth.getInstance().getCurrentUser()!=null){
 
                         FirebaseFirestore.getInstance().collection("userDetails").document(FirebaseAuth.getInstance().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -36,13 +45,8 @@ public class SplashActivity extends AppCompatActivity {
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 if (documentSnapshot.exists()){
                                     String userType = documentSnapshot.getString("user_type");
-                                    String userImage = documentSnapshot.getString("user_image");
-
-                                    if (userImage.equals("") && userType.equals("Customer")){
-                                        startActivity(new Intent(SplashActivity.this, AccountSetupCustomerActivity.class));
-                                        finish();
-                                    }if (userImage.equals("") && userType.equals("Merchant")){
-                                        startActivity(new Intent(SplashActivity.this, AccountSetupMerchantActivity.class));
+                                    if (userType.equals("")){
+                                        startActivity(new Intent(SplashActivity.this, SignUpAsActivity.class));
                                         finish();
                                     }else {
                                         startActivity(new Intent(SplashActivity.this, MainActivity.class));
@@ -57,10 +61,6 @@ public class SplashActivity extends AppCompatActivity {
                         finish();
                     }
 
-                }else if (firstStart){
-                    Intent intent = new Intent(SplashActivity.this, OnboardingActivity.class);
-                    startActivity(intent);
-                    finish();
                 }
             }
         }, 2000);

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.netro.trox.R;
 import com.netro.trox.authentication.LoginActivity;
@@ -24,9 +25,12 @@ public class SliderAdapterOnboarding extends PagerAdapter {
 
     Context context;
     LayoutInflater layoutInflater;
+    int index = 0;
+    ViewPager onboarding;
 
-    public SliderAdapterOnboarding(Context context) {
+    public SliderAdapterOnboarding(Context context, ViewPager onboarding) {
         this.context = context;
+        this.onboarding = onboarding;
     }
 
     public int[] slider_images = {
@@ -76,14 +80,22 @@ public class SliderAdapterOnboarding extends PagerAdapter {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences prefs = context.getSharedPreferences("prefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putBoolean("firstStart", false);
-                editor.apply();
 
-                Intent intent = new Intent(context, LoginActivity.class);
-                context.startActivity(intent);
-                ((Activity)context).finish();
+                if (position==0){
+                    onboarding.setCurrentItem(position+1);
+                } else if (position==1) {
+                    onboarding.setCurrentItem(position+1);
+                }else {
+                    SharedPreferences prefs = context.getSharedPreferences("prefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean("starting", false);
+                    editor.apply();
+
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent);
+                    ((Activity)context).finish();
+                }
+
             }
         });
 

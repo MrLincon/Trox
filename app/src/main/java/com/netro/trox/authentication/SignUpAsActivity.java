@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.netro.trox.R;
+import com.netro.trox.activity.AccountSetupCustomerActivity;
+import com.netro.trox.activity.AccountSetupMerchantActivity;
 import com.netro.trox.util.Tools;
 
 public class SignUpAsActivity extends AppCompatActivity {
@@ -23,7 +25,6 @@ public class SignUpAsActivity extends AppCompatActivity {
     CoordinatorLayout main;
 
     String selected = "";
-    TextView logIn;
     CardView btnContinue;
 
     Tools tools;
@@ -32,7 +33,6 @@ public class SignUpAsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_as);
 
-        logIn = findViewById(R.id.login);
         btnContinue = findViewById(R.id.btn_continue);
         back = findViewById(R.id.back);
         customer = findViewById(R.id.customer);
@@ -70,22 +70,17 @@ public class SignUpAsActivity extends AppCompatActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!selected.equals("")){
-                    Intent intent = new Intent(SignUpAsActivity.this, SignUpActivity.class);
-                    intent.putExtra("selected",selected);
+                if (selected.equals("Customer")){
+                    Intent intent = new Intent(SignUpAsActivity.this, AccountSetupCustomerActivity.class);
                     startActivity(intent);         
+                    finish();
+                }else if (selected.equals("Merchant")){
+                    Intent intent = new Intent(SignUpAsActivity.this, AccountSetupMerchantActivity.class);
+                    startActivity(intent);
                     finish();
                 }else{
                     tools.makeSnack(main,getString(R.string.message_user_type));
                 }
-            }
-        });
-
-        logIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SignUpAsActivity.this, LoginActivity.class));
-                finish();
             }
         });
     }

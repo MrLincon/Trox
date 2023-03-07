@@ -3,9 +3,11 @@ package com.netro.trox.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
@@ -21,6 +23,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.netro.trox.R;
 import com.netro.trox.authentication.LoginActivity;
+import com.netro.trox.authentication.ResetPasswordActivity;
 import com.netro.trox.bottomsheet.BottomSheetLanguage;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -35,8 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     LocationManager locationManager;
 
-    CardView language, savedAddresses, permissions, emergencySupport, privacyPolicies, logOut;
-ImageView selectImage;
+    CardView language, savedAddresses, permissions, emergencySupport, privacyPolicies, rate, logOut, changePassword, editProfile;
+    ImageView selectImage;
 
     private FirebaseFirestore db;
     private DocumentReference document_ref;
@@ -51,6 +54,8 @@ ImageView selectImage;
         back = findViewById(R.id.back);
         language = findViewById(R.id.language);
         savedAddresses = findViewById(R.id.saved_addresses);
+        changePassword = findViewById(R.id.change_password);
+        editProfile = findViewById(R.id.edit_profile);
         permissions = findViewById(R.id.permissions);
         emergencySupport = findViewById(R.id.emergency_support);
         privacyPolicies = findViewById(R.id.privacy_policy);
@@ -59,6 +64,7 @@ ImageView selectImage;
         userName = findViewById(R.id.user_name);
         userEmail = findViewById(R.id.user_email);
         selectImage = findViewById(R.id.select_image);
+        rate = findViewById(R.id.rate);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -72,7 +78,7 @@ ImageView selectImage;
         db.collection("userDetails").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()){
+                if (documentSnapshot.exists()) {
                     String user_image = documentSnapshot.getString("user_image");
                     String user_name = documentSnapshot.getString("user_name");
                     String user_email = documentSnapshot.getString("user_email");
@@ -83,6 +89,37 @@ ImageView selectImage;
                     userEmail.setText(user_email);
 
 
+                }
+            }
+        });
+
+
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, ResetPasswordActivity.class));
+                finish();
+            }
+        });
+
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
+                finish();
+            }
+        });
+
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("market://details?id=" + getPackageName())));
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("Coming soon..." + getPackageName())));
                 }
             }
         });
@@ -109,7 +146,7 @@ ImageView selectImage;
                 if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivity(intent);
-                }else {
+                } else {
                     startActivity(new Intent(ProfileActivity.this, SavedAddressesActivity.class));
                 }
             }
