@@ -16,6 +16,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,6 +31,8 @@ import com.netro.trox.R;
 import com.netro.trox.activity.MainActivity;
 import com.netro.trox.activity.OrderConfirmationActivity;
 import com.netro.trox.util.Tools;
+
+import java.util.regex.Pattern;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
@@ -48,6 +51,18 @@ public class ResetPasswordActivity extends AppCompatActivity {
     Dialog popup;
 
     Tools tools;
+
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{6,}" +               //at least 4 characters
+                    "$");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +122,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     tools.makeSnack(main, "Minimum length of current password was  6");
                     return;
                 }
+                if (!PASSWORD_PATTERN.matcher(CurrentPassword).matches()) {
+                    currentPasswordLayout.setError("");
+                    Toast.makeText(ResetPasswordActivity.this, getResources().getString(R.string.pass_check), Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if (NewPassword.isEmpty()) {
                     newPasswordLayout.setError("New password is required");
                     tools.makeSnack(main, "New password is required");
@@ -116,6 +136,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 if (NewPassword.length() < 6) {
                     newPasswordLayout.setError("Minimum length of new password should be 6");
                     tools.makeSnack(main, "Minimum length of new password should be 6");
+                    return;
+                }
+                if (!PASSWORD_PATTERN.matcher(NewPassword).matches()) {
+                    newPasswordLayout.setError("");
+                    Toast.makeText(ResetPasswordActivity.this, getResources().getString(R.string.pass_check), Toast.LENGTH_LONG).show();
                     return;
                 } else {
 

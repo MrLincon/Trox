@@ -1,25 +1,44 @@
 package com.netro.trox.authentication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.netro.trox.R;
+import com.netro.trox.activity.MainActivity;
+import com.netro.trox.activity.OrderConfirmationActivity;
+import com.netro.trox.util.Tools;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     ImageView back;
 
-    RelativeLayout email, phone;
+    TextInputLayout emailLayout;
+    TextInputEditText email;
 
     String selected = "";
     CardView btnContinue;
+    CoordinatorLayout main;
+
+    Tools tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +47,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         back = findViewById(R.id.back);
         btnContinue = findViewById(R.id.btn_continue);
-        email = findViewById(R.id.email);
-        phone = findViewById(R.id.phone);
+        emailLayout = findViewById(R.id.email_layout);
+        email = findViewById(R.id.et_email);
+        main = findViewById(R.id.main);
+
+        tools = new Tools();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,28 +60,56 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
         });
 
-        email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selected = "Email";
-                email.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.selected_outline_bg));
-                phone.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_bg));
-            }
-        });
-
-        phone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selected = "International";
-                email.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_bg));
-                phone.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.selected_outline_bg));
-            }
-        });
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ForgotPasswordActivity.this, ResetPasswordActivity.class));
+
+                String Email = email.getText().toString();
+
+                if (Email.isEmpty()) {
+                    emailLayout.setError("E-mail is required");
+                    tools.makeSnack(main, "Email is required");
+                    return;
+                }
+
+                if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
+                    emailLayout.setError("Please enter a valid email");
+                    tools.makeSnack(main, "Please enter a valid email");
+                    return;
+                }else {
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(Email)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Dialog popup = new Dialog(ForgotPasswordActivity.this);
+                                        popup.setContentView(R.layout.popup_successful);
+                                        popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                        TextView message = popup.findViewById(R.id.message);
+                                        TextView actionText = popup.findViewById(R.id.action_text);
+                                        CardView btnContinue = popup.findViewById(R.id.btn_continue);
+                                        popup.setCancelable(false);
+                                        popup.show();
+
+                                        message.setText(R.string.pasword_reset_link);
+                                        actionText.setText(R.string.continue_);
+
+                                        btnContinue.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                popup.dismiss();
+                                                finish();
+                                            }
+                                        });
+                                    }else {
+                                        tools.makeSnack(main," Please enter a valid e-mail address");
+                                    }
+                                }
+                            });
+                }
+
+
             }
         });
     }

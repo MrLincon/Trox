@@ -9,6 +9,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     CircleImageView userImage;
     TextView userName;
     TextView homeAddressText, workAddressText;
+    EditText search;
+    ImageView btnSearch;
 
     private FirebaseFirestore db;
     private DocumentReference document_ref;
@@ -69,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         workAddress = findViewById(R.id.work);
         homeAddressText = findViewById(R.id.home_address);
         workAddressText = findViewById(R.id.work_address);
+        search = findViewById(R.id.search);
+        btnSearch = findViewById(R.id.btn_search);
 
 tools = new Tools();
 
@@ -223,6 +229,16 @@ tools = new Tools();
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ActiveOrdersActivity.class));
                 finish();
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = search.getText().toString();
+                Intent intent = new Intent(MainActivity.this, SearchOrdersActivity.class);
+                intent.putExtra("order_id",text);
+                startActivity(intent);
             }
         });
 

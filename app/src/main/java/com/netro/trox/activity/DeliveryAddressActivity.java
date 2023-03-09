@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,7 +36,8 @@ public class DeliveryAddressActivity extends AppCompatActivity {
 
     LinearLayout main;
 
-    EditText search;
+    SearchView search;
+
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -57,7 +59,6 @@ public class DeliveryAddressActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
-
         tools = new Tools();
 
         tools.setLightStatusBar(main, DeliveryAddressActivity.this);
@@ -74,7 +75,7 @@ public class DeliveryAddressActivity extends AppCompatActivity {
         String city = getIntent().getStringExtra("city");
 
         if (data.equals("country")) {
-            search.setHint(getResources().getString(R.string.enter_country));
+            search.setQueryHint(getResources().getString(R.string.enter_country));
 
             db.collection("Countries").orderBy("name", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -108,7 +109,7 @@ public class DeliveryAddressActivity extends AppCompatActivity {
 
 
         } else if (data.equals("state")) {
-            search.setHint(getResources().getString(R.string.enter_state));
+            search.setQueryHint(getResources().getString(R.string.enter_state));
 
 
             db.collection("Countries").document(country).collection("States").orderBy("name", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -140,8 +141,7 @@ public class DeliveryAddressActivity extends AppCompatActivity {
                 }
             });
         } else if (data.equals("city")) {
-            search.setHint(getResources().getString(R.string.enter_city));
-
+            search.setQueryHint(getResources().getString(R.string.enter_city));
             db.collection("Countries").document(country).collection("States").document(state).collection("Cities").orderBy("name", Query.Direction.ASCENDING)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -173,6 +173,136 @@ public class DeliveryAddressActivity extends AppCompatActivity {
                         }
                     });
         }
+
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                String capitalizedText = null;
+                if (newText.length()!=0){
+                    capitalizedText = newText.substring(0, 1).toUpperCase() + newText.substring(1).toLowerCase();
+                }
+
+                if (data.equals("country")) {
+                    search.setQueryHint(getResources().getString(R.string.enter_country));
+
+                    db.collection("Countries")
+                            .orderBy("name", Query.Direction.ASCENDING)
+                            .startAt(capitalizedText).endAt(capitalizedText + "\uf8ff")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                locationData = new ArrayList<>();
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    String data = document.getString("name");
+                                    locationData.add(new LocationList(data));
+                                }
+                                // Load the data in your list
+                                adapter = new LocationListAdpater(locationData, DeliveryAddressActivity.this);
+                                recyclerView.setAdapter(adapter);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(DeliveryAddressActivity.this));
+
+
+                                adapter.setOnItemClickListener(new LocationListAdpater.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(String value) {
+                                        Intent intent = new Intent();
+                                        intent.putExtra("key", value);
+                                        setResult(RESULT_OK, intent);
+                                        finish();
+                                    }
+                                });
+                            } else {
+                                tools.logMessage("DeliveryAddressActivity", task.getException().toString());
+                            }
+                        }
+                    });
+
+
+                } else if (data.equals("state")) {
+                    search.setQueryHint(getResources().getString(R.string.enter_state));
+
+
+                    db.collection("Countries")
+                            .document(country).collection("States")
+                            .orderBy("name", Query.Direction.ASCENDING)
+                            .startAt(capitalizedText).endAt(capitalizedText + "\uf8ff")
+                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                locationData = new ArrayList<>();
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    String data = document.getString("name");
+                                    locationData.add(new LocationList(data));
+                                }
+                                // Load the data in your list
+                                adapter = new LocationListAdpater(locationData, DeliveryAddressActivity.this);
+                                recyclerView.setAdapter(adapter);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(DeliveryAddressActivity.this));
+
+                                adapter.setOnItemClickListener(new LocationListAdpater.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(String value) {
+                                        Intent intent = new Intent();
+                                        intent.putExtra("key", value);
+                                        setResult(RESULT_OK, intent);
+                                        finish();
+                                    }
+                                });
+                            } else {
+                                tools.logMessage("DeliveryAddressActivity", task.getException().toString());
+                            }
+                        }
+                    });
+                } else if (data.equals("city")) {
+                    search.setQueryHint(getResources().getString(R.string.enter_city));
+
+                    db.collection("Countries")
+                            .document(country).collection("States")
+                            .document(state).collection("Cities")
+                            .orderBy("name", Query.Direction.ASCENDING)
+                            .startAt(capitalizedText).endAt(capitalizedText + "\uf8ff")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        locationData = new ArrayList<>();
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            String data = document.getString("name");
+                                            locationData.add(new LocationList(data));
+                                        }
+                                        // Load the data in your list
+                                        adapter = new LocationListAdpater(locationData, DeliveryAddressActivity.this);
+                                        recyclerView.setAdapter(adapter);
+                                        recyclerView.setLayoutManager(new LinearLayoutManager(DeliveryAddressActivity.this));
+
+                                        adapter.setOnItemClickListener(new LocationListAdpater.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(String value) {
+                                                Intent intent = new Intent();
+                                                intent.putExtra("key", value);
+                                                setResult(RESULT_OK, intent);
+                                                finish();
+                                            }
+                                        });
+                                    } else {
+                                        tools.logMessage("DeliveryAddressActivity", task.getException().toString());
+                                    }
+                                }
+                            });
+                }
+                return false;
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

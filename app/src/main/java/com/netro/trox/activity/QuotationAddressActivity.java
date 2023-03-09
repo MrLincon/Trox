@@ -58,17 +58,16 @@ public class QuotationAddressActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
-
         tools = new Tools();
 
         tools.setLightStatusBar(main, QuotationAddressActivity.this);
 
-
+//Firebase
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         userID = mAuth.getUid();
 
-
+//Data init
         String data = getIntent().getStringExtra("data");
         String country = getIntent().getStringExtra("country");
         String state = getIntent().getStringExtra("state");
@@ -176,7 +175,6 @@ public class QuotationAddressActivity extends AppCompatActivity {
         }
 
 
-
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -186,27 +184,122 @@ public class QuotationAddressActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                List<LocationList> filteredDataList = new ArrayList<>();
-                for (LocationList data : locationData) {
-                    if (data.getName().toLowerCase().contains(newText.toLowerCase())) {
-                        filteredDataList.add(data);
-                    }
-                    adapter.notifyDataSetChanged();
+                String capitalizedText = null;
+                if (newText.length()!=0){
+                    capitalizedText = newText.substring(0, 1).toUpperCase() + newText.substring(1).toLowerCase(); 
                 }
+                if (data.equals("country")) {
+                    search.setQueryHint(getResources().getString(R.string.enter_country));
 
-                adapter = new LocationListAdpater(filteredDataList, QuotationAddressActivity.this);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(QuotationAddressActivity.this));
+                    db.collection("Countries")
+                            .orderBy("name", Query.Direction.ASCENDING)
+                            .startAt(capitalizedText).endAt(capitalizedText + "\uf8ff")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                locationData = new ArrayList<>();
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    String data = document.getString("name");
+                                    locationData.add(new LocationList(data));
+                                }
+                                // Load the data in your list
+                                adapter = new LocationListAdpater(locationData, QuotationAddressActivity.this);
+                                recyclerView.setAdapter(adapter);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(QuotationAddressActivity.this));
 
-                adapter.setOnItemClickListener(new LocationListAdpater.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(String value) {
-                        Intent intent = new Intent();
-                        intent.putExtra("key", value);
-                        setResult(RESULT_OK, intent);
-                        finish();
-                    }
-                });
+
+                                adapter.setOnItemClickListener(new LocationListAdpater.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(String value) {
+                                        Intent intent = new Intent();
+                                        intent.putExtra("key", value);
+                                        setResult(RESULT_OK, intent);
+                                        finish();
+                                    }
+                                });
+                            } else {
+                                tools.logMessage("DeliveryAddressActivity", task.getException().toString());
+                            }
+                        }
+                    });
+
+
+                } else if (data.equals("state")) {
+                    search.setQueryHint(getResources().getString(R.string.enter_state));
+
+
+                    db.collection("Countries").document(country).collection("States")
+                            .orderBy("name", Query.Direction.ASCENDING)
+                            .startAt(capitalizedText.toUpperCase()).endAt(capitalizedText + "\uf8ff")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                locationData = new ArrayList<>();
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    String data = document.getString("name");
+                                    locationData.add(new LocationList(data));
+                                }
+                                // Load the data in your list
+                                adapter = new LocationListAdpater(locationData, QuotationAddressActivity.this);
+                                recyclerView.setAdapter(adapter);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(QuotationAddressActivity.this));
+
+                                adapter.setOnItemClickListener(new LocationListAdpater.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(String value) {
+                                        Intent intent = new Intent();
+                                        intent.putExtra("key", value);
+                                        setResult(RESULT_OK, intent);
+                                        finish();
+                                    }
+                                });
+                            } else {
+                                tools.logMessage("DeliveryAddressActivity", task.getException().toString());
+                            }
+                        }
+                    });
+                } else if (data.equals("city")) {
+                    search.setQueryHint(getResources().getString(R.string.enter_city));
+
+                    db.collection("Countries").document(country)
+                            .collection("States")
+                            .document(state).collection("Cities")
+                            .orderBy("name", Query.Direction.ASCENDING)
+                            .startAt(capitalizedText.toUpperCase()).endAt(capitalizedText + "\uf8ff")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        locationData = new ArrayList<>();
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            String data = document.getString("name");
+                                            locationData.add(new LocationList(data));
+                                        }
+                                        // Load the data in your list
+                                        adapter = new LocationListAdpater(locationData, QuotationAddressActivity.this);
+                                        recyclerView.setAdapter(adapter);
+                                        recyclerView.setLayoutManager(new LinearLayoutManager(QuotationAddressActivity.this));
+
+                                        adapter.setOnItemClickListener(new LocationListAdpater.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(String value) {
+                                                Intent intent = new Intent();
+                                                intent.putExtra("key", value);
+                                                setResult(RESULT_OK, intent);
+                                                finish();
+                                            }
+                                        });
+                                    } else {
+                                        tools.logMessage("DeliveryAddressActivity", task.getException().toString());
+                                    }
+                                }
+                            });
+                }
                 return true;
             }
         });

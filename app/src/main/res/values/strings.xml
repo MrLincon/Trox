@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Trox</string>
     <string name="map_api_key">AIzaSyD-xb0bmAfov55i-LH-PyTI8DZgvrgUvdE</string>
+    <string name="password_pattern">^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&amp;])[A-Za-z\\d@$!%*?&amp;]{6,12}$</string>
     <string name="parcel_delivery">PARCEL DELIVERY</string>
     <string name="_1_parcel_delivery_platform">#1 Parcel Delivery Platform</string>
     <string name="welcome_to_trox">Welcome to Trox!</string>
@@ -181,4 +182,6 @@
     <string name="current_password">Current password</string>
     <string name="new_password">New password</string>
     <string name="a_link_to_reset_your_password_will_be_sent_to_your_verified_e_mail_address">A link to reset your password will be sent to your verified e-mail address</string>
+    <string name="pasword_reset_link">A password reset link has been sent to your e-mail address</string>
+    <string name="pass_check">Password should contain 1 upper case letter, 1 lower case letter, 1 number and 1 special character</string>
 </resources>

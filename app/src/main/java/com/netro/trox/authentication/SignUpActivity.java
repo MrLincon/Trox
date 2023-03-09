@@ -14,6 +14,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,6 +31,7 @@ import com.netro.trox.util.Tools;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -53,6 +55,18 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private DocumentReference document_ref;
 
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{6,}" +               //at least 4 characters
+                    "$");
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +88,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void getData() {
+
         final String email = et_email.getText().toString().trim();
         final String password = et_password.getText().toString().trim();
 
@@ -126,6 +140,11 @@ public class SignUpActivity extends AppCompatActivity {
         if (password.length() < 6) {
             layout_password.setError("");
             tools.makeSnack(main, "Minimum length of password should be 6");
+            return;
+        }
+        if (!PASSWORD_PATTERN.matcher(password).matches()) {
+            layout_password.setError("");
+            Toast.makeText(SignUpActivity.this,getResources().getString( R.string.pass_check), Toast.LENGTH_LONG).show();
             return;
         } else {
             tools.loading(popup, true);

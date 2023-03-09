@@ -65,20 +65,39 @@
 
         </RelativeLayout>
 
-        <EditText
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="16dp"
-            android:background="@drawable/edit_text_bg"
-            android:drawableEnd="@drawable/ic_search"
-            android:fontFamily="@font/ubuntu_medium"
-            android:hint="@string/enter_your_tracking_number"
-            android:paddingLeft="16dp"
-            android:maxLines="1"
-            android:paddingRight="8dp"
-            android:textColor="@color/colorBlackHighEmp"
-            android:textColorHint="@color/colorBlackLowEmp"
-            android:textSize="12sp"></EditText>
+            android:background="@drawable/edit_text_bg">
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:fontFamily="@font/ubuntu_medium"
+                android:background="@null"
+                android:hint="@string/enter_your_tracking_number"
+                android:paddingLeft="16dp"
+                android:paddingEnd="52dp"
+                android:lines="1"
+                android:paddingRight="8dp"
+                android:textColor="@color/colorBlackHighEmp"
+                android:textColorHint="@color/colorBlackLowEmp"
+                android:textSize="12sp"></EditText>
+
+            <ImageView
+                android:id="@+id/btn_search"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_search"></ImageView>
+
+        </RelativeLayout>
+
+
 
 
 

@@ -221,11 +221,10 @@
                     android:layout_gravity="center"
                     android:orientation="horizontal">
 
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:foreground="?android:attr/selectableItemBackground"
                         android:src="@drawable/btn_facebook"></ImageView>
 
                     <View
@@ -236,8 +235,6 @@
                         android:id="@+id/google_auth"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:foreground="?android:attr/selectableItemBackground"
                         android:src="@drawable/btn_google"></ImageView>
 
                 </LinearLayout>

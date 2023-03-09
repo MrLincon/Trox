@@ -41,6 +41,8 @@ import com.netro.trox.util.Tools;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -62,6 +64,18 @@ public class LoginActivity extends AppCompatActivity {
 
     Dialog popup;
     Tools tools;
+
+
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{6,}" +               //at least 4 characters
+                    "$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,12 +137,17 @@ public class LoginActivity extends AppCompatActivity {
                     tools.makeSnack(main, "Password is required");
                     return;
                 }
-
                 if (password.length() < 6) {
-                    password_layout.setError("Minimum length of password should be 6");
+                    password_layout.setError("");
                     tools.makeSnack(main, "Minimum length of password should be 6");
                     return;
-                } else {
+                }
+//                if (!PASSWORD_PATTERN.matcher(password).matches()) {
+//                    password_layout.setError("");
+//                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.pass_check), Toast.LENGTH_LONG).show();
+//                    return;
+//                }
+                else {
                     if (mAuth.getCurrentUser()==null){
                         tools.loading(popup, true);
                         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -313,5 +332,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     }
+
+
 
 }

@@ -43,7 +43,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     String name, contact, address;
     long price;
 
-    String ID;
+    String ID, userType;
 
     private FirebaseFirestore db;
     private String userID;
@@ -104,6 +104,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 name = documentSnapshot.getString("user_name");
                                 contact = documentSnapshot.getString("user_contact");
+                                userType = documentSnapshot.getString("user_type");
 
                                 senderName.setText(name);
                                 senderContact.setText(contact);
@@ -200,6 +201,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                 userMap.put("order_status", "Pending");
                 userMap.put("active_status", "Active");
                 userMap.put("order_type", OrderType);
+                userMap.put("user_type", userType);
                 userMap.put("user_id", userID);
                 userMap.put("timestamp", FieldValue.serverTimestamp());
 

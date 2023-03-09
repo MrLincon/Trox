@@ -106,6 +106,8 @@ public class TrackOrdersActivity extends AppCompatActivity {
             step3.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
             step4.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
             step5.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
+        }else if (status.equals("Returned")) {
+            fragment = "FragmentReturned";
         }
     }
 

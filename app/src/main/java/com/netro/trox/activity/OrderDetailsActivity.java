@@ -77,7 +77,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
                        String ReceiverName = documentSnapshot.getString("receiver_name");
                        String ReceiverContact = documentSnapshot.getString("receiver_contact");
                        String ReceiverAddress = documentSnapshot.getString("receiver_address");
-                       String ParcelWeight = documentSnapshot.getString("parcel_weight");
+                       long ParcelWeight = documentSnapshot.getLong("parcel_weight");
                        Long Price = documentSnapshot.getLong("price");
                        String OrdeID = documentSnapshot.getString("order_id");
 
@@ -88,7 +88,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
                        receiverName.setText(ReceiverName);
                        receiverContact.setText(ReceiverContact);
                        receiverAddress.setText(ReceiverAddress);
-                       parcelWeight.setText(ParcelWeight);
+                       parcelWeight.setText(ParcelWeight+" KG");
                        parcelPrice.setText("$"+Price);
                        orderID.setText(OrdeID);
                    }
