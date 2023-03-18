@@ -108,98 +108,78 @@ public class GetQuotationActivity extends AppCompatActivity {
                 } else if (!(ParcelWeight == 0)) {
 
                     if (PickupCountry.equals(DeliveryCountry)) {
-                        if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")) {
+
+                        if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")){
                             String doc = null;
-                            if (ParcelWeight == 1) {
-                                doc = "1_kg";
-                            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
-                                doc = "2_to_5_kg";
-                            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
-                                doc = "5_to_10_kg";
+                            if (ParcelWeight==1){
+                                doc = "local_bellow_one";
+                            } else if (ParcelWeight>1 && ParcelWeight<6) {
+                                doc = "local_one_to_five";
+                            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+                                doc = "local_five_to_ten";
                             }
 
-                            setPriceDomestic("localPrice", doc);
+                            setPriceDomestic("parcel",doc);
 
-                        } else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")) {
+                        }else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")){
                             String doc = null;
-                            if (ParcelWeight == 1) {
-                                doc = "1_kg";
-                            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
-                                doc = "2_to_5_kg";
-                            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
-                                doc = "5_to_10_kg";
+                            if (ParcelWeight==1){
+                                doc = "domestic_bellow_one";
+                            } else if (ParcelWeight>1 && ParcelWeight<6) {
+                                doc = "domestic_one_to_five";
+                            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+                                doc = "domestic_five_to_ten";
                             }
 
-                            setPriceDomestic("domesticPrice", doc);
+                            setPriceDomestic("parcel",doc);
 
-                        } else if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")) {
+                        }else if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")){
                             String doc = null;
-                            if (ParcelWeight == 1) {
-                                doc = "doc_1";
-                            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
-                                doc = "doc_2_5";
-                            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
-                                doc = "doc_5_10";
+                            if (ParcelWeight==1){
+                                doc = "local_bellow_one";
+                            } else if (ParcelWeight>1 && ParcelWeight<6) {
+                                doc = "local_one_to_five";
+                            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+                                doc = "local_five_to_ten";
                             }
-                            setPriceDomestic("localPrice", doc);
-                        } else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")) {
+                            setPriceDomestic("document",doc);
+
+                        }else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")){
                             String doc = null;
-                            if (ParcelWeight == 1) {
-                                doc = "doc_1";
-                            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
-                                doc = "doc_2_5";
-                            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
-                                doc = "doc_5_10";
+                            if (ParcelWeight==1){
+                                doc = "domestic_bellow_one";
+                            } else if (ParcelWeight>1 && ParcelWeight<6) {
+                                doc = "domestic_one_to_five";
+                            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+                                doc = "domestic_five_to_ten";
                             }
-                            setPriceDomestic("domesticPrice", doc);
+                            setPriceDomestic("document",doc);
                         }
                     } else {
 
-                        if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")) {
+                        if (ParcelType.equals("Parcel")){
                             String doc = null;
-                            if (ParcelWeight == 1) {
-                                doc = "1_kg";
-                            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
-                                doc = "2_to_5_kg";
-                            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
-                                doc = "5_to_10_kg";
+                            if (ParcelWeight==1){
+                                doc = "international_bellow_one";
+                            } else if (ParcelWeight>1 && ParcelWeight<6) {
+                                doc = "international_one_to_five";
+                            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+                                doc = "international_five_to_ten";
                             }
 
-                            setPriceInternational("localPrice", doc);
+                            setPriceInternational("parcel",doc);
 
-                        } else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")) {
+                        }else if (ParcelType.equals("Document")){
                             String doc = null;
-                            if (ParcelWeight == 1) {
-                                doc = "1_kg";
-                            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
-                                doc = "2_to_5_kg";
-                            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
-                                doc = "5_to_10_kg";
+                            if (ParcelWeight==1){
+                                doc = "international_bellow_one";
+                            } else if (ParcelWeight>1 && ParcelWeight<6) {
+                                doc = "international_one_to_five";
+                            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+                                doc = "international_to_ten";
                             }
+                            setPriceInternational("document",doc);
 
-                            setPriceInternational("internationalPrice", doc);
-
-                        } else if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")) {
-                            String doc = null;
-                            if (ParcelWeight == 1) {
-                                doc = "doc_1";
-                            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
-                                doc = "doc_2_5";
-                            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
-                                doc = "doc_5_10";
-                            }
-                            setPriceInternational("localPrice", doc);
-
-                        } else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")) {
-                            String doc = null;
-                            if (ParcelWeight == 1) {
-                                doc = "doc_1";
-                            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
-                                doc = "doc_2_5";
-                            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
-                                doc = "doc_5_10";
-                            }
-                            setPriceInternational("internationalPrice", doc);
                         }
                     }
                 } else {
@@ -356,24 +336,22 @@ public class GetQuotationActivity extends AppCompatActivity {
     }
 
 
-    private void setPriceDomestic(String collection, String document) {
-        FirebaseFirestore.getInstance().collection(collection).document(document).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+    private void setPriceDomestic(String document, String value) {
+        FirebaseFirestore.getInstance().collection("deliveryCost").document(document).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                price = documentSnapshot.getLong("amount");
-                priceHome.setText("$" + String.valueOf(price));
-                priceMerchant.setText("$" + String.valueOf(price));
+                price = documentSnapshot.getLong(value);
+//                totalPrice.setText("$"+String.valueOf(price));
             }
         });
     }
 
-    private void setPriceInternational(String collection, String document) {
-        FirebaseFirestore.getInstance().collection(collection).document(document).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+    private void setPriceInternational(String document, String value) {
+        FirebaseFirestore.getInstance().collection("deliveryCost").document(document).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                price = documentSnapshot.getLong("amount");
-                priceHome.setText("$" + String.valueOf(price));
-                priceMerchant.setText("$" + String.valueOf(price));
+                price = documentSnapshot.getLong(value);
+//                totalPrice.setText("$"+String.valueOf(price));
             }
         });
     }

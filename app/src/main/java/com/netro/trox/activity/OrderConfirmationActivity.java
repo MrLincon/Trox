@@ -41,7 +41,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     CardView btnConfirm;
 
     String name, contact, address;
-    long price;
+    Long price;
 
     String ID, userType;
 
@@ -116,47 +116,48 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")){
             String doc = null;
             if (ParcelWeight==1){
-                doc = "1_kg";
+                doc = "local_bellow_one";
             } else if (ParcelWeight>1 && ParcelWeight<6) {
-                doc = "2_to_5_kg";
+                doc = "local_one_to_five";
             }else if (ParcelWeight>5 && ParcelWeight<=10) {
-                doc = "5_to_10_kg";
+                doc = "local_five_to_ten";
             }
 
-            setPrice("localPrice",doc);
+            setPrice("parcel",doc);
 
         }else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")){
             String doc = null;
             if (ParcelWeight==1){
-                doc = "1_kg";
+                doc = "domestic_bellow_one";
             } else if (ParcelWeight>1 && ParcelWeight<6) {
-                doc = "2_to_5_kg";
+                doc = "domestic_one_to_five";
             }else if (ParcelWeight>5 && ParcelWeight<=10) {
-                doc = "5_to_10_kg";
+                doc = "domestic_five_to_ten";
             }
 
-            setPrice("domesticPrice",doc);
+            setPrice("parcel",doc);
 
         }else if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")){
             String doc = null;
             if (ParcelWeight==1){
-                doc = "doc_1";
+                doc = "local_bellow_one";
             } else if (ParcelWeight>1 && ParcelWeight<6) {
-                doc = "doc_2_5";
+                doc = "local_one_to_five";
             }else if (ParcelWeight>5 && ParcelWeight<=10) {
-                doc = "doc_5_10";
+                doc = "local_five_to_ten";
             }
-            setPrice("localPrice",doc);
+            setPrice("document",doc);
+
         }else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")){
             String doc = null;
             if (ParcelWeight==1){
-                doc = "doc_1";
+                doc = "domestic_bellow_one";
             } else if (ParcelWeight>1 && ParcelWeight<6) {
-                doc = "doc_2_5";
+                doc = "domestic_one_to_five";
             }else if (ParcelWeight>5 && ParcelWeight<=10) {
-                doc = "doc_5_10";
+                doc = "domestic_five_to_ten";
             }
-            setPrice("domesticPrice",doc);
+            setPrice("document",doc);
         }
 
 
@@ -278,11 +279,11 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         });
     }
 
-    private void setPrice(String collection, String document) {
-        db.collection(collection).document(document).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+    private void setPrice(String document, String value) {
+        db.collection("deliveryCost").document(document).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                price = documentSnapshot.getLong("amount");
+                price = documentSnapshot.getLong(value);
                 totalPrice.setText("$"+String.valueOf(price));
             }
         });
