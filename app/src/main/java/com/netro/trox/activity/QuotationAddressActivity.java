@@ -186,7 +186,7 @@ public class QuotationAddressActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 String capitalizedText = null;
                 if (newText.length()!=0){
-                    capitalizedText = newText.substring(0, 1).toUpperCase() + newText.substring(1).toLowerCase(); 
+                    capitalizedText = newText.substring(0, 1).toUpperCase() + newText.substring(1).toLowerCase();
                 }
                 if (data.equals("country")) {
                     search.setQueryHint(getResources().getString(R.string.enter_country));

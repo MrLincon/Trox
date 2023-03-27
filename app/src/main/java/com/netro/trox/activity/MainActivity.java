@@ -37,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity {
 
     ImageView notification;
-    LinearLayout sendParcel, priceCheck, trackOrder, domestic, international, homeAddress, workAddress;
+    LinearLayout sendParcel, priceCheck, trackOrder, local, domestic, international, homeAddress, workAddress;
     ChipNavigationBar bottomNav;
     CoordinatorLayout main;
     CircleImageView userImage;
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         priceCheck = findViewById(R.id.price_check);
         trackOrder = findViewById(R.id.track_order);
         notification = findViewById(R.id.notification);
+        local = findViewById(R.id.local);
         domestic = findViewById(R.id.domestic);
         international = findViewById(R.id.international);
         homeAddress = findViewById(R.id.home);
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         search = findViewById(R.id.search);
         btnSearch = findViewById(R.id.btn_search);
 
-tools = new Tools();
+        tools = new Tools();
 
         //firebase init
         mAuth = FirebaseAuth.getInstance();
@@ -85,7 +86,7 @@ tools = new Tools();
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        bottomNav.setItemSelected(R.id.nav_home,true);
+        bottomNav.setItemSelected(R.id.nav_home, true);
 
         ArrayList<SliderData> sliderDataArrayList = new ArrayList<>();
 
@@ -110,7 +111,7 @@ tools = new Tools();
         db.collection("userDetails").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()){
+                if (documentSnapshot.exists()) {
                     String user_image = documentSnapshot.getString("user_image");
                     String user_name = documentSnapshot.getString("user_name");
                     String Home = documentSnapshot.getString("home_address");
@@ -128,7 +129,7 @@ tools = new Tools();
                         if (!Work.equals("")) {
                             workAddressText.setText(Work);
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
 
                     }
 
@@ -159,6 +160,24 @@ tools = new Tools();
             }
         });
 
+        local.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+
+                } else {
+                    Intent intent = new Intent(MainActivity.this, ParcelOrderDetailsActivity.class);
+                    intent.putExtra("type", "Local");
+                    intent.putExtra("ID", "fromHome");
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+
         domestic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,9 +185,9 @@ tools = new Tools();
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivity(intent);
 
-                }else {
+                } else {
                     Intent intent = new Intent(MainActivity.this, ParcelOrderDetailsActivity.class);
-                    intent.putExtra("type","Domestic");
+                    intent.putExtra("type", "Domestic");
                     intent.putExtra("ID", "fromHome");
                     startActivity(intent);
                 }
@@ -183,7 +202,7 @@ tools = new Tools();
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivity(intent);
 
-                }else {
+                } else {
                     Intent intent = new Intent(MainActivity.this, NOCActivity.class);
                     intent.putExtra("type", "International");
                     startActivity(intent);
@@ -198,7 +217,7 @@ tools = new Tools();
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivity(intent);
 
-                }else {
+                } else {
                     startActivity(new Intent(MainActivity.this, SavedAddressesActivity.class));
                 }
             }
@@ -211,7 +230,7 @@ tools = new Tools();
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivity(intent);
 
-                }else {
+                } else {
                     startActivity(new Intent(MainActivity.this, SavedAddressesActivity.class));
                 }
             }
@@ -237,7 +256,7 @@ tools = new Tools();
             public void onClick(View v) {
                 String text = search.getText().toString();
                 Intent intent = new Intent(MainActivity.this, SearchOrdersActivity.class);
-                intent.putExtra("order_id",text);
+                intent.putExtra("order_id", text);
                 startActivity(intent);
             }
         });
@@ -245,7 +264,7 @@ tools = new Tools();
         bottomNav.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
-                switch (i){
+                switch (i) {
                     case R.id.nav_home:
                         break;
 
@@ -263,12 +282,12 @@ tools = new Tools();
 
     @Override
     public void onBackPressed() {
-        tools.makeSnack(main,"Use double back press to exit");
+        tools.makeSnack(main, "Use double back press to exit");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        bottomNav.setItemSelected(R.id.nav_home,true);
+        bottomNav.setItemSelected(R.id.nav_home, true);
     }
 }

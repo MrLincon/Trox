@@ -43,7 +43,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     String name, contact, address;
     Long price;
 
-    String ID, userType;
+    String ID, userType, orderCategory, pickupCode;
 
     private FirebaseFirestore db;
     private String userID;
@@ -72,7 +72,10 @@ public class OrderConfirmationActivity extends AppCompatActivity {
 
         tools.setLightStatusBar(main,this);
 
+
         ID = getIntent().getStringExtra("ID");
+        orderCategory = getIntent().getStringExtra("orderCategory");
+        pickupCode = getIntent().getStringExtra("pickupCode");
 
 
         //firebase init
@@ -204,6 +207,9 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                 userMap.put("order_type", OrderType);
                 userMap.put("user_type", userType);
                 userMap.put("user_id", userID);
+                userMap.put("orderCategory", orderCategory);
+                userMap.put("pickupCode", pickupCode);
+
                 userMap.put("timestamp", FieldValue.serverTimestamp());
 
 
@@ -236,7 +242,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                                     });
                                 }
                             });
-                }else {
+                }else{
                     db.collection("orders").document(ID)
                             .update(userMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {

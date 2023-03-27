@@ -29,6 +29,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.netro.trox.R;
 import com.netro.trox.util.Tools;
 
+import java.util.Random;
+
 public class ParcelOrderDetailsActivity extends AppCompatActivity {
 
     ImageView back;
@@ -106,7 +108,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
         });
 
 
-        if (type.equals("Domestic")) {
+        if (type.equals("Local")) {
             FirebaseFirestore.getInstance().collection("userDetails").document(FirebaseAuth.getInstance().getUid())
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -123,6 +125,22 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                         }
                     });
 
+        } else if (type.equals("Domestic")) {
+            FirebaseFirestore.getInstance().collection("userDetails").document(FirebaseAuth.getInstance().getUid())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            String country = documentSnapshot.getString("user_country");
+                            pickupCountry.setText(country);
+                            deliveryCountry.setText(country);
+
+                            pickupCountry.setEnabled(false);
+                            pickupCountry.setFocusable(false);
+                            deliveryCountry.setEnabled(false);
+                            deliveryCountry.setFocusable(false);
+                        }
+                    });
         } else if (type.equals("International")) {
             FirebaseFirestore.getInstance().collection("userDetails").document(FirebaseAuth.getInstance().getUid())
                     .get()
@@ -308,7 +326,6 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
             }
         });
 
-
         weightSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -316,7 +333,6 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                 weight = Math.round(value);
             }
         });
-
 
         itemType.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -370,6 +386,9 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                 String PickupLocation = pickupLocation.getText().toString();
                 String DeliveryLocation = deliveryLocation.getText().toString();
 
+                Random random = new Random();
+                int randomNumber = random.nextInt(9000) + 1000;
+
 
                 if (PickupCountry.equals("")) {
                     tools.makeSnack(main, "Country can not be empty");
@@ -422,6 +441,8 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                     intent.putExtra("deliveryLat", deliveryLattitude);
                     intent.putExtra("deliveryLong", deliveryLongitude);
                     intent.putExtra("ID", ID);
+                    intent.putExtra("orderCategory", type);
+                    intent.putExtra("pickupCode", randomNumber);
                     startActivity(intent);
 
                 }
