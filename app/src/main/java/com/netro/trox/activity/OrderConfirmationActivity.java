@@ -37,13 +37,14 @@ public class OrderConfirmationActivity extends AppCompatActivity {
     LinearLayout main;
     ImageView back;
 
-    TextView senderName, senderContact, senderAddress, receiverName, receiverContact, receiverAddress, parcelWeight, totalPrice;
+    TextView senderName, senderContact, senderAddress, receiverName, receiverContact, receiverAddress, parcelWeight, totalPrice, deliveryFee;
     CardView btnConfirm;
 
     String name, contact, address;
-    Long price;
+    Long price, charge;
 
-    String ID, userType, orderCategory, pickupCode;
+    String ID, userType, orderCategory;
+    int pickupCode;
 
     private FirebaseFirestore db;
     private String userID;
@@ -67,16 +68,17 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         parcelWeight = findViewById(R.id.weight);
         totalPrice = findViewById(R.id.total_price);
         btnConfirm = findViewById(R.id.btn_confirm);
+        deliveryFee = findViewById(R.id.delivery_fee);
 
         tools = new Tools();
 
-        tools.setLightStatusBar(main,this);
+        tools.setLightStatusBar(main, this);
 
 
         ID = getIntent().getStringExtra("ID");
-        orderCategory = getIntent().getStringExtra("orderCategory");
-        pickupCode = getIntent().getStringExtra("pickupCode");
+        pickupCode = getIntent().getIntExtra("pickupCode", 0);
 
+        Log.d("pickupCode", "onCreate: " + pickupCode);
 
         //firebase init
         mAuth = FirebaseAuth.getInstance();
@@ -93,74 +95,78 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         String DeliveryState = getIntent().getStringExtra("deliveryState");
         String DeliveryCity = getIntent().getStringExtra("deliveryCity");
         String DeliveryAddress = getIntent().getStringExtra("deliveryAddress");
-        int ParcelWeight = getIntent().getIntExtra("parcelWeight",0);
+        int ParcelWeight = getIntent().getIntExtra("parcelWeight", 0);
         String ParcelType = getIntent().getStringExtra("parcelType");
         String OrderType = getIntent().getStringExtra("orderType");
-        Double PickupLattitude = getIntent().getDoubleExtra("pickupLat",0);
-        Double PickupLongtitude = getIntent().getDoubleExtra("pickupLong",0);
-        Double DeliveryLattitude = getIntent().getDoubleExtra("deliveryLat",0);
-        Double DeliveryLongitude = getIntent().getDoubleExtra("deliveryLong",0);
+        Double PickupLattitude = getIntent().getDoubleExtra("pickupLat", 0);
+        Double PickupLongtitude = getIntent().getDoubleExtra("pickupLong", 0);
+        Double DeliveryLattitude = getIntent().getDoubleExtra("deliveryLat", 0);
+        Double DeliveryLongitude = getIntent().getDoubleExtra("deliveryLong", 0);
 
         db.collection("userDetails").document(userID).get()
-                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                name = documentSnapshot.getString("user_name");
-                                contact = documentSnapshot.getString("user_contact");
-                                userType = documentSnapshot.getString("user_type");
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        name = documentSnapshot.getString("user_name");
+                        contact = documentSnapshot.getString("user_contact");
+                        userType = documentSnapshot.getString("user_type");
 
-                                senderName.setText(name);
-                                senderContact.setText(contact);
+                        senderName.setText(name);
+                        senderContact.setText(contact);
 
-                            }
-                        });
+                    }
+                });
 
 
-        if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")){
+        if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")) {
             String doc = null;
-            if (ParcelWeight==1){
+            if (ParcelWeight == 1) {
                 doc = "local_bellow_one";
-            } else if (ParcelWeight>1 && ParcelWeight<6) {
+            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
                 doc = "local_one_to_five";
-            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
                 doc = "local_five_to_ten";
             }
 
-            setPrice("parcel",doc);
+            setPrice("parcel", doc);
+            setDelivery("deliveryManCharge", "local_delivery_charge");
 
-        }else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")){
+        } else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Parcel")) {
             String doc = null;
-            if (ParcelWeight==1){
+            if (ParcelWeight == 1) {
                 doc = "domestic_bellow_one";
-            } else if (ParcelWeight>1 && ParcelWeight<6) {
+            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
                 doc = "domestic_one_to_five";
-            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
                 doc = "domestic_five_to_ten";
             }
 
-            setPrice("parcel",doc);
+            setPrice("parcel", doc);
+            setDelivery("deliveryManCharge", "domestic_delivery_charge");
 
-        }else if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")){
+        } else if (PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")) {
             String doc = null;
-            if (ParcelWeight==1){
+            if (ParcelWeight == 1) {
                 doc = "local_bellow_one";
-            } else if (ParcelWeight>1 && ParcelWeight<6) {
+            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
                 doc = "local_one_to_five";
-            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
                 doc = "local_five_to_ten";
             }
-            setPrice("document",doc);
+            setPrice("document", doc);
+            setDelivery("deliveryManCharge", "local_delivery_charge");
 
-        }else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")){
+        } else if (!PickupCity.equals(DeliveryCity) && ParcelType.equals("Document")) {
             String doc = null;
-            if (ParcelWeight==1){
+            if (ParcelWeight == 1) {
                 doc = "domestic_bellow_one";
-            } else if (ParcelWeight>1 && ParcelWeight<6) {
+            } else if (ParcelWeight > 1 && ParcelWeight < 6) {
                 doc = "domestic_one_to_five";
-            }else if (ParcelWeight>5 && ParcelWeight<=10) {
+            } else if (ParcelWeight > 5 && ParcelWeight <= 10) {
                 doc = "domestic_five_to_ten";
             }
-            setPrice("document",doc);
+            setPrice("document", doc);
+            setDelivery("deliveryManCharge", "domestic_delivery_charge");
         }
 
 
@@ -168,7 +174,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         receiverName.setText(ReceiverName);
         receiverContact.setText(ReceiverContact);
         receiverAddress.setText(DeliveryAddress);
-        parcelWeight.setText(String.valueOf(ParcelWeight)+" KG");
+        parcelWeight.setText(String.valueOf(ParcelWeight) + " KG");
 
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +184,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                 btnConfirm.setFocusable(false);
                 btnConfirm.setClickable(false);
 
-                String currentTimeInMillies  = String.valueOf(System.currentTimeMillis());
+                String currentTimeInMillies = String.valueOf(System.currentTimeMillis());
 
                 Map<String, Object> userMap = new HashMap<>();
 
@@ -201,19 +207,20 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                 userMap.put("parcel_weight", ParcelWeight);
                 userMap.put("parcel_type", ParcelType);
                 userMap.put("price", price);
+                userMap.put("total_price", price+charge);
                 userMap.put("order_id", currentTimeInMillies);
                 userMap.put("order_status", "Pending");
                 userMap.put("active_status", "Active");
                 userMap.put("order_type", OrderType);
                 userMap.put("user_type", userType);
                 userMap.put("user_id", userID);
-                userMap.put("orderCategory", orderCategory);
                 userMap.put("pickupCode", pickupCode);
+                userMap.put("assigned", false);
 
                 userMap.put("timestamp", FieldValue.serverTimestamp());
 
 
-                if (ID.equals("fromDomestic")){
+                if (OrderType.equals("Local") || OrderType.equals("Domestic")) {
                     db.collection("orders").document(currentTimeInMillies)
                             .set(userMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -236,13 +243,13 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(View v) {
                                             popup.dismiss();
-                                            startActivity(new Intent(OrderConfirmationActivity.this,MainActivity.class));
+                                            startActivity(new Intent(OrderConfirmationActivity.this, MainActivity.class));
                                             finish();
                                         }
                                     });
                                 }
                             });
-                }else{
+                } else if (OrderType.equals("International")) {
                     db.collection("orders").document(ID)
                             .update(userMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -265,7 +272,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(View v) {
                                             popup.dismiss();
-                                            startActivity(new Intent(OrderConfirmationActivity.this,MainActivity.class));
+                                            startActivity(new Intent(OrderConfirmationActivity.this, MainActivity.class));
                                             finish();
                                         }
                                     });
@@ -285,12 +292,27 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         });
     }
 
+    private void setDelivery(String deliveryManCharge, String value) {
+        db.collection(deliveryManCharge).document(deliveryManCharge).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            charge = documentSnapshot.getLong(value);
+                            deliveryFee.setText("$" + String.valueOf(charge));
+
+                            Long sum = charge+price;
+                            totalPrice.setText("$"+ sum);
+                        }
+                    }
+                });
+    }
+
     private void setPrice(String document, String value) {
         db.collection("deliveryCost").document(document).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 price = documentSnapshot.getLong(value);
-                totalPrice.setText("$"+String.valueOf(price));
             }
         });
     }

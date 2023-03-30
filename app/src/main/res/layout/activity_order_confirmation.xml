@@ -319,12 +319,12 @@
                             android:textSize="14sp"></TextView>
 
                         <TextView
+                            android:id="@+id/delivery_fee"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:fontFamily="@font/ubuntu_bold"
                             android:gravity="right"
-                            android:text="$30.00"
                             android:textColor="@color/colorBlackMidEmp"
                             android:textSize="14sp"></TextView>
 

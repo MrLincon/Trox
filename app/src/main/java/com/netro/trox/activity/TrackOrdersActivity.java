@@ -12,6 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baoyachi.stepview.VerticalStepView;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.netro.trox.R;
 import com.netro.trox.util.Tools;
 
@@ -25,6 +28,7 @@ public class TrackOrdersActivity extends AppCompatActivity {
     ImageView back;
     ImageView step1, step2, step3, step4, step5;
     View stepLine1, stepLine2, stepLine3, stepLine4;
+    TextView pickupCode;
 
     String status, order_id, fragment;
     int value;
@@ -48,6 +52,7 @@ public class TrackOrdersActivity extends AppCompatActivity {
         stepLine2 = findViewById(R.id.step_line_2);
         stepLine3 = findViewById(R.id.step_line_3);
         stepLine4 = findViewById(R.id.step_line_4);
+        pickupCode = findViewById(R.id.pickup_code);
 
         tools = new Tools();
 
@@ -55,6 +60,16 @@ public class TrackOrdersActivity extends AppCompatActivity {
 
         status = getIntent().getStringExtra("status");
         order_id = getIntent().getStringExtra("order_id");
+
+        FirebaseFirestore.getInstance().collection("orders").document(order_id)
+                        .get()
+                                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        Long code = documentSnapshot.getLong("pickupCode");
+                                        pickupCode.setText("Pickup code: "+String.valueOf(code));
+                                    }
+                                });
 
         orderStatusUpdate();
 
@@ -66,7 +81,6 @@ public class TrackOrdersActivity extends AppCompatActivity {
                 finish();
             }
         });
-
 
 
         btnOrderDetails.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +97,7 @@ public class TrackOrdersActivity extends AppCompatActivity {
     }
 
     private void orderStatusUpdate() {
-        if (status.equals("Pending")){
+        if (status.equals("Pending")) {
             fragment = "FragmentPickUpRequest";
             step1.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
 
@@ -91,22 +105,20 @@ public class TrackOrdersActivity extends AppCompatActivity {
             fragment = "FragmentPickUpRequest";
             step1.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
             step2.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
-        }
-        else if (status.equals("Picked Up")) {
+        } else if (status.equals("Picked Up")) {
             fragment = "FragmentPickedUp";
             step1.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
             step2.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
             step3.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
             step4.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
-        }
-        else if (status.equals("Delivered")) {
+        } else if (status.equals("Delivered")) {
             fragment = "FragmentDelivered";
             step1.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
             step2.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
             step3.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
             step4.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
             step5.setImageDrawable(getResources().getDrawable(R.drawable.ic_selected));
-        }else if (status.equals("Returned")) {
+        } else if (status.equals("Returned")) {
             fragment = "FragmentReturned";
         }
     }

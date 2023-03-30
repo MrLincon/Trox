@@ -422,6 +422,7 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                     tools.makeSnack(main, "Parcel type can not be empty");
                 } else {
 
+
                     Intent intent = new Intent(ParcelOrderDetailsActivity.this, OrderConfirmationActivity.class);
                     intent.putExtra("receiverContact", ReceiverContact);
                     intent.putExtra("receiverName", ReceiverName);
@@ -440,8 +441,6 @@ public class ParcelOrderDetailsActivity extends AppCompatActivity {
                     intent.putExtra("pickupLong", pickupLongtitude);
                     intent.putExtra("deliveryLat", deliveryLattitude);
                     intent.putExtra("deliveryLong", deliveryLongitude);
-                    intent.putExtra("ID", ID);
-                    intent.putExtra("orderCategory", type);
                     intent.putExtra("pickupCode", randomNumber);
                     startActivity(intent);
 

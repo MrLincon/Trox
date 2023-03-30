@@ -306,6 +306,16 @@
 
     </ScrollView>
 
+    <TextView
+        android:id="@+id/pickup_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu_medium"
+        android:layout_marginBottom="96dp"
+        android:layout_gravity="center|bottom"
+        android:textColor="@color/colorBlackMidEmp"
+        android:textSize="14sp"></TextView>
+
     <LinearLayout
         android:id="@+id/btn_order_details"
         android:layout_width="match_parent"
